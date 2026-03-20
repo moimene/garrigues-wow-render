@@ -9,6 +9,7 @@ import { ConstellationGraph } from '@/components/dsm/ConstellationGraph';
 import { TranspositionSection } from '@/components/dsm/TranspositionSection';
 import { ResourcesSection } from '@/components/dsm/ResourcesSection';
 import { useScrollReveal } from '@/components/dsm/useScrollReveal';
+import { VisualizationFilters, FilterState } from '@/components/dsm/VisualizationFilters';
 
 const tabs = [
   { id: 'general', label: 'Vista General' },
