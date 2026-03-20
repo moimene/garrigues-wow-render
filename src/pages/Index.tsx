@@ -33,6 +33,7 @@ const SectionHeading = ({ title, subtitle }: { title: string; subtitle: string }
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<TabId>('general');
+  const [vizFilters, setVizFilters] = useState<FilterState>({ estadoUE: [], tipoNorma: [], estadoES: [] });
   const sectionRefs = useRef<Record<TabId, HTMLElement | null>>({ general: null, mapas: null, cronologia: null, transposicion: null, recursos: null });
 
   const totalNormas = bloques.reduce((s, b) => s + b.normas.length, 0);
