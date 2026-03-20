@@ -9,6 +9,7 @@ import { ConstellationGraph } from '@/components/dsm/ConstellationGraph';
 import { TranspositionSection } from '@/components/dsm/TranspositionSection';
 import { ResourcesSection } from '@/components/dsm/ResourcesSection';
 import { useScrollReveal } from '@/components/dsm/useScrollReveal';
+import { VisualizationFilters, FilterState } from '@/components/dsm/VisualizationFilters';
 
 const tabs = [
   { id: 'general', label: 'Vista General' },
@@ -32,6 +33,7 @@ const SectionHeading = ({ title, subtitle }: { title: string; subtitle: string }
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<TabId>('general');
+  const [vizFilters, setVizFilters] = useState<FilterState>({ estadoUE: [], tipoNorma: [], estadoES: [] });
   const sectionRefs = useRef<Record<TabId, HTMLElement | null>>({ general: null, mapas: null, cronologia: null, transposicion: null, recursos: null });
 
   const totalNormas = bloques.reduce((s, b) => s + b.normas.length, 0);
@@ -140,25 +142,27 @@ const Index = () => {
         <section ref={el => { sectionRefs.current.mapas = el; }} id="mapas" className="space-y-16">
           <SectionHeading title="Visualizaciones Interactivas" subtitle="Tres perspectivas diferentes para explorar el ecosistema normativo del Mercado Único Digital." />
 
+          <VisualizationFilters filters={vizFilters} onChange={setVizFilters} />
+
           {/* Sunburst */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa Radial Sunburst</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Anillos concéntricos: DSM → Bloques → Normas. Color exterior por estado de transposición en España.</p>
-            <SunburstMap />
+            <SunburstMap filters={vizFilters} />
           </div>
 
           {/* HeatGrid */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa de Calor por Bloques</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Densidad normativa y porcentaje de implementación en España por bloque temático.</p>
-            <HeatGrid />
+            <HeatGrid filters={vizFilters} />
           </div>
 
           {/* Constellation */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Diagrama de Constelación</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Red de nodos: bloques temáticos y sus normas asociadas con estado de transposición.</p>
-            <ConstellationGraph />
+            <ConstellationGraph filters={vizFilters} />
           </div>
         </section>
 
