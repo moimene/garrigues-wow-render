@@ -3,9 +3,9 @@ import { bloques } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
 
 const depTypeConfig = {
-  complementariedad: { label: 'Complementaria', color: 'var(--status-directa)' },
-  dependencia: { label: 'Dependencia', color: 'var(--status-proceso)' },
-  conflicto: { label: 'Conflicto', color: 'var(--status-pendiente)' },
+  complementariedad: { label: 'Complementaria', color: '#2563eb', symbol: '◆' },
+  dependencia: { label: 'Dependencia', color: '#d97706', symbol: '▲' },
+  conflicto: { label: 'Conflicto', color: '#dc2626', symbol: '■' },
 };
 
 interface Cell {
@@ -27,20 +27,15 @@ export const InteractionsMatrix = () => {
     return m;
   }, []);
 
-  const cellColor = (cell: Cell | undefined) => {
-    if (!cell?.tipo) return 'transparent';
-    return depTypeConfig[cell.tipo].color;
-  };
-
   return (
     <div ref={ref} className="space-y-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 700ms cubic-bezier(0.16,1,0.3,1)' }}>
       <div className="overflow-x-auto">
-        <table className="border-collapse text-[10px]" style={{ minWidth: '480px' }}>
+        <table className="border-collapse text-[11px]" style={{ minWidth: '520px' }}>
           <thead>
             <tr>
-              <th className="p-1.5" />
+              <th className="p-2" />
               {bloques.map(b => (
-                <th key={b.id} className="p-1.5 text-center font-bold" style={{ color: b.color, minWidth: '32px' }}>
+                <th key={b.id} className="p-2 text-center font-bold text-[11px]" style={{ color: b.color, minWidth: '36px' }}>
                   B{b.id}
                 </th>
               ))}
@@ -49,7 +44,7 @@ export const InteractionsMatrix = () => {
           <tbody>
             {bloques.map(bRow => (
               <tr key={bRow.id}>
-                <td className="p-1.5 font-bold text-right pr-3 whitespace-nowrap" style={{ color: bRow.color }}>
+                <td className="p-2 font-bold text-right pr-3 whitespace-nowrap text-[11px]" style={{ color: bRow.color }}>
                   B{bRow.id}
                 </td>
                 {bloques.map(bCol => {
@@ -57,41 +52,42 @@ export const InteractionsMatrix = () => {
                   const cell = matrix[key];
                   const isDiag = bRow.id === bCol.id;
                   const isH = hoveredCell?.from === bRow.id && hoveredCell?.to === bCol.id;
+                  const cfg = cell?.tipo ? depTypeConfig[cell.tipo] : null;
 
                   return (
                     <td
                       key={bCol.id}
                       className="relative p-0 cursor-pointer"
                       style={{
-                        width: '32px',
-                        height: '32px',
-                        border: '1px solid var(--g-border-subtle)',
+                        width: '36px',
+                        height: '36px',
+                        border: '2px solid var(--g-surface-card)',
                       }}
                       onMouseEnter={() => !isDiag && setHoveredCell({ from: bRow.id, to: bCol.id })}
                       onMouseLeave={() => setHoveredCell(null)}
                     >
                       <div
-                        className="w-full h-full flex items-center justify-center"
+                        className="w-full h-full flex items-center justify-center rounded-sm"
                         style={{
-                          background: isDiag ? `${bRow.color}18` : cell?.tipo ? `${cellColor(cell)}20` : 'transparent',
+                          background: isDiag ? bRow.color : cfg ? `${cfg.color}25` : 'var(--g-surface-muted)',
                           transition: 'all 150ms ease',
                           transform: isH ? 'scale(1.15)' : 'scale(1)',
                         }}
                       >
                         {isDiag ? (
-                          <span className="text-[9px] font-bold" style={{ color: bRow.color }}>■</span>
-                        ) : cell?.tipo ? (
-                          <span className="w-2.5 h-2.5 rounded-full" style={{ background: cellColor(cell), opacity: 0.7 }} />
+                          <span className="text-[11px] font-bold text-white">■</span>
+                        ) : cfg ? (
+                          <span className="text-[13px] font-bold" style={{ color: cfg.color }}>{cfg.symbol}</span>
                         ) : null}
                       </div>
 
                       {isH && cell?.desc && (
-                        <div className="absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[220px] p-2.5 text-left" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', border: '1px solid var(--g-border-subtle)' }}>
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <span className="font-bold text-[var(--g-text-primary)]">B{bRow.id} → B{bCol.id}</span>
-                            {cell.tipo && (
-                              <span className="text-[9px] font-medium px-1 py-0.5" style={{ color: cellColor(cell), background: `${cellColor(cell)}15`, borderRadius: 'var(--g-radius-sm)' }}>
-                                {depTypeConfig[cell.tipo].label}
+                        <div className="absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[240px] p-3 text-left" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', border: `2px solid ${cfg?.color || 'var(--g-border-subtle)'}` }}>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-bold text-xs text-[var(--g-text-primary)]">B{bRow.id} → B{bCol.id}</span>
+                            {cfg && (
+                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ color: 'white', background: cfg.color }}>
+                                {cfg.label}
                               </span>
                             )}
                           </div>
@@ -108,10 +104,12 @@ export const InteractionsMatrix = () => {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] text-[var(--g-text-secondary)]">
+      <div className="flex flex-wrap items-center justify-center gap-5 text-[11px] text-[var(--g-text-secondary)]">
         {Object.entries(depTypeConfig).map(([key, cfg]) => (
-          <span key={key} className="inline-flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full" style={{ background: cfg.color, opacity: 0.7 }} />
+          <span key={key} className="inline-flex items-center gap-2 font-semibold">
+            <span className="w-5 h-5 rounded-sm flex items-center justify-center" style={{ background: `${cfg.color}25` }}>
+              <span className="text-[12px] font-bold" style={{ color: cfg.color }}>{cfg.symbol}</span>
+            </span>
             {cfg.label}
           </span>
         ))}

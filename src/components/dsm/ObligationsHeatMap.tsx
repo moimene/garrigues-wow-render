@@ -5,17 +5,24 @@ import { useScrollReveal } from './useScrollReveal';
 const allActors: ActorType[] = ['plataformas', 'fabricantes', 'proveedores', 'administraciones', 'pymes', 'financieras', 'telecoms', 'medios'];
 
 const intensidadValue = { alta: 3, media: 2, baja: 1, nula: 0 };
+
 const intensidadColor = (v: number) => {
-  if (v === 0) return 'var(--g-surface-page)';
-  if (v === 1) return 'rgba(0,68,56,0.12)';
-  if (v === 2) return 'rgba(0,68,56,0.35)';
-  return 'rgba(0,68,56,0.7)';
+  if (v === 0) return 'var(--g-surface-muted)';
+  if (v === 1) return '#93c5fd';   // blue-300
+  if (v === 2) return '#d97706';   // amber-600
+  return '#dc2626';                // red-600
 };
 const intensidadPattern = (v: number) => {
   if (v === 0) return '—';
   if (v === 1) return '○';
   if (v === 2) return '◑';
   return '●';
+};
+const intensidadTextColor = (v: number) => {
+  if (v === 0) return 'var(--g-text-secondary)';
+  if (v === 1) return '#1e40af';
+  if (v === 2) return '#92400e';
+  return '#ffffff';
 };
 
 export const ObligationsHeatMap = () => {
@@ -38,23 +45,23 @@ export const ObligationsHeatMap = () => {
   return (
     <div ref={ref} className="space-y-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 700ms cubic-bezier(0.16,1,0.3,1)' }}>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-[10px]" style={{ minWidth: '640px' }}>
+        <table className="w-full border-collapse text-[11px]" style={{ minWidth: '680px' }}>
           <thead>
             <tr>
-              <th className="text-left p-2 font-bold text-[var(--g-text-secondary)] uppercase tracking-wider" style={{ width: '140px' }}>Bloque</th>
+              <th className="text-left p-2 font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[10px]" style={{ width: '140px' }}>Bloque</th>
               {allActors.map(a => (
-                <th key={a} className="p-2 text-center font-bold text-[var(--g-text-secondary)] uppercase tracking-wider" style={{ writingMode: 'vertical-lr', transform: 'rotate(180deg)', height: '90px', minWidth: '36px' }}>
+                <th key={a} className="p-2 text-center font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[9px]" style={{ writingMode: 'vertical-lr', transform: 'rotate(180deg)', height: '100px', minWidth: '40px' }}>
                   {actorLabels[a].split(' ')[0]}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {matrix.map(({ bloque, actors }, rowIdx) => (
+            {matrix.map(({ bloque, actors }) => (
               <tr key={bloque.id}>
-                <td className="p-2 font-medium text-[var(--g-text-primary)]" style={{ borderBottom: '1px solid var(--g-border-subtle)' }}>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ background: bloque.color }} />
+                <td className="p-2 font-semibold text-[var(--g-text-primary)]" style={{ borderBottom: '1px solid var(--g-border-subtle)' }}>
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded shrink-0" style={{ background: bloque.color }} />
                     <span className="truncate">B{bloque.id}</span>
                   </div>
                 </td>
@@ -67,20 +74,21 @@ export const ObligationsHeatMap = () => {
                       className="relative p-1 text-center cursor-pointer"
                       style={{
                         background: intensidadColor(cell.intensidad),
-                        borderBottom: '1px solid var(--g-border-subtle)',
-                        borderRight: '1px solid var(--g-border-subtle)',
+                        borderBottom: '2px solid var(--g-surface-card)',
+                        borderRight: '2px solid var(--g-surface-card)',
                         transition: 'all 150ms ease',
-                        transform: isH ? 'scale(1.08)' : 'scale(1)',
+                        transform: isH ? 'scale(1.12)' : 'scale(1)',
+                        borderRadius: '3px',
                       }}
                       onMouseEnter={() => setHoveredCell({ bloqueId: bloque.id, actor: a })}
                       onMouseLeave={() => setHoveredCell(null)}
                     >
-                      <span className="text-xs font-bold" style={{ color: cell.intensidad > 2 ? 'var(--g-text-inverse)' : 'var(--g-text-primary)' }} aria-label={`Intensidad ${cell.intensidad}`}>
+                      <span className="text-sm font-bold" style={{ color: intensidadTextColor(cell.intensidad) }} aria-label={`Intensidad ${cell.intensidad}`}>
                         {intensidadPattern(cell.intensidad)}
                       </span>
                       {isH && cell.obligaciones.length > 0 && (
-                        <div className="absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[200px] p-2.5 text-left" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', border: '1px solid var(--g-border-subtle)' }}>
-                          <div className="font-bold text-[var(--g-text-primary)] mb-1">{actorLabels[a]}</div>
+                        <div className="absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[220px] p-3 text-left" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', border: '1px solid var(--g-border-subtle)' }}>
+                          <div className="font-bold text-[var(--g-text-primary)] text-xs mb-1">{actorLabels[a]}</div>
                           <div className="text-[10px] text-[var(--g-text-secondary)] mb-1.5">{bloque.nombre}</div>
                           <ul className="space-y-0.5">
                             {cell.obligaciones.slice(0, 3).map((o, i) => (
@@ -99,17 +107,17 @@ export const ObligationsHeatMap = () => {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] text-[var(--g-text-secondary)]">
-        <span className="font-bold uppercase tracking-wider">Intensidad:</span>
+      <div className="flex flex-wrap items-center justify-center gap-5 text-[11px] text-[var(--g-text-secondary)]">
+        <span className="font-bold uppercase tracking-wider text-[10px]">Intensidad:</span>
         {[
-          { label: 'Nula —', v: 0 },
-          { label: 'Baja ○', v: 1 },
-          { label: 'Media ◑', v: 2 },
-          { label: 'Alta ●', v: 3 },
+          { label: 'Nula', v: 0 },
+          { label: 'Baja', v: 1 },
+          { label: 'Media', v: 2 },
+          { label: 'Alta', v: 3 },
         ].map(l => (
-          <span key={l.v} className="inline-flex items-center gap-1">
-            <span className="w-4 h-4 flex items-center justify-center" style={{ background: intensidadColor(l.v), borderRadius: '3px' }}>
-              <span className="text-[9px]" style={{ color: l.v > 2 ? 'var(--g-text-inverse)' : 'var(--g-text-primary)' }}>{intensidadPattern(l.v)}</span>
+          <span key={l.v} className="inline-flex items-center gap-1.5 font-medium">
+            <span className="w-5 h-5 flex items-center justify-center rounded" style={{ background: intensidadColor(l.v) }}>
+              <span className="text-[11px] font-bold" style={{ color: intensidadTextColor(l.v) }}>{intensidadPattern(l.v)}</span>
             </span>
             {l.label}
           </span>
