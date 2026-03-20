@@ -142,11 +142,13 @@ const Index = () => {
         <section ref={el => { sectionRefs.current.mapas = el; }} id="mapas" className="space-y-16">
           <SectionHeading title="Visualizaciones Interactivas" subtitle="Tres perspectivas diferentes para explorar el ecosistema normativo del Mercado Único Digital." />
 
+          <VisualizationFilters filters={vizFilters} onChange={setVizFilters} />
+
           {/* Sunburst */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa Radial Sunburst</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Anillos concéntricos: DSM → Bloques → Normas. Color exterior por estado de transposición en España.</p>
-            <SunburstMap />
+            <SunburstMap filters={vizFilters} />
           </div>
 
           {/* HeatGrid */}
