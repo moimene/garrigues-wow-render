@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { bloques } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
+import { FilterState, normaPassesFilter, bloquePassesEstadoUE } from './VisualizationFilters';
 
 interface Node {
   id: string;
@@ -14,7 +15,11 @@ interface Node {
   bloqueId: number;
 }
 
-export const ConstellationGraph = () => {
+interface Props {
+  filters?: FilterState;
+}
+
+export const ConstellationGraph = ({ filters }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [activeBloque, setActiveBloque] = useState<number | null>(null);
   const width = 700;
@@ -22,13 +27,25 @@ export const ConstellationGraph = () => {
   const cx = width / 2;
   const cy = height / 2;
 
+  const filteredBloques = useMemo(() => {
+    if (!filters) return bloques;
+    return bloques
+      .filter(b => bloquePassesEstadoUE(b, filters.estadoUE))
+      .map(b => ({
+        ...b,
+        normas: b.normas.filter(n => normaPassesFilter(n, b, filters)),
+      }))
+      .filter(b => b.normas.length > 0);
+  }, [filters]);
+
   const { bloqueNodes, normaNodes, links } = useMemo(() => {
     const bNodes: Node[] = [];
     const nNodes: Node[] = [];
     const lnks: { from: Node; to: Node }[] = [];
+    const count = filteredBloques.length;
 
-    bloques.forEach((b, i) => {
-      const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+    filteredBloques.forEach((b, i) => {
+      const angle = (i / Math.max(count, 1)) * Math.PI * 2 - Math.PI / 2;
       const orbitR = 150;
       const bNode: Node = {
         id: `b${b.id}`, label: `B${b.id}`, x: cx + orbitR * Math.cos(angle), y: cy + orbitR * Math.sin(angle),
@@ -51,12 +68,19 @@ export const ConstellationGraph = () => {
     });
 
     return { bloqueNodes: bNodes, normaNodes: nNodes, links: lnks };
-  }, [cx, cy]);
+  }, [filteredBloques, cx, cy]);
+
+  if (filteredBloques.length === 0) {
+    return (
+      <div ref={ref} className="flex items-center justify-center py-16 text-sm text-[var(--g-text-secondary)]">
+        No hay datos que coincidan con los filtros seleccionados.
+      </div>
+    );
+  }
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(24px)', transition: 'all 800ms cubic-bezier(0.16,1,0.3,1)' }}>
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full max-w-[680px]" role="img" aria-label="Diagrama de Constelación Normativa">
-        {/* Links */}
         {links.map((l, i) => {
           const active = activeBloque === null || activeBloque === l.from.bloqueId;
           return (
@@ -67,16 +91,13 @@ export const ConstellationGraph = () => {
           );
         })}
 
-        {/* Center */}
         <circle cx={cx} cy={cy} r={30} fill="var(--g-brand-3308)" />
         <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="central" fill="var(--g-text-inverse)" fontSize="9" fontWeight="700" fontFamily="Montserrat">DSM</text>
 
-        {/* Center connections */}
         {bloqueNodes.map(bn => (
           <line key={`c-${bn.id}`} x1={cx} y1={cy} x2={bn.x} y2={bn.y} stroke="var(--g-sec-300)" strokeWidth={0.6} opacity={0.25} />
         ))}
 
-        {/* Norma nodes */}
         {normaNodes.map(n => {
           const active = activeBloque === null || activeBloque === n.bloqueId;
           return (
@@ -87,7 +108,6 @@ export const ConstellationGraph = () => {
           );
         })}
 
-        {/* Bloque nodes */}
         {bloqueNodes.map(n => (
           <g key={n.id} className="cursor-pointer"
             onMouseEnter={() => setActiveBloque(n.bloqueId)}

@@ -1,16 +1,41 @@
 import { bloques } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { FilterState, normaPassesFilter, bloquePassesEstadoUE } from './VisualizationFilters';
 
-export const HeatGrid = () => {
+interface Props {
+  filters?: FilterState;
+}
+
+export const HeatGrid = ({ filters }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [hovered, setHovered] = useState<number | null>(null);
-  const maxNormas = Math.max(...bloques.map(b => b.normas.length));
+
+  const filteredBloques = useMemo(() => {
+    if (!filters) return bloques;
+    return bloques
+      .filter(b => bloquePassesEstadoUE(b, filters.estadoUE))
+      .map(b => ({
+        ...b,
+        normas: b.normas.filter(n => normaPassesFilter(n, b, filters)),
+      }))
+      .filter(b => b.normas.length > 0);
+  }, [filters]);
+
+  const maxNormas = Math.max(...filteredBloques.map(b => b.normas.length), 1);
+
+  if (filteredBloques.length === 0) {
+    return (
+      <div ref={ref} className="flex items-center justify-center py-16 text-sm text-[var(--g-text-secondary)]">
+        No hay bloques que coincidan con los filtros seleccionados.
+      </div>
+    );
+  }
 
   return (
     <div ref={ref} className="space-y-4">
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-        {bloques.map((b, i) => {
+        {filteredBloques.map((b, i) => {
           const intensity = b.normas.length / maxNormas;
           const transpuestas = b.normas.filter(n => n.estadoES === 'directa' || n.estadoES === 'transpuesta').length;
           const pct = Math.round((transpuestas / b.normas.length) * 100);
@@ -57,7 +82,6 @@ export const HeatGrid = () => {
         })}
       </div>
 
-      {/* Gradient scale */}
       <div className="flex items-center justify-center gap-2 text-[10px] text-[var(--g-text-secondary)]">
         <span>Menos normas</span>
         <div className="w-32 h-2" style={{ background: 'linear-gradient(to right, rgba(0,68,56,0.1), rgba(0,68,56,0.9))', borderRadius: 'var(--g-radius-full)' }} />
