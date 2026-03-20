@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
-import { bloques } from '@/data/dsmData';
+import { useState, useRef, useMemo, useCallback } from 'react';
+import { bloques, Norma } from '@/data/dsmData';
+import { GlobalSearch } from '@/components/dsm/GlobalSearch';
 import { AnimatedCounter } from '@/components/dsm/AnimatedCounter';
 import { BlockCard } from '@/components/dsm/BlockCard';
 import { TimelineSection } from '@/components/dsm/TimelineSection';
@@ -34,6 +35,7 @@ const SectionHeading = ({ title, subtitle }: { title: string; subtitle: string }
 const Index = () => {
   const [activeTab, setActiveTab] = useState<TabId>('general');
   const [vizFilters, setVizFilters] = useState<FilterState>({ estadoUE: [], tipoNorma: [], estadoES: [] });
+  const [searchQuery, setSearchQuery] = useState('');
   const sectionRefs = useRef<Record<TabId, HTMLElement | null>>({ general: null, mapas: null, cronologia: null, transposicion: null, recursos: null });
 
   const totalNormas = bloques.reduce((s, b) => s + b.normas.length, 0);
@@ -45,6 +47,32 @@ const Index = () => {
     setActiveTab(tab);
     sectionRefs.current[tab]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  // Filter bloques by search query
+  const filteredBloques = useMemo(() => {
+    if (!searchQuery.trim()) return bloques;
+    const q = searchQuery.toLowerCase().trim();
+    return bloques
+      .map(b => {
+        const bloqueMatch = b.nombre.toLowerCase().includes(q) || b.descripcion.toLowerCase().includes(q) || `b${b.id}`.includes(q) || `bloque ${b.id}`.includes(q);
+        const matchingNormas = b.normas.filter(n =>
+          n.nombre.toLowerCase().includes(q) || n.tipo.toLowerCase().includes(q) || n.transposicionES.toLowerCase().includes(q)
+        );
+        if (bloqueMatch) return b; // show full bloque
+        if (matchingNormas.length > 0) return { ...b, normas: matchingNormas };
+        return null;
+      })
+      .filter(Boolean) as typeof bloques;
+  }, [searchQuery]);
+
+  const handleSearchSelect = useCallback((bloqueId: number) => {
+    setActiveTab('general');
+    // Small delay to let tab change, then scroll to section
+    setTimeout(() => {
+      const el = document.getElementById('general');
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }, []);
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--g-surface-page)' }}>
@@ -89,23 +117,26 @@ const Index = () => {
       {/* Sticky nav */}
       <nav className="sticky top-0 z-40" style={{ background: 'var(--g-surface-card)', boxShadow: 'var(--g-shadow-sm)', borderBottom: '1px solid var(--g-border-subtle)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex gap-0 overflow-x-auto scrollbar-hide">
-            {tabs.map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => scrollTo(tab.id)}
-                className="relative px-4 py-3.5 text-xs sm:text-sm font-medium whitespace-nowrap"
-                style={{
-                  color: activeTab === tab.id ? 'var(--g-brand-3308)' : 'var(--g-text-secondary)',
-                  transition: 'color var(--g-transition-fast)',
-                }}
-              >
-                {tab.label}
-                {activeTab === tab.id && (
-                  <span className="absolute bottom-0 left-2 right-2 h-[2.5px]" style={{ background: 'var(--g-brand-3308)', borderRadius: '2px 2px 0 0', transition: 'all var(--g-transition-smooth)' }} />
-                )}
-              </button>
-            ))}
+          <div className="flex items-center gap-0">
+            <div className="flex gap-0 overflow-x-auto scrollbar-hide flex-1">
+              {tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => scrollTo(tab.id)}
+                  className="relative px-4 py-3.5 text-xs sm:text-sm font-medium whitespace-nowrap"
+                  style={{
+                    color: activeTab === tab.id ? 'var(--g-brand-3308)' : 'var(--g-text-secondary)',
+                    transition: 'color var(--g-transition-fast)',
+                  }}
+                >
+                  {tab.label}
+                  {activeTab === tab.id && (
+                    <span className="absolute bottom-0 left-2 right-2 h-[2.5px]" style={{ background: 'var(--g-brand-3308)', borderRadius: '2px 2px 0 0', transition: 'all var(--g-transition-smooth)' }} />
+                  )}
+                </button>
+              ))}
+            </div>
+            <GlobalSearch query={searchQuery} onChange={setSearchQuery} onSelect={handleSearchSelect} />
           </div>
         </div>
       </nav>
@@ -115,6 +146,12 @@ const Index = () => {
         {/* Vista General */}
         <section ref={el => { sectionRefs.current.general = el; }} id="general">
           <SectionHeading title="Mapa de las 12 Áreas del DSM" subtitle="Haz clic en cada bloque para ver la legislación UE y su estado de transposición/implementación en España." />
+
+          {searchQuery.trim() && (
+            <div className="mb-4 text-xs text-[var(--g-text-secondary)] text-center">
+              Mostrando <span className="font-bold text-[var(--g-text-primary)]">{filteredBloques.length}</span> bloques y <span className="font-bold text-[var(--g-text-primary)]">{filteredBloques.reduce((s, b) => s + b.normas.length, 0)}</span> normas para "<span className="font-medium text-[var(--g-brand-3308)]">{searchQuery}</span>"
+            </div>
+          )}
 
           {/* Legend */}
           <div className="flex flex-wrap justify-center gap-4 mb-6 text-xs">
@@ -132,10 +169,17 @@ const Index = () => {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {bloques.map((b, i) => (
+            {filteredBloques.map((b, i) => (
               <BlockCard key={b.id} bloque={b} index={i} />
             ))}
           </div>
+
+          {filteredBloques.length === 0 && searchQuery.trim() && (
+            <div className="text-center py-16">
+              <p className="text-sm text-[var(--g-text-secondary)]">No se encontraron resultados para "<span className="font-medium">{searchQuery}</span>"</p>
+              <button onClick={() => setSearchQuery('')} className="mt-3 text-xs font-medium hover:underline" style={{ color: 'var(--g-brand-accent)' }}>Limpiar búsqueda</button>
+            </div>
+          )}
         </section>
 
         {/* Visualizaciones */}
