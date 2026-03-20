@@ -7,6 +7,14 @@ interface Props {
   filters?: FilterState;
 }
 
+const estadoColors: Record<string, string> = {
+  directa: '#2563eb',
+  transpuesta: '#059669',
+  parcial: '#d97706',
+  pendiente: '#dc2626',
+  propuesta: '#6b7280',
+};
+
 export const SunburstMap = ({ filters }: Props) => {
   const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
   const { ref, isVisible } = useScrollReveal(0.2);
@@ -60,10 +68,12 @@ export const SunburstMap = ({ filters }: Props) => {
   return (
     <div ref={ref} className="flex flex-col items-center gap-6" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'scale(1)' : 'scale(0.92)', transition: 'all 800ms cubic-bezier(0.16,1,0.3,1)' }}>
       <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-[480px]" role="img" aria-label="Mapa Radial Sunburst del DSM">
+        {/* Center hub */}
         <circle cx={cx} cy={cy} r={52} fill="var(--g-brand-3308)" />
-        <text x={cx} y={cy - 8} textAnchor="middle" fill="var(--g-text-inverse)" fontSize="11" fontWeight="700" fontFamily="Montserrat">DSM</text>
-        <text x={cx} y={cy + 8} textAnchor="middle" fill="var(--g-sec-300)" fontSize="8" fontWeight="500" fontFamily="Montserrat">{filteredBloques.length} Bloques</text>
-        <text x={cx} y={cy + 22} textAnchor="middle" fill="var(--g-sec-300)" fontSize="8" fontWeight="500" fontFamily="Montserrat">{totalNormas} Normas</text>
+        <circle cx={cx} cy={cy} r={52} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.5} />
+        <text x={cx} y={cy - 8} textAnchor="middle" fill="white" fontSize="13" fontWeight="700" fontFamily="Montserrat">DSM</text>
+        <text x={cx} y={cy + 10} textAnchor="middle" fill="var(--g-sec-300)" fontSize="9" fontWeight="600" fontFamily="Montserrat">{filteredBloques.length} Bloques</text>
+        <text x={cx} y={cy + 24} textAnchor="middle" fill="var(--g-sec-300)" fontSize="9" fontWeight="500" fontFamily="Montserrat">{totalNormas} Normas</text>
 
         {segments.map(({ bloque, startAngle, sweep }) => {
           const isHovered = hoveredBlock === bloque.id;
@@ -71,16 +81,35 @@ export const SunburstMap = ({ filters }: Props) => {
           const labelR = 100;
           return (
             <g key={bloque.id} onMouseEnter={() => setHoveredBlock(bloque.id)} onMouseLeave={() => setHoveredBlock(null)} style={{ cursor: 'pointer' }}>
-              <path d={describeArc(cx, cy, 58, 105, startAngle, sweep - 1)} fill={bloque.color} opacity={isHovered ? 1 : 0.8} style={{ transition: 'opacity 150ms ease, filter 150ms ease', filter: isHovered ? 'brightness(1.15)' : 'none' }} />
-              {sweep > 18 && (
-                <text x={cx + labelR * Math.cos(midAngle)} y={cy + labelR * Math.sin(midAngle)} textAnchor="middle" dominantBaseline="central" fill="var(--g-text-inverse)" fontSize="7" fontWeight="600" fontFamily="Montserrat" style={{ pointerEvents: 'none' }}>{bloque.id}</text>
+              {/* Block ring - thicker, fully opaque */}
+              <path
+                d={describeArc(cx, cy, 58, 115, startAngle, sweep - 0.8)}
+                fill={bloque.color}
+                opacity={isHovered ? 1 : 0.92}
+                stroke="white"
+                strokeWidth={0.8}
+                style={{ transition: 'opacity 150ms ease, filter 150ms ease', filter: isHovered ? 'brightness(1.2) saturate(1.2)' : 'none' }}
+              />
+              {sweep > 14 && (
+                <text x={cx + labelR * Math.cos(midAngle)} y={cy + labelR * Math.sin(midAngle)} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="9" fontWeight="700" fontFamily="Montserrat" style={{ pointerEvents: 'none', textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>
+                  B{bloque.id}
+                </text>
               )}
+              {/* Norma ring - vivid status colors */}
               {bloque.normas.map((norma, j) => {
                 const normaSweep = (1 / totalNormas) * 360;
                 const normaStart = startAngle + j * normaSweep;
-                const estadoColor = norma.estadoES === 'directa' ? 'var(--status-directa)' : norma.estadoES === 'transpuesta' ? 'var(--status-transpuesta)' : norma.estadoES === 'parcial' ? 'var(--status-parcial)' : norma.estadoES === 'pendiente' ? 'var(--status-pendiente)' : 'var(--status-propuesta)';
+                const color = estadoColors[norma.estadoES] || '#6b7280';
                 return (
-                  <path key={j} d={describeArc(cx, cy, 110, 150, normaStart, normaSweep - 0.5)} fill={estadoColor} opacity={isHovered ? 0.9 : 0.5} style={{ transition: 'opacity 200ms ease' }}>
+                  <path
+                    key={j}
+                    d={describeArc(cx, cy, 120, 165, normaStart, normaSweep - 0.4)}
+                    fill={color}
+                    opacity={isHovered ? 1 : 0.75}
+                    stroke="white"
+                    strokeWidth={0.3}
+                    style={{ transition: 'opacity 200ms ease' }}
+                  >
                     <title>{norma.nombre} — {norma.estadoES}</title>
                   </path>
                 );
@@ -93,23 +122,23 @@ export const SunburstMap = ({ filters }: Props) => {
       {hoveredBlock && (() => {
         const b = filteredBloques.find(b => b.id === hoveredBlock);
         return b ? (
-          <div className="text-center px-4 py-2" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)' }}>
+          <div className="text-center px-5 py-3" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', borderLeft: `4px solid ${b.color}` }}>
             <div className="text-sm font-bold text-[var(--g-text-primary)]">{b.nombre}</div>
             <div className="text-xs text-[var(--g-text-secondary)]">{b.normas.length} normas</div>
           </div>
         ) : null;
       })()}
 
-      <div className="flex flex-wrap justify-center gap-3 text-[10px]">
+      <div className="flex flex-wrap justify-center gap-4 text-[11px]">
         {[
-          { label: 'Apl. directa', color: 'var(--status-directa)' },
-          { label: 'Transpuesta', color: 'var(--status-transpuesta)' },
-          { label: 'Parcial', color: 'var(--status-parcial)' },
-          { label: 'Pendiente', color: 'var(--status-pendiente)' },
-          { label: 'Propuesta', color: 'var(--status-propuesta)' },
+          { label: 'Apl. directa', color: estadoColors.directa },
+          { label: 'Transpuesta', color: estadoColors.transpuesta },
+          { label: 'Parcial', color: estadoColors.parcial },
+          { label: 'Pendiente', color: estadoColors.pendiente },
+          { label: 'Propuesta', color: estadoColors.propuesta },
         ].map(l => (
-          <span key={l.label} className="inline-flex items-center gap-1 font-medium text-[var(--g-text-secondary)]">
-            <span className="w-2 h-2 rounded-full" style={{ background: l.color }} />
+          <span key={l.label} className="inline-flex items-center gap-1.5 font-semibold text-[var(--g-text-secondary)]">
+            <span className="w-3 h-3 rounded-sm" style={{ background: l.color }} />
             {l.label}
           </span>
         ))}
