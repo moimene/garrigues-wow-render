@@ -162,7 +162,7 @@ const Index = () => {
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Diagrama de Constelación</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Red de nodos: bloques temáticos y sus normas asociadas con estado de transposición.</p>
-            <ConstellationGraph />
+            <ConstellationGraph filters={vizFilters} />
           </div>
         </section>
 
