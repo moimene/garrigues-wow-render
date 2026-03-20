@@ -60,7 +60,7 @@ const Index = () => {
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[var(--g-text-inverse)]" style={{ textWrap: 'balance', lineHeight: 1.1 }}>
-            Mapeo Normativo del<br />Mercado Único Digital
+            Mapa Normativo del<br />Mercado Único Digital
           </h1>
           <p className="mt-4 text-sm sm:text-base text-[var(--g-sec-300)] max-w-xl leading-relaxed">
             Unión Europea y España — 12 áreas del DSM — Actualizado 19 marzo 2026
