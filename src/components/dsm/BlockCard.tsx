@@ -1,15 +1,7 @@
 import { useState } from 'react';
 import { type Bloque } from '@/data/dsmData';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { AreaDetailPanel } from './AreaDetailPanel';
 import { useScrollReveal } from './useScrollReveal';
-
-const estadoLabel: Record<string, { label: string; bg: string; text: string }> = {
-  directa: { label: 'Aplicación directa', bg: 'var(--status-directa)', text: 'var(--g-text-inverse)' },
-  transpuesta: { label: 'Transpuesta', bg: 'var(--status-transpuesta)', text: 'var(--g-text-inverse)' },
-  parcial: { label: 'Parcial', bg: 'var(--status-parcial)', text: 'var(--g-text-inverse)' },
-  pendiente: { label: 'Pendiente', bg: 'var(--status-pendiente)', text: 'var(--g-text-inverse)' },
-  propuesta: { label: 'Propuesta', bg: 'var(--status-propuesta)', text: 'var(--g-text-inverse)' },
-};
 
 interface BlockCardProps {
   bloque: Bloque;
@@ -17,14 +9,14 @@ interface BlockCardProps {
 }
 
 export const BlockCard = ({ bloque, index }: BlockCardProps) => {
-  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const { ref, isVisible } = useScrollReveal();
 
   return (
     <>
       <div
         ref={ref}
-        onClick={() => setOpen(true)}
+        onClick={() => setExpanded(!expanded)}
         className="group cursor-pointer overflow-hidden"
         style={{
           background: 'var(--g-surface-card)',
@@ -92,53 +84,18 @@ export const BlockCard = ({ bloque, index }: BlockCardProps) => {
 
           <div className="mt-3 pt-3 flex items-center justify-between text-[10px] font-medium text-[var(--g-text-secondary)]" style={{ borderTop: '1px solid var(--g-border-subtle)' }}>
             <span>{bloque.reglamentos} Reg. + {bloque.directivas} Dir.</span>
-            <span className="text-[var(--g-link)] group-hover:text-[var(--g-link-hover)]" style={{ transition: 'var(--g-transition-fast)' }}>Ver detalle →</span>
+            <span className="text-[var(--g-link)] group-hover:text-[var(--g-link-hover)]" style={{ transition: 'var(--g-transition-fast)' }}>
+              {expanded ? 'Cerrar ↑' : 'Ver detalle →'}
+            </span>
           </div>
         </div>
       </div>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto" style={{ borderRadius: 'var(--g-radius-xl)', boxShadow: 'var(--g-shadow-modal)' }}>
-          <DialogHeader>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center text-sm font-bold" style={{ background: bloque.color, color: 'var(--g-text-inverse)', borderRadius: 'var(--g-radius-full)' }}>
-                {bloque.id}
-              </div>
-              <div>
-                <DialogTitle className="text-base font-bold text-[var(--g-text-primary)]">{bloque.nombre}</DialogTitle>
-                <DialogDescription className="text-xs text-[var(--g-text-secondary)]">{bloque.descripcion}</DialogDescription>
-              </div>
-            </div>
-          </DialogHeader>
-
-          <div className="mt-2 space-y-2">
-            {bloque.normas.map((norma, i) => {
-              const est = estadoLabel[norma.estadoES];
-              return (
-                <div key={i} className="p-3" style={{ background: 'var(--g-surface-page)', borderRadius: 'var(--g-radius-md)', border: '1px solid var(--g-border-subtle)' }}>
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-semibold text-[var(--g-text-primary)]">{norma.nombre}</span>
-                        <span className="px-1.5 py-0.5 text-[10px] font-medium" style={{ background: norma.tipo === 'Reglamento' ? 'var(--status-directa)' : norma.tipo === 'Directiva' ? 'var(--status-proceso)' : 'var(--status-propuesta)', color: 'var(--g-text-inverse)', borderRadius: 'var(--g-radius-sm)' }}>
-                          {norma.tipo}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-xs text-[var(--g-text-secondary)] leading-relaxed">{norma.transposicionES}</p>
-                    </div>
-                    <span className="flex-shrink-0 px-2 py-0.5 text-[10px] font-medium" style={{ background: est.bg, color: est.text, borderRadius: 'var(--g-radius-sm)' }}>
-                      {est.label}
-                    </span>
-                  </div>
-                  {norma.plazo !== '—' && (
-                    <div className="mt-1.5 text-[10px] text-[var(--g-text-secondary)]">📅 {norma.plazo}</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </DialogContent>
-      </Dialog>
+      {expanded && (
+        <div className="col-span-full mt-2 mb-2">
+          <AreaDetailPanel bloque={bloque} onClose={() => setExpanded(false)} />
+        </div>
+      )}
     </>
   );
 };

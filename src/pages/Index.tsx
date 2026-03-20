@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
-import { bloques, Norma } from '@/data/dsmData';
+import { bloques } from '@/data/dsmData';
 import { GlobalSearch } from '@/components/dsm/GlobalSearch';
 import { AnimatedCounter } from '@/components/dsm/AnimatedCounter';
 import { BlockCard } from '@/components/dsm/BlockCard';
@@ -7,6 +7,9 @@ import { TimelineSection } from '@/components/dsm/TimelineSection';
 import { SunburstMap } from '@/components/dsm/SunburstMap';
 import { HeatGrid } from '@/components/dsm/HeatGrid';
 import { ConstellationGraph } from '@/components/dsm/ConstellationGraph';
+import { ObligationsHeatMap } from '@/components/dsm/ObligationsHeatMap';
+import { InteractionsMatrix } from '@/components/dsm/InteractionsMatrix';
+import { DensityTimeline } from '@/components/dsm/DensityTimeline';
 import { TranspositionSection } from '@/components/dsm/TranspositionSection';
 import { ResourcesSection } from '@/components/dsm/ResourcesSection';
 import { useScrollReveal } from '@/components/dsm/useScrollReveal';
@@ -48,29 +51,26 @@ const Index = () => {
     sectionRefs.current[tab]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Filter bloques by search query
   const filteredBloques = useMemo(() => {
     if (!searchQuery.trim()) return bloques;
     const q = searchQuery.toLowerCase().trim();
     return bloques
       .map(b => {
-        const bloqueMatch = b.nombre.toLowerCase().includes(q) || b.descripcion.toLowerCase().includes(q) || `b${b.id}`.includes(q) || `bloque ${b.id}`.includes(q);
+        const bloqueMatch = b.nombre.toLowerCase().includes(q) || b.descripcion.toLowerCase().includes(q) || `b${b.id}`.includes(q);
         const matchingNormas = b.normas.filter(n =>
           n.nombre.toLowerCase().includes(q) || n.tipo.toLowerCase().includes(q) || n.transposicionES.toLowerCase().includes(q)
         );
-        if (bloqueMatch) return b; // show full bloque
+        if (bloqueMatch) return b;
         if (matchingNormas.length > 0) return { ...b, normas: matchingNormas };
         return null;
       })
       .filter(Boolean) as typeof bloques;
   }, [searchQuery]);
 
-  const handleSearchSelect = useCallback((bloqueId: number) => {
+  const handleSearchSelect = useCallback(() => {
     setActiveTab('general');
-    // Small delay to let tab change, then scroll to section
     setTimeout(() => {
-      const el = document.getElementById('general');
-      el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('general')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
   }, []);
 
@@ -81,7 +81,6 @@ const Index = () => {
         <div className="absolute inset-0 g-pattern-dots" />
         <div className="absolute inset-0 g-pattern-lines" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-16 sm:pt-16 sm:pb-20">
-          {/* Garrigues mark */}
           <div className="flex items-center gap-2 mb-6">
             <div className="w-8 h-1" style={{ background: 'var(--g-brand-bright)' }} />
             <span className="text-xs font-medium tracking-widest uppercase" style={{ color: 'var(--g-sec-300)' }}>Garrigues · Digital & Innovation</span>
@@ -99,7 +98,6 @@ const Index = () => {
             <span className="px-3 py-1 text-xs font-medium" style={{ background: 'rgba(255,255,255,0.12)', color: 'var(--g-text-inverse)', borderRadius: 'var(--g-radius-full)', backdropFilter: 'blur(8px)' }}>🇪🇸 España</span>
           </div>
 
-          {/* Counters */}
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
             <AnimatedCounter target={totalNormas} label="Normas mapeadas" />
             <AnimatedCounter target={vigentes} label="Vigentes" />
@@ -108,7 +106,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Bottom wave */}
         <svg viewBox="0 0 1440 48" className="w-full block" preserveAspectRatio="none" style={{ marginBottom: '-1px' }}>
           <path d="M0,24 C360,48 720,0 1080,24 C1260,36 1380,48 1440,48 L1440,48 L0,48 Z" fill="var(--g-surface-page)" />
         </svg>
@@ -124,14 +121,11 @@ const Index = () => {
                   key={tab.id}
                   onClick={() => scrollTo(tab.id)}
                   className="relative px-4 py-3.5 text-xs sm:text-sm font-medium whitespace-nowrap"
-                  style={{
-                    color: activeTab === tab.id ? 'var(--g-brand-3308)' : 'var(--g-text-secondary)',
-                    transition: 'color var(--g-transition-fast)',
-                  }}
+                  style={{ color: activeTab === tab.id ? 'var(--g-brand-3308)' : 'var(--g-text-secondary)', transition: 'color var(--g-transition-fast)' }}
                 >
                   {tab.label}
                   {activeTab === tab.id && (
-                    <span className="absolute bottom-0 left-2 right-2 h-[2.5px]" style={{ background: 'var(--g-brand-3308)', borderRadius: '2px 2px 0 0', transition: 'all var(--g-transition-smooth)' }} />
+                    <span className="absolute bottom-0 left-2 right-2 h-[2.5px]" style={{ background: 'var(--g-brand-3308)', borderRadius: '2px 2px 0 0' }} />
                   )}
                 </button>
               ))}
@@ -145,7 +139,7 @@ const Index = () => {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-20">
         {/* Vista General */}
         <section ref={el => { sectionRefs.current.general = el; }} id="general">
-          <SectionHeading title="Mapa de las 12 Áreas del DSM" subtitle="Haz clic en cada bloque para ver la legislación UE y su estado de transposición/implementación en España." />
+          <SectionHeading title="Mapa de las 12 Áreas del DSM" subtitle="Haz clic en cada bloque para desplegar la ficha completa: síntesis ejecutiva, estado UE, transposición, obligaciones por actor e interacciones con otras áreas." />
 
           {searchQuery.trim() && (
             <div className="mb-4 text-xs text-[var(--g-text-secondary)] text-center">
@@ -153,7 +147,6 @@ const Index = () => {
             </div>
           )}
 
-          {/* Legend */}
           <div className="flex flex-wrap justify-center gap-4 mb-6 text-xs">
             {[
               { label: 'Vigente', color: 'var(--status-vigente)' },
@@ -184,7 +177,7 @@ const Index = () => {
 
         {/* Visualizaciones */}
         <section ref={el => { sectionRefs.current.mapas = el; }} id="mapas" className="space-y-16">
-          <SectionHeading title="Visualizaciones Interactivas" subtitle="Tres perspectivas diferentes para explorar el ecosistema normativo del Mercado Único Digital." />
+          <SectionHeading title="Visualizaciones Interactivas" subtitle="Seis perspectivas para explorar el ecosistema normativo: mapas radiales, de calor, de obligaciones, interacciones entre áreas y densidad temporal." />
 
           <VisualizationFilters filters={vizFilters} onChange={setVizFilters} />
 
@@ -202,6 +195,27 @@ const Index = () => {
             <HeatGrid filters={vizFilters} />
           </div>
 
+          {/* Obligations Matrix — NEW */}
+          <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
+            <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Matriz de Obligaciones por Actor</h3>
+            <p className="text-xs text-[var(--g-text-secondary)] mb-6">Cruza los 12 bloques con los principales tipos de actores regulados. La intensidad refleja el volumen y complejidad de las obligaciones. Pasa el ratón para ver obligaciones concretas.</p>
+            <ObligationsHeatMap />
+          </div>
+
+          {/* Interactions Matrix — NEW */}
+          <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
+            <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Matriz de Interacciones Normativas</h3>
+            <p className="text-xs text-[var(--g-text-secondary)] mb-6">Atlas de dependencias y complementariedades entre las 12 áreas del DSM. Identifica solapamientos y relaciones que afectan al cumplimiento coordinado.</p>
+            <InteractionsMatrix />
+          </div>
+
+          {/* Density Timeline — NEW */}
+          <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
+            <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Densidad Temporal de Hitos</h3>
+            <p className="text-xs text-[var(--g-text-secondary)] mb-6">Mapa de calor por trimestre: identifica los periodos con mayor concentración de entradas en vigor, plazos de transposición y propuestas legislativas.</p>
+            <DensityTimeline />
+          </div>
+
           {/* Constellation */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Diagrama de Constelación</h3>
@@ -212,7 +226,7 @@ const Index = () => {
 
         {/* Cronología */}
         <section ref={el => { sectionRefs.current.cronologia = el; }} id="cronologia">
-          <SectionHeading title="Cronología Legislativa 2025–2028" subtitle="Principales hitos de las nuevas iniciativas del mandato 2024-2029 y plazos de transposición en España." />
+          <SectionHeading title="Cronología Legislativa 2025–2028" subtitle="Principales hitos del mandato 2024-2029. Filtra por estado, haz clic en un hito para ver su efecto jurídico y próximo paso. Las fechas con '~Estimado' están sujetas al proceso legislativo." />
           <TimelineSection />
         </section>
 
@@ -220,7 +234,6 @@ const Index = () => {
         <section ref={el => { sectionRefs.current.transposicion = el; }} id="transposicion">
           <SectionHeading title="Transposición e Implementación en España" subtitle="Estado de transposición de las Directivas y de aplicación de los Reglamentos UE en el ordenamiento jurídico español." />
 
-          {/* Status legend */}
           <div className="flex flex-wrap justify-center gap-3 mb-6 text-[10px]">
             {[
               { label: 'Reg. Aplicación directa', color: 'var(--status-directa)' },
@@ -254,7 +267,7 @@ const Index = () => {
           <div className="w-6 h-0.5" style={{ background: 'var(--g-brand-bright)' }} />
         </div>
         <p className="text-[10px] text-[var(--g-sec-300)]">
-          Mapeo Normativo del Mercado Único Digital · Actualizado 19 marzo 2026 · © 2026 Garrigues
+          Mapa Normativo del Mercado Único Digital · Actualizado 19 marzo 2026 · © 2026 Garrigues
         </p>
       </footer>
     </div>
