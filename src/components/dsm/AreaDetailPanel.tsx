@@ -170,7 +170,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
             {bloque.alcance && (
               <div>
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1.5">Alcance</div>
-                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed">{bloque.alcance}</p>
+                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.alcance} /></p>
               </div>
             )}
 
