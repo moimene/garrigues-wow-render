@@ -473,6 +473,7 @@ export const bloques: Bloque[] = [
       'CNMC — Coordinador de Servicios Digitales',
     ],
     funcionNormativa: 'Horizontal y de supervisión — fija estándares de confianza y seguridad en el ecosistema de intermediarios digitales.',
+    buildingBlocks: ['eDelivery'],
     obligacionesActores: [
       { actor: 'plataformas', intensidad: 'alta', obligaciones: ['Mecanismos de notificación y actuación (DSA)', 'Transparencia en publicidad online', 'Evaluación de riesgos sistémicos (VLOPs)', 'Retirar contenido terrorista en 1 hora', 'Auditorías independientes para VLOPs'] },
       { actor: 'pymes', intensidad: 'media', obligaciones: ['Cumplir obligaciones básicas del DSA', 'Designar punto de contacto', 'Publicar condiciones generales claras'] },
