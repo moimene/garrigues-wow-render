@@ -92,7 +92,7 @@ const Index = () => {
   const [tourActive, setTourActive] = useState(false);
   const [vistaEspana, setVistaEspana] = useState(false);
   const sectionRefs = useRef<Record<TabId, HTMLElement | null>>({
-    orientacion: null, general: null, mapas: null, cronologia: null, transposicion: null, recursos: null,
+    orientacion: null, general: null, mapas: null, cronologia: null, transposicion: null, infraestructura: null, recursos: null,
   });
 
   const totalNormas = bloques.reduce((s, b) => s + b.normas.length, 0);
