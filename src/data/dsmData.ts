@@ -54,6 +54,8 @@ export interface Bloque {
   alertasRigor: string[];
   recursosReferencia: string[];
   funcionNormativa: string;
+  // EuroStack / Building Blocks
+  buildingBlocks?: string[];
 }
 
 export const actorLabels: Record<ActorType, string> = {
