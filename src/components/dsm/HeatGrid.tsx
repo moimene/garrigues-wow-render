@@ -44,30 +44,35 @@ export const HeatGrid = ({ filters }: Props) => {
           return (
             <div
               key={b.id}
-              className="relative cursor-pointer p-3 flex flex-col items-center justify-center text-center"
+              className="relative cursor-pointer p-4 flex flex-col items-center justify-center text-center"
+              onMouseEnter={() => setHovered(b.id)}
+              onMouseLeave={() => setHovered(null)}
               style={{
                 borderRadius: 'var(--g-radius-lg)',
                 background: b.color,
                 boxShadow: isH ? `0 8px 24px ${b.color}55` : 'var(--g-shadow-card)',
                 transition: 'all 300ms cubic-bezier(0.16,1,0.3,1)',
-                transform: isH ? 'scale(1.06) translateY(-2px)' : 'scale(1)',
+                transform: isH ? 'scale(1.04) translateY(-2px)' : 'scale(1)',
                 opacity: isVisible ? 1 : 0,
                 transitionDelay: `${i * 60}ms`,
-                minHeight: '120px',
+                minHeight: '160px',
                 borderLeft: `4px solid ${b.color}`,
                 filter: isH ? 'brightness(1.12)' : 'none',
               }}
             >
-              <div className="text-3xl font-bold tabular-nums text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
+              <div className="text-4xl font-bold tabular-nums text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
                 {b.normas.length}
               </div>
-              <div className="text-[11px] font-bold mt-1 leading-tight text-white" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.25)' }}>
+              <div className="text-[12px] font-bold mt-1 leading-tight text-white" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.25)' }}>
                 B{b.id}
               </div>
-              <div className="mt-2.5 w-full h-2 overflow-hidden" style={{ background: 'rgba(255,255,255,0.3)', borderRadius: 'var(--g-radius-full)' }}>
+              <div className="text-[10px] mt-1 leading-tight text-white/80 font-medium line-clamp-2" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
+                {b.nombre}
+              </div>
+              <div className="mt-3 w-full h-2.5 overflow-hidden" style={{ background: 'rgba(255,255,255,0.3)', borderRadius: 'var(--g-radius-full)' }}>
                 <div className="h-full" style={{ width: `${pct}%`, background: 'rgba(255,255,255,0.9)', borderRadius: 'var(--g-radius-full)', transition: 'width 600ms ease-out' }} />
               </div>
-              <div className="text-[10px] mt-1 font-bold text-white" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
+              <div className="text-[11px] mt-1 font-bold text-white" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
                 {pct}% impl.
               </div>
 
