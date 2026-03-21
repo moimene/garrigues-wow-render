@@ -133,7 +133,7 @@ export const ConstellationGraph = ({ filters }: Props) => {
               <circle cx={n.x} cy={n.y} r={n.r} fill={n.color} stroke="white" strokeWidth={2.5}
                 style={{ filter: isActive ? `drop-shadow(0 0 6px ${n.color})` : 'none', transition: 'filter 200ms ease' }}
               />
-              <text x={n.x} y={n.y + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="9" fontWeight="700" fontFamily="Montserrat" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
+              <text x={n.x} y={n.y + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="10" fontWeight="700" fontFamily="Montserrat" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
                 {n.label}
               </text>
             </g>
