@@ -210,7 +210,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
             {bloque.arquitecturaNormativaUE && (
               <div className="p-3" style={{ background: 'rgba(0,68,56,0.04)', borderRadius: 'var(--g-radius-md)' }}>
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1.5">Arquitectura normativa</div>
-                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed">{bloque.arquitecturaNormativaUE}</p>
+                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.arquitecturaNormativaUE} /></p>
               </div>
             )}
 
