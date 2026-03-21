@@ -132,13 +132,22 @@ const CardContent = ({ event, align, showDetail, onToggle }: {
   </div>
 );
 
-export const TimelineSection = () => {
+export const TimelineSection = ({ vistaEspana }: { vistaEspana?: boolean }) => {
   const [filter, setFilter] = useState<FilterEstado>('all');
 
   const filteredEvents = useMemo(() => {
-    if (filter === 'all') return cronologia;
-    return cronologia.filter(e => e.estado === filter);
-  }, [filter]);
+    let events = filter === 'all' ? cronologia : cronologia.filter(e => e.estado === filter);
+    if (vistaEspana) {
+      events = events.filter(e => {
+        // Keep events linked to blocks that have non-propuesta normas in Spain
+        return e.bloques.some(bId => {
+          const bloque = bloques.find(b => b.id === bId);
+          return bloque?.normas.some(n => n.estadoES !== 'propuesta');
+        });
+      });
+    }
+    return events;
+  }, [filter, vistaEspana]);
 
   return (
     <div className="space-y-6">
