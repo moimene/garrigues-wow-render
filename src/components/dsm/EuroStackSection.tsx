@@ -249,10 +249,10 @@ const SovereigntyHeatmap = () => {
                 <div
                   className="absolute left-0 right-0 top-full mt-1 p-3 z-50"
                   style={{
-                    background: 'var(--g-surface-card)',
+                    background: '#ffffff',
                     borderRadius: 'var(--g-radius-md)',
-                    boxShadow: '0 8px 30px rgba(0,0,0,0.18)',
-                    border: '1px solid var(--g-border-subtle)',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.22)',
+                    border: '1px solid #d1d5db',
                   }}
                 >
                   <p className="text-[10px] text-[var(--g-text-primary)] leading-relaxed">{s.nota}</p>

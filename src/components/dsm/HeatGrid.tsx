@@ -85,7 +85,7 @@ export const HeatGrid = ({ filters, vistaEspana }: Props) => {
               </div>
 
               {isH && (
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full z-50 px-4 py-3 min-w-[180px]" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', border: `2px solid ${b.color}` }}>
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full z-50 px-4 py-3 min-w-[180px]" style={{ background: '#ffffff', borderRadius: 'var(--g-radius-md)', boxShadow: '0 8px 30px rgba(0,0,0,0.22)', border: `2px solid ${b.color}` }}>
                   <div className="text-xs font-bold text-[var(--g-text-primary)]">{b.nombre}</div>
                   <div className="text-[10px] text-[var(--g-text-secondary)] mt-0.5">{b.normas.length} normas · {transpuestas} implementadas</div>
                 </div>
