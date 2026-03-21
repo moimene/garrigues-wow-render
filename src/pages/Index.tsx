@@ -187,6 +187,7 @@ const Index = () => {
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa Radial Sunburst</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Anillos concéntricos: DSM → Bloques → Normas. Color exterior por estado de transposición en España.</p>
             <SunburstMap filters={vizFilters} />
+            <BloqueLegend />
           </div>
 
           {/* HeatGrid */}
