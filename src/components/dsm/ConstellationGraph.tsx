@@ -68,7 +68,7 @@ export const ConstellationGraph = ({ filters }: Props) => {
         const nNode: Node = {
           id: `n${b.id}-${j}`, label: n.nombre.split(' ').slice(0, 2).join(' '),
           x: cx + nOrbit * Math.cos(nAngle), y: cy + nOrbit * Math.sin(nAngle),
-          r: 7, color, type: 'norma', estadoES: n.estadoES, bloqueId: b.id,
+          r: 9, color, type: 'norma', estadoES: n.estadoES, bloqueId: b.id,
         };
         nNodes.push(nNode);
         lnks.push({ from: bNode, to: nNode });
