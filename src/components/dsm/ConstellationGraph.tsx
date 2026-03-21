@@ -62,8 +62,8 @@ export const ConstellationGraph = ({ filters }: Props) => {
       bNodes.push(bNode);
 
       b.normas.slice(0, 6).forEach((n, j) => {
-        const nAngle = angle + ((j - b.normas.slice(0, 6).length / 2) * 0.2);
-        const nOrbit = orbitR + 60 + j * 14;
+        const nAngle = angle + ((j - b.normas.slice(0, 6).length / 2) * 0.18);
+        const nOrbit = orbitR + 70 + j * 16;
         const color = estadoColors[n.estadoES] || '#6b7280';
         const nNode: Node = {
           id: `n${b.id}-${j}`, label: n.nombre.split(' ').slice(0, 2).join(' '),
