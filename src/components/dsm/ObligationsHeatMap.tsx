@@ -48,7 +48,7 @@ export const ObligationsHeatMap = () => {
         <table className="w-full border-collapse text-[11px]" style={{ minWidth: '780px' }}>
           <thead>
             <tr>
-              <th className="text-left p-2 font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[10px]" style={{ width: '140px' }}>Bloque</th>
+              <th className="text-left p-2 font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[10px]" style={{ width: '200px' }}>Bloque</th>
               {allActors.map(a => (
                 <th key={a} className="p-2 text-center font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[9px]" style={{ writingMode: 'vertical-rl', height: '100px', minWidth: '40px' }}>
                   {actorLabels[a].split(' ')[0]}
