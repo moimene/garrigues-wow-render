@@ -495,6 +495,8 @@ const Index = () => {
           </p>
         </div>
       </footer>
+
+      <GuidedTour active={tourActive} onClose={() => setTourActive(false)} />
     </div>
   );
 };
