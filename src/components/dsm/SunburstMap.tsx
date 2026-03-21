@@ -83,7 +83,7 @@ export const SunburstMap = ({ filters }: Props) => {
             <g key={bloque.id} onMouseEnter={() => setHoveredBlock(bloque.id)} onMouseLeave={() => setHoveredBlock(null)} style={{ cursor: 'pointer' }}>
               {/* Block ring - thicker, fully opaque */}
               <path
-                d={describeArc(cx, cy, 58, 115, startAngle, sweep - 0.8)}
+                d={describeArc(cx, cy, 68, 140, startAngle, sweep - 0.8)}
                 fill={bloque.color}
                 opacity={isHovered ? 1 : 0.92}
                 stroke="white"
