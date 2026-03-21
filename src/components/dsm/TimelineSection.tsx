@@ -53,7 +53,14 @@ const TimelineNode = ({ event, index }: { event: typeof cronologia[0]; index: nu
       {/* Mobile */}
       <div className="md:hidden flex gap-3 w-full">
         <div className="flex flex-col items-center flex-shrink-0">
-          <div className="w-3.5 h-3.5 rounded-full border-[3px] z-10" style={{ borderColor: estadoColors[event.estado], background: 'var(--g-surface-card)' }} />
+          <div
+            className="w-3.5 h-3.5 rounded-full border-[3px] z-10"
+            style={{
+              borderColor: estadoColors[event.estado],
+              background: 'var(--g-surface-card)',
+              borderStyle: event.tipoHito === 'tecnico' ? 'dashed' : 'solid',
+            }}
+          />
           <div className="w-0.5 flex-1" style={{ background: 'var(--g-sec-300)', opacity: 0.4 }} />
         </div>
         <div className="pb-6 flex-1">
@@ -67,7 +74,14 @@ const TimelineNode = ({ event, index }: { event: typeof cronologia[0]; index: nu
           {isLeft && <CardContent event={event} align="right" showDetail={showDetail} onToggle={() => setShowDetail(!showDetail)} />}
         </div>
         <div className="flex flex-col items-center">
-          <div className="w-4 h-4 rounded-full border-[3px] z-10" style={{ borderColor: estadoColors[event.estado], background: 'var(--g-surface-card)' }} />
+          <div
+            className="w-4 h-4 rounded-full border-[3px] z-10"
+            style={{
+              borderColor: estadoColors[event.estado],
+              background: 'var(--g-surface-card)',
+              borderStyle: event.tipoHito === 'tecnico' ? 'dashed' : 'solid',
+            }}
+          />
         </div>
         <div className={!isLeft ? 'pl-6' : 'pl-6 opacity-0 pointer-events-none'}>
           {!isLeft && <CardContent event={event} align="left" showDetail={showDetail} onToggle={() => setShowDetail(!showDetail)} />}
@@ -85,7 +99,9 @@ const CardContent = ({ event, align, showDetail, onToggle }: {
 }) => (
   <div className="pb-8 group">
     <div className="flex items-center gap-2 flex-wrap" style={{ justifyContent: align === 'right' ? 'flex-end' : 'flex-start' }}>
-      <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: estadoColors[event.estado] }}>{event.fecha}</span>
+      <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: estadoColors[event.estado] }}>
+        {event.tipoHito === 'tecnico' ? '⚙ ' : ''}{event.fecha}
+      </span>
       {event.incertidumbre && (
         <span className="text-[9px] font-medium px-1.5 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)', border: '1px dashed var(--g-border-subtle)' }} title="Fecha sujeta a proceso legislativo">
           ~Estimado
@@ -157,6 +173,18 @@ export const TimelineSection = ({ vistaEspana }: { vistaEspana?: boolean }) => {
         {(['vigente', 'proceso', 'planificada', 'revision'] as EstadoUE[]).map(e => (
           <FilterChip key={e} label={estadoLabels[e]} active={filter === e} color={estadoColors[e]} onClick={() => setFilter(e)} />
         ))}
+      </div>
+
+      {/* Milestone type legend */}
+      <div className="flex justify-center gap-4 text-[10px] text-[var(--g-text-secondary)]">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="w-3 h-3 rounded-full border-[2px]" style={{ borderColor: 'var(--g-text-secondary)', background: 'var(--g-surface-card)' }} />
+          Hito normativo
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="w-3 h-3 rounded-full border-[2px]" style={{ borderColor: 'var(--g-text-secondary)', background: 'var(--g-surface-card)', borderStyle: 'dashed' }} />
+          ⚙ Hito técnico
+        </span>
       </div>
 
       {vistaEspana && (

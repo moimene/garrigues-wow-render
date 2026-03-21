@@ -54,6 +54,8 @@ export interface Bloque {
   alertasRigor: string[];
   recursosReferencia: string[];
   funcionNormativa: string;
+  // EuroStack / Building Blocks
+  buildingBlocks?: string[];
 }
 
 export const actorLabels: Record<ActorType, string> = {
@@ -418,6 +420,7 @@ export const bloques: Bloque[] = [
       'Pilotos de cartera de identidad europea — Comisión Europea',
     ],
     funcionNormativa: 'Habilitante y organizativa — facilita transacciones seguras y reduce fricciones administrativas y comerciales transfronterizas.',
+    buildingBlocks: ['eID / EUDI Wallet', 'eSignature'],
     obligacionesActores: [
       { actor: 'proveedores', intensidad: 'alta', obligaciones: ['Designar representante legal en la UE', 'Atender órdenes de e-Evidence en plazos cortos', 'Preservar datos conforme a órdenes judiciales', 'Aceptar y verificar carteras de identidad'] },
       { actor: 'plataformas', intensidad: 'media', obligaciones: ['Cooperar con autoridades en investigaciones', 'Integrar verificación de identidad digital europea', 'Transmitir datos conforme a órdenes europeas'] },
@@ -470,6 +473,7 @@ export const bloques: Bloque[] = [
       'CNMC — Coordinador de Servicios Digitales',
     ],
     funcionNormativa: 'Horizontal y de supervisión — fija estándares de confianza y seguridad en el ecosistema de intermediarios digitales.',
+    buildingBlocks: ['eDelivery'],
     obligacionesActores: [
       { actor: 'plataformas', intensidad: 'alta', obligaciones: ['Mecanismos de notificación y actuación (DSA)', 'Transparencia en publicidad online', 'Evaluación de riesgos sistémicos (VLOPs)', 'Retirar contenido terrorista en 1 hora', 'Auditorías independientes para VLOPs'] },
       { actor: 'pymes', intensidad: 'media', obligaciones: ['Cumplir obligaciones básicas del DSA', 'Designar punto de contacto', 'Publicar condiciones generales claras'] },
@@ -710,6 +714,7 @@ export interface TimelineEvent {
   efectoJuridico?: string;
   proximoPaso?: string;
   incertidumbre?: boolean;
+  tipoHito?: 'normativo' | 'tecnico';
 }
 
 export const cronologia: TimelineEvent[] = [
@@ -728,6 +733,10 @@ export const cronologia: TimelineEvent[] = [
   { fecha: '09.12.2026', titulo: 'Plazo transposición Product Liability Directive', descripcion: 'Modificará TRLGDCU para incluir software e IA.', estado: 'vigente', bloques: [9], efectoJuridico: 'Extiende la responsabilidad civil objetiva a fabricantes de software y sistemas de IA defectuosos.', proximoPaso: 'España debe modificar el TRLGDCU.' },
   { fecha: '14.06.2027', titulo: 'Plazo transposición Dir. Violencia contra Mujeres', descripcion: 'Incluye ciberviolencia. Deberá modificar CP y Ley 1/2004.', estado: 'vigente', bloques: [7], efectoJuridico: 'Tipifica delitos de ciberviolencia: acoso online, difusión de imágenes íntimas, incitación al odio.', proximoPaso: 'Modificación del Código Penal y la Ley 1/2004.' },
   { fecha: '10.07.2027', titulo: 'Plazo transposición 6ª Directiva AML', descripcion: 'Modificará Ley 10/2010. Registros de titularidad real centralizados.', estado: 'vigente', bloques: [12], efectoJuridico: 'Refuerza la prevención del blanqueo con registros centralizados y diligencia debida reforzada para cripto.', proximoPaso: 'Modificación de la Ley 10/2010 y registro de titularidad real.' },
+  // Technical milestones — EuroStack / Building Blocks
+  { fecha: 'Q2 2026', titulo: 'EUDI Wallet: pilotos a gran escala', descripcion: 'Los pilotos de cartera de identidad digital europea alcanzan fase de despliegue a gran escala en varios Estados miembros, incluida España.', estado: 'proceso', bloques: [7], efectoJuridico: 'Los actos de ejecución (Reglamentos 2024/2979 y 2024/2982) definen las especificaciones técnicas. Los pilotos no crean obligaciones adicionales, pero anticipan la infraestructura de cumplimiento.', proximoPaso: 'Evaluación de resultados y ajuste de especificaciones técnicas.', tipoHito: 'tecnico' },
+  { fecha: 'Q3 2026', titulo: 'OOTS: conexión de portales nacionales', descripcion: 'El Once-Only Technical System conecta los portales nacionales de procedimientos al sistema transfronterizo de intercambio de evidencias.', estado: 'proceso', bloques: [7, 8], efectoJuridico: 'Ejecuta el Reglamento de Ventanilla Digital Única. Los ciudadanos y empresas podrán presentar datos una sola vez ante administraciones europeas.', proximoPaso: 'Despliegue progresivo en Estados miembros con mayor madurez de interoperabilidad.', tipoHito: 'tecnico' },
+  { fecha: '2027', titulo: 'EUDI Wallet: obligatoriedad de aceptación', descripcion: 'Los servicios públicos y determinados servicios privados deberán aceptar la cartera de identidad digital europea como medio de identificación.', estado: 'planificada', bloques: [7], efectoJuridico: 'Creará obligaciones de aceptación para administraciones y, progresivamente, para ciertos sectores privados regulados.', proximoPaso: 'Adopción de actos de ejecución que precisen los servicios obligados y los plazos.', incertidumbre: true, tipoHito: 'tecnico' },
 ];
 
 export interface Recurso {
