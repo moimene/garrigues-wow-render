@@ -44,7 +44,7 @@ export const ObligationsHeatMap = () => {
 
   return (
     <div ref={ref} className="space-y-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 700ms cubic-bezier(0.16,1,0.3,1)' }}>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto" style={{ overflow: 'visible', overflowX: 'auto' }}>
         <table className="w-full border-collapse text-[11px]" style={{ minWidth: '780px' }}>
           <thead>
             <tr>
