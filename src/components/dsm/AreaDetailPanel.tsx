@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type Bloque, actorLabels } from '@/data/dsmData';
+import { type Bloque, actorLabels, bloques as allBloques } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
 
 const estadoESLabels: Record<string, { label: string; color: string }> = {
@@ -23,7 +23,7 @@ const depTypeConfig = {
   conflicto: { label: 'Conflicto potencial', icon: '⚡', color: 'var(--status-pendiente)' },
 };
 
-type Tab = 'sintesis' | 'estadoUE' | 'transposicion' | 'obligaciones' | 'dependencias';
+type Tab = 'sintesis' | 'estadoUE' | 'transposicion' | 'obligaciones' | 'dependencias' | 'claves';
 
 interface Props {
   bloque: Bloque;
@@ -32,6 +32,7 @@ interface Props {
 
 export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
   const [tab, setTab] = useState<Tab>('sintesis');
+  const [showFullExplanation, setShowFullExplanation] = useState(false);
   const { ref, isVisible } = useScrollReveal(0.05);
 
   const tabs: { id: Tab; label: string }[] = [
@@ -40,10 +41,16 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
     { id: 'transposicion', label: 'España' },
     { id: 'obligaciones', label: 'Obligaciones' },
     { id: 'dependencias', label: 'Interacciones' },
+    { id: 'claves', label: 'Claves' },
   ];
 
   const transpuestas = bloque.normas.filter(n => n.estadoES === 'directa' || n.estadoES === 'transpuesta').length;
   const pctImpl = Math.round((transpuestas / bloque.normas.length) * 100);
+
+  const getLinkedBlockName = (areaId: number) => {
+    const b = allBloques.find(bl => bl.id === areaId);
+    return b ? `B${b.id} · ${b.nombre}` : `Bloque ${areaId}`;
+  };
 
   return (
     <div
@@ -68,7 +75,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
             </div>
             <div>
               <h3 className="text-base font-bold text-[var(--g-text-primary)] leading-snug">{bloque.nombre}</h3>
-              <p className="text-xs text-[var(--g-text-secondary)] mt-0.5">{bloque.descripcion}</p>
+              <p className="text-[11px] text-[var(--g-text-secondary)] mt-0.5 italic">{bloque.subtitulo}</p>
             </div>
           </div>
           <button onClick={onClose} className="text-xs font-medium shrink-0 px-2 py-1" style={{ color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)' }}>✕</button>
@@ -97,6 +104,13 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
             <span className="text-[10px] text-[var(--g-text-secondary)]">impl. ES</span>
           </div>
         </div>
+
+        {/* Function badge */}
+        {bloque.funcionNormativa && (
+          <div className="mt-3 text-[10px] font-medium px-2.5 py-1 inline-block" style={{ background: `${bloque.color}12`, color: bloque.color, borderRadius: 'var(--g-radius-sm)' }}>
+            {bloque.funcionNormativa}
+          </div>
+        )}
       </div>
 
       {/* Tab bar */}
@@ -105,7 +119,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className="relative px-4 py-2.5 text-[11px] sm:text-xs font-medium whitespace-nowrap"
+            className="relative px-3 sm:px-4 py-2.5 text-[10px] sm:text-xs font-medium whitespace-nowrap"
             style={{
               color: tab === t.id ? 'var(--g-brand-3308)' : 'var(--g-text-secondary)',
               transition: 'color 150ms ease',
@@ -124,10 +138,53 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
         {tab === 'sintesis' && (
           <div className="space-y-4">
             <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.sintesisEjecutiva}</p>
+
+            {/* Expandable deeper explanation */}
+            {bloque.explicacionMedia && (
+              <div>
+                <button
+                  onClick={() => setShowFullExplanation(!showFullExplanation)}
+                  className="text-[11px] font-semibold flex items-center gap-1"
+                  style={{ color: 'var(--g-brand-3308)' }}
+                >
+                  {showFullExplanation ? '▾ Ocultar explicación detallada' : '▸ Leer explicación detallada'}
+                </button>
+                {showFullExplanation && (
+                  <div className="mt-3 space-y-3">
+                    <p className="text-[13px] text-[var(--g-text-primary)] leading-relaxed">{bloque.explicacionMedia}</p>
+                    {bloque.explicacionCompleta && (
+                      <p className="text-[12px] text-[var(--g-text-secondary)] leading-relaxed">{bloque.explicacionCompleta}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
             <div className="p-4" style={{ background: 'var(--g-sec-50)', borderRadius: 'var(--g-radius-md)', borderLeft: `3px solid ${bloque.color}` }}>
               <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1">Impacto principal</div>
               <p className="text-xs text-[var(--g-text-primary)] leading-relaxed">{bloque.impactoResumen}</p>
             </div>
+
+            {/* Alcance */}
+            {bloque.alcance && (
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1.5">Alcance</div>
+                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed">{bloque.alcance}</p>
+              </div>
+            )}
+
+            {/* Conceptos clave */}
+            {bloque.conceptosClave && bloque.conceptosClave.length > 0 && (
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-2">Conceptos clave</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {bloque.conceptosClave.map((c, i) => (
+                    <span key={i} className="text-[10px] font-medium px-2 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-primary)', borderRadius: 'var(--g-radius-sm)' }}>{c}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {bloque.hitosProximos.length > 0 && (
               <div>
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-2">Próximos hitos</div>
@@ -147,6 +204,15 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
         {tab === 'estadoUE' && (
           <div className="space-y-4">
             <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.estadoUEDetalle}</p>
+
+            {/* Arquitectura normativa */}
+            {bloque.arquitecturaNormativaUE && (
+              <div className="p-3" style={{ background: 'rgba(0,68,56,0.04)', borderRadius: 'var(--g-radius-md)' }}>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1.5">Arquitectura normativa</div>
+                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed">{bloque.arquitecturaNormativaUE}</p>
+              </div>
+            )}
+
             <div className="space-y-2">
               {bloque.normas.map((n, i) => (
                 <div key={i} className="flex items-center gap-3 p-2.5" style={{ background: 'var(--g-surface-page)', borderRadius: 'var(--g-radius-md)' }}>
@@ -181,7 +247,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
             <div className="p-3" style={{ background: 'rgba(0,68,56,0.04)', borderRadius: 'var(--g-radius-md)' }}>
               <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-2">📖 Glosario rápido</div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
-                <div><strong className="text-[var(--g-text-primary)]">Aplicación directa:</strong> <span className="text-[var(--g-text-secondary)]">El reglamento UE es exigible sin necesidad de norma nacional.</span></div>
+                <div><strong className="text-[var(--g-text-primary)]">Aplicación directa:</strong> <span className="text-[var(--g-text-secondary)]">El reglamento UE es exigible sin necesidad de norma nacional, aunque puede requerir designaciones.</span></div>
                 <div><strong className="text-[var(--g-text-primary)]">Transposición:</strong> <span className="text-[var(--g-text-secondary)]">La directiva UE se incorpora al ordenamiento español mediante ley o real decreto-ley.</span></div>
                 <div><strong className="text-[var(--g-text-primary)]">Implementación:</strong> <span className="text-[var(--g-text-secondary)]">Desarrollo reglamentario, designación de autoridades y adopción de guías técnicas.</span></div>
                 <div><strong className="text-[var(--g-text-primary)]">Parcial:</strong> <span className="text-[var(--g-text-secondary)]">Existe normativa nacional pero no cubre todos los aspectos de la directiva UE.</span></div>
@@ -230,7 +296,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
                     <span className="text-lg mt-0.5">{cfg.icon}</span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-bold text-[var(--g-text-primary)]">Bloque {d.areaId}</span>
+                        <span className="text-xs font-bold text-[var(--g-text-primary)]">{getLinkedBlockName(d.areaId)}</span>
                         <span className="text-[10px] font-medium px-1.5 py-0.5" style={{ color: cfg.color, background: `${cfg.color}15`, borderRadius: 'var(--g-radius-sm)' }}>{cfg.label}</span>
                       </div>
                       <p className="text-[11px] text-[var(--g-text-secondary)] leading-relaxed">{d.descripcion}</p>
@@ -239,6 +305,54 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
                 );
               })}
             </div>
+          </div>
+        )}
+
+        {tab === 'claves' && (
+          <div className="space-y-5">
+            {/* Claves de interpretación */}
+            {bloque.clavesInterpretacion && bloque.clavesInterpretacion.length > 0 && (
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-2">Claves de interpretación</div>
+                <ul className="space-y-2">
+                  {bloque.clavesInterpretacion.map((c, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-[12px] text-[var(--g-text-primary)] leading-relaxed">
+                      <span className="shrink-0 mt-0.5 w-4 h-4 flex items-center justify-center text-[9px] font-bold" style={{ background: `${bloque.color}15`, color: bloque.color, borderRadius: 'var(--g-radius-sm)' }}>{i + 1}</span>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Alertas de rigor */}
+            {bloque.alertasRigor && bloque.alertasRigor.length > 0 && (
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-2">⚠ Alertas de rigor</div>
+                <div className="space-y-2">
+                  {bloque.alertasRigor.map((a, i) => (
+                    <div key={i} className="p-2.5 text-[11px] text-[var(--g-text-primary)] leading-relaxed" style={{ background: 'rgba(245,158,11,0.06)', borderRadius: 'var(--g-radius-md)', borderLeft: '3px solid var(--status-proceso)' }}>
+                      {a}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Recursos de referencia */}
+            {bloque.recursosReferencia && bloque.recursosReferencia.length > 0 && (
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-2">Fuentes de referencia</div>
+                <ul className="space-y-1">
+                  {bloque.recursosReferencia.map((r, i) => (
+                    <li key={i} className="text-[11px] text-[var(--g-text-secondary)] leading-relaxed flex items-start gap-1.5">
+                      <span className="shrink-0 mt-0.5">📄</span>
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </div>
