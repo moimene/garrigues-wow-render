@@ -712,6 +712,7 @@ export interface TimelineEvent {
   efectoJuridico?: string;
   proximoPaso?: string;
   incertidumbre?: boolean;
+  tipoHito?: 'normativo' | 'tecnico';
 }
 
 export const cronologia: TimelineEvent[] = [
