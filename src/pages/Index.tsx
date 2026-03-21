@@ -214,7 +214,7 @@ const Index = () => {
             <BloqueLegend />
           </div>
 
-          {/* Density Timeline — NEW */}
+          {/* Density Timeline */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Densidad Temporal de Hitos</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Mapa de calor por trimestre: identifica los periodos con mayor concentración de entradas en vigor, plazos de transposición y propuestas legislativas.</p>
