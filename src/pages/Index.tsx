@@ -393,7 +393,7 @@ const Index = () => {
             description="Anillos concéntricos desde el núcleo del DSM hacia los bloques temáticos y, en el exterior, las normas individuales. El color exterior refleja el estado de transposición en España."
             interpretation="Los segmentos más amplios concentran mayor densidad normativa. El anillo exterior permite evaluar de un vistazo qué proporción del acervo tiene aplicación práctica en España."
           >
-            <SunburstMap filters={vizFilters} />
+            <SunburstMap filters={vizFilters} vistaEspana={vistaEspana} />
           </VisualizationCard>
 
           <VisualizationCard
