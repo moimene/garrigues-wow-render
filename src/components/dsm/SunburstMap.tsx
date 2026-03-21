@@ -103,7 +103,7 @@ export const SunburstMap = ({ filters }: Props) => {
                 return (
                   <path
                     key={j}
-                    d={describeArc(cx, cy, 120, 165, normaStart, normaSweep - 0.4)}
+                    d={describeArc(cx, cy, 146, 200, normaStart, normaSweep - 0.4)}
                     fill={color}
                     opacity={isHovered ? 1 : 0.75}
                     stroke="white"
