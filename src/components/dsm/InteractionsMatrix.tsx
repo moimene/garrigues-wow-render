@@ -44,7 +44,7 @@ export const InteractionsMatrix = () => {
           <tbody>
             {bloques.map(bRow => (
               <tr key={bRow.id}>
-                <td className="p-2 font-bold text-right pr-3 whitespace-nowrap text-[11px]" style={{ color: bRow.color }}>
+                <td className="p-2 font-bold text-right pr-3 whitespace-nowrap text-[11px]" style={{ color: bRow.color }} title={bRow.nombre}>
                   B{bRow.id}
                 </td>
                 {bloques.map(bCol => {
