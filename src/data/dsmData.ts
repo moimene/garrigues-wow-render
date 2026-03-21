@@ -420,6 +420,7 @@ export const bloques: Bloque[] = [
       'Pilotos de cartera de identidad europea — Comisión Europea',
     ],
     funcionNormativa: 'Habilitante y organizativa — facilita transacciones seguras y reduce fricciones administrativas y comerciales transfronterizas.',
+    buildingBlocks: ['eID / EUDI Wallet', 'eSignature'],
     obligacionesActores: [
       { actor: 'proveedores', intensidad: 'alta', obligaciones: ['Designar representante legal en la UE', 'Atender órdenes de e-Evidence en plazos cortos', 'Preservar datos conforme a órdenes judiciales', 'Aceptar y verificar carteras de identidad'] },
       { actor: 'plataformas', intensidad: 'media', obligaciones: ['Cooperar con autoridades en investigaciones', 'Integrar verificación de identidad digital europea', 'Transmitir datos conforme a órdenes europeas'] },
