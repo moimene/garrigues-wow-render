@@ -138,7 +138,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
       <div className="p-5 sm:p-6">
         {tab === 'sintesis' && (
           <div className="space-y-4">
-            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.sintesisEjecutiva}</p>
+            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.sintesisEjecutiva} /></p>
 
             {/* Expandable deeper explanation */}
             {bloque.explicacionMedia && (
