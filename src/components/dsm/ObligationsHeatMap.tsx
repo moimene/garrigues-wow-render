@@ -45,7 +45,7 @@ export const ObligationsHeatMap = () => {
   return (
     <div ref={ref} className="space-y-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 700ms cubic-bezier(0.16,1,0.3,1)' }}>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-[11px]" style={{ minWidth: '680px' }}>
+        <table className="w-full border-collapse text-[11px]" style={{ minWidth: '780px' }}>
           <thead>
             <tr>
               <th className="text-left p-2 font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[10px]" style={{ width: '140px' }}>Bloque</th>
