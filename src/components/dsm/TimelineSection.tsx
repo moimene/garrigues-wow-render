@@ -132,13 +132,22 @@ const CardContent = ({ event, align, showDetail, onToggle }: {
   </div>
 );
 
-export const TimelineSection = () => {
+export const TimelineSection = ({ vistaEspana }: { vistaEspana?: boolean }) => {
   const [filter, setFilter] = useState<FilterEstado>('all');
 
   const filteredEvents = useMemo(() => {
-    if (filter === 'all') return cronologia;
-    return cronologia.filter(e => e.estado === filter);
-  }, [filter]);
+    let events = filter === 'all' ? cronologia : cronologia.filter(e => e.estado === filter);
+    if (vistaEspana) {
+      events = events.filter(e => {
+        // Keep events linked to blocks that have non-propuesta normas in Spain
+        return e.bloques.some(bId => {
+          const bloque = bloques.find(b => b.id === bId);
+          return bloque?.normas.some(n => n.estadoES !== 'propuesta');
+        });
+      });
+    }
+    return events;
+  }, [filter, vistaEspana]);
 
   return (
     <div className="space-y-6">
@@ -149,6 +158,21 @@ export const TimelineSection = () => {
           <FilterChip key={e} label={estadoLabels[e]} active={filter === e} color={estadoColors[e]} onClick={() => setFilter(e)} />
         ))}
       </div>
+
+      {vistaEspana && (
+        <div
+          className="flex items-center justify-center gap-2 px-4 py-2 text-[11px] font-semibold"
+          style={{
+            background: 'var(--g-surface-subtle)',
+            borderRadius: 'var(--g-radius-md)',
+            color: 'var(--g-brand-3308)',
+            border: '1px solid var(--g-sec-300)',
+          }}
+        >
+          <span>🇪🇸</span>
+          Mostrando solo hitos con impacto en España ({filteredEvents.length} de {cronologia.length})
+        </div>
+      )}
 
       {filteredEvents.length === 0 ? (
         <div className="text-center py-12 text-sm text-[var(--g-text-secondary)]">

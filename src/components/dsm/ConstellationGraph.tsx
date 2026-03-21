@@ -36,9 +36,10 @@ interface Node {
 
 interface Props {
   filters?: FilterState;
+  vistaEspana?: boolean;
 }
 
-export const ConstellationGraph = ({ filters }: Props) => {
+export const ConstellationGraph = ({ filters, vistaEspana }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [activeBloque, setActiveBloque] = useState<number | null>(null);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
@@ -129,6 +130,7 @@ export const ConstellationGraph = ({ filters }: Props) => {
         {normaNodes.map(n => {
           const active = activeBloque === null || activeBloque === n.bloqueId;
           const isSelected = selectedNode?.id === n.id;
+          const esHighlight = vistaEspana && n.estadoES && n.estadoES !== 'propuesta';
           return (
             <g
               key={n.id}
@@ -136,14 +138,17 @@ export const ConstellationGraph = ({ filters }: Props) => {
               opacity={active ? 1 : 0.2}
               onClick={() => setSelectedNode(isSelected ? null : n)}
             >
+              {vistaEspana && esHighlight && (
+                <circle cx={n.x} cy={n.y} r={n.r + 5} fill="none" stroke={n.color} strokeWidth={1.5} opacity={0.4} />
+              )}
               <circle
-                cx={n.x} cy={n.y} r={isSelected ? n.r + 3 : n.r}
+                cx={n.x} cy={n.y} r={isSelected ? n.r + 3 : (esHighlight ? n.r + 1 : n.r)}
                 fill={n.color}
                 stroke="white"
                 strokeWidth={isSelected ? 2.5 : 1.5}
                 style={{
-                  filter: isSelected ? `drop-shadow(0 0 8px ${n.color})` : 'none',
-                  transition: 'r 150ms ease, stroke-width 150ms ease, filter 150ms ease',
+                  filter: isSelected ? `drop-shadow(0 0 8px ${n.color})` : (esHighlight ? `drop-shadow(0 0 4px ${n.color})` : 'none'),
+                  transition: 'all 300ms ease',
                 }}
               />
             </g>

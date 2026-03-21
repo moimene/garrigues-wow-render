@@ -5,6 +5,7 @@ import { FilterState, normaPassesFilter, bloquePassesEstadoUE } from './Visualiz
 
 interface Props {
   filters?: FilterState;
+  vistaEspana?: boolean;
 }
 
 const estadoColors: Record<string, string> = {
@@ -30,7 +31,7 @@ interface SelectedNorma {
   bloqueColor: string;
 }
 
-export const SunburstMap = ({ filters }: Props) => {
+export const SunburstMap = ({ filters, vistaEspana }: Props) => {
   const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
   const [selectedNorma, setSelectedNorma] = useState<SelectedNorma | null>(null);
   const { ref, isVisible } = useScrollReveal(0.2);
@@ -101,10 +102,10 @@ export const SunburstMap = ({ filters }: Props) => {
               <path
                 d={describeArc(cx, cy, 68, 140, startAngle, sweep - 0.8)}
                 fill={bloque.color}
-                opacity={isHovered ? 1 : 0.92}
+                opacity={vistaEspana ? 0.5 : (isHovered ? 1 : 0.92)}
                 stroke="white"
                 strokeWidth={0.8}
-                style={{ transition: 'opacity 150ms ease, filter 150ms ease', filter: isHovered ? 'brightness(1.2) saturate(1.2)' : 'none' }}
+                style={{ transition: 'opacity 300ms ease, filter 150ms ease', filter: isHovered ? 'brightness(1.2) saturate(1.2)' : 'none' }}
               />
               {sweep > 10 && (
                 <text x={cx + labelR * Math.cos(midAngle)} y={cy + labelR * Math.sin(midAngle)} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="10" fontWeight="700" fontFamily="Montserrat" style={{ pointerEvents: 'none', textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
@@ -120,12 +121,12 @@ export const SunburstMap = ({ filters }: Props) => {
                 return (
                   <path
                     key={j}
-                    d={describeArc(cx, cy, 146, 200, normaStart, normaSweep - 0.4)}
+                    d={describeArc(cx, cy, 146, vistaEspana ? 210 : 200, normaStart, normaSweep - 0.4)}
                     fill={color}
-                    opacity={isSelected ? 1 : isHovered ? 1 : 0.75}
+                    opacity={vistaEspana ? 1 : (isSelected ? 1 : isHovered ? 1 : 0.75)}
                     stroke={isSelected ? 'white' : 'white'}
-                    strokeWidth={isSelected ? 2 : 0.3}
-                    style={{ cursor: 'pointer', transition: 'opacity 200ms ease, stroke-width 150ms ease' }}
+                    strokeWidth={isSelected ? 2 : (vistaEspana ? 0.8 : 0.3)}
+                    style={{ cursor: 'pointer', transition: 'all 300ms ease' }}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedNorma(
@@ -133,7 +134,7 @@ export const SunburstMap = ({ filters }: Props) => {
                       );
                     }}
                   >
-                    <title>{norma.nombre} — {norma.estadoES}</title>
+                    <title>{norma.nombre} — {estadoLabels[norma.estadoES] || norma.estadoES}</title>
                   </path>
                 );
               })}

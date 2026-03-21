@@ -88,6 +88,7 @@ const Index = () => {
   const [vizFilters, setVizFilters] = useState<FilterState>({ estadoUE: [], tipoNorma: [], estadoES: [] });
   const [searchQuery, setSearchQuery] = useState('');
   const [tourActive, setTourActive] = useState(false);
+  const [vistaEspana, setVistaEspana] = useState(false);
   const sectionRefs = useRef<Record<TabId, HTMLElement | null>>({
     orientacion: null, general: null, mapas: null, cronologia: null, transposicion: null, recursos: null,
   });
@@ -268,6 +269,30 @@ const Index = () => {
                 </button>
               ))}
             </div>
+
+            {/* Vista España toggle */}
+            <button
+              onClick={() => setVistaEspana(!vistaEspana)}
+              className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] sm:text-[11px] font-bold whitespace-nowrap"
+              style={{
+                background: vistaEspana ? 'var(--g-brand-3308)' : 'transparent',
+                color: vistaEspana ? 'white' : 'var(--g-text-secondary)',
+                borderRadius: 'var(--g-radius-full)',
+                border: `1.5px solid ${vistaEspana ? 'var(--g-brand-3308)' : 'var(--g-border-subtle)'}`,
+                transition: 'all 200ms ease',
+              }}
+              title={vistaEspana ? 'Desactivar perspectiva España' : 'Activar perspectiva España: resalta transposición y filtra hitos'}
+            >
+              <span>🇪🇸</span>
+              Vista España
+              {vistaEspana && (
+                <span
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ background: 'var(--g-brand-bright)' }}
+                />
+              )}
+            </button>
+
             <GlobalSearch query={searchQuery} onChange={setSearchQuery} onSelect={handleSearchSelect} />
           </div>
         </div>
@@ -368,7 +393,7 @@ const Index = () => {
             description="Anillos concéntricos desde el núcleo del DSM hacia los bloques temáticos y, en el exterior, las normas individuales. El color exterior refleja el estado de transposición en España."
             interpretation="Los segmentos más amplios concentran mayor densidad normativa. El anillo exterior permite evaluar de un vistazo qué proporción del acervo tiene aplicación práctica en España."
           >
-            <SunburstMap filters={vizFilters} />
+            <SunburstMap filters={vizFilters} vistaEspana={vistaEspana} />
           </VisualizationCard>
 
           <VisualizationCard
@@ -377,7 +402,7 @@ const Index = () => {
             description="Cada celda representa un bloque temático. La barra inferior indica el porcentaje de normas ya implementadas en España."
             interpretation="Los bloques con más normas no son necesariamente los de mayor impacto. Cruza esta vista con la matriz de obligaciones para identificar los ámbitos de mayor exigencia práctica."
           >
-            <HeatGrid filters={vizFilters} />
+            <HeatGrid filters={vizFilters} vistaEspana={vistaEspana} />
           </VisualizationCard>
 
           <VisualizationCard
@@ -415,7 +440,7 @@ const Index = () => {
             description="Cada nodo representa un bloque o una norma individual. Las conexiones muestran la adscripción temática. El color indica el estado de transposición en España."
             interpretation="Los bloques con mayor número de nodos periféricos son los más complejos. Las zonas de convergencia señalan áreas donde múltiples normas se aplican simultáneamente."
           >
-            <ConstellationGraph filters={vizFilters} />
+            <ConstellationGraph filters={vizFilters} vistaEspana={vistaEspana} />
           </VisualizationCard>
         </section>
 
@@ -432,7 +457,7 @@ const Index = () => {
             title="Cronología legislativa 2025–2028"
             subtitle="Principales hitos del mandato legislativo 2024–2029. Cada entrada muestra su efecto jurídico y el próximo paso esperado. Las fechas marcadas como '~Estimado' están sujetas a la evolución del proceso legislativo."
           />
-          <TimelineSection />
+          <TimelineSection vistaEspana={vistaEspana} />
         </section>
 
         {/* Transposición España */}
