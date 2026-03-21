@@ -103,9 +103,9 @@ export const ConstellationGraph = ({ filters }: Props) => {
         })}
 
         {/* Center hub */}
-        <circle cx={cx} cy={cy} r={34} fill="var(--g-brand-3308)" />
-        <circle cx={cx} cy={cy} r={34} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.6} />
-        <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="11" fontWeight="700" fontFamily="Montserrat">DSM</text>
+        <circle cx={cx} cy={cy} r={42} fill="var(--g-brand-3308)" />
+        <circle cx={cx} cy={cy} r={42} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.6} />
+        <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="13" fontWeight="700" fontFamily="Montserrat">DSM</text>
 
         {/* Orbit lines */}
         {bloqueNodes.map(bn => (
