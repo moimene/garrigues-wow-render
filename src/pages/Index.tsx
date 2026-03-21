@@ -492,6 +492,16 @@ const Index = () => {
           <TranspositionSection />
         </section>
 
+        {/* Infraestructura soberana — EuroStack */}
+        <section ref={el => { sectionRefs.current.infraestructura = el; }} id="infraestructura">
+          <LayerHeading
+            layer="Análisis · Soberanía digital"
+            title="De la norma a la infraestructura: el EuroStack y los Digital Building Blocks"
+            subtitle="La regulación define el marco. Los Digital Building Blocks lo convierten en infraestructura ejecutable y soberana. EuroStack articula el proyecto político de que esa infraestructura sea europea por diseño."
+          />
+          <EuroStackSection />
+        </section>
+
         {/* Recursos */}
         <section ref={el => { sectionRefs.current.recursos = el; }} id="recursos">
           <LayerHeading
