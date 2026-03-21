@@ -25,6 +25,7 @@ const tabs = [
   { id: 'mapas', label: 'Exploración' },
   { id: 'cronologia', label: 'Cronología' },
   { id: 'transposicion', label: 'España' },
+  { id: 'infraestructura', label: 'Infraestructura' },
   { id: 'recursos', label: 'Recursos' },
 ] as const;
 
