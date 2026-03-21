@@ -1,6 +1,7 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
 import { GuidedTour, GuidedTourButton } from '@/components/dsm/GuidedTour';
 import { bloques } from '@/data/dsmData';
+import { EuroStackSection } from '@/components/dsm/EuroStackSection';
 import { GlobalSearch } from '@/components/dsm/GlobalSearch';
 import { AnimatedCounter } from '@/components/dsm/AnimatedCounter';
 import { BlockCard } from '@/components/dsm/BlockCard';
