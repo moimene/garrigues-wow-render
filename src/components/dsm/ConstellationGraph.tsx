@@ -36,9 +36,10 @@ interface Node {
 
 interface Props {
   filters?: FilterState;
+  vistaEspana?: boolean;
 }
 
-export const ConstellationGraph = ({ filters }: Props) => {
+export const ConstellationGraph = ({ filters, vistaEspana }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [activeBloque, setActiveBloque] = useState<number | null>(null);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);

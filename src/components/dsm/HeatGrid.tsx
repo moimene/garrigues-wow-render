@@ -5,9 +5,10 @@ import { FilterState, normaPassesFilter, bloquePassesEstadoUE } from './Visualiz
 
 interface Props {
   filters?: FilterState;
+  vistaEspana?: boolean;
 }
 
-export const HeatGrid = ({ filters }: Props) => {
+export const HeatGrid = ({ filters, vistaEspana }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [hovered, setHovered] = useState<number | null>(null);
 

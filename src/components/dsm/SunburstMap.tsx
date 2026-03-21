@@ -31,7 +31,7 @@ interface SelectedNorma {
   bloqueColor: string;
 }
 
-export const SunburstMap = ({ filters }: Props) => {
+export const SunburstMap = ({ filters, vistaEspana }: Props) => {
   const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
   const [selectedNorma, setSelectedNorma] = useState<SelectedNorma | null>(null);
   const { ref, isVisible } = useScrollReveal(0.2);
