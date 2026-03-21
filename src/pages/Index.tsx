@@ -1,4 +1,5 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
+import { GuidedTour, GuidedTourButton } from '@/components/dsm/GuidedTour';
 import { bloques } from '@/data/dsmData';
 import { GlobalSearch } from '@/components/dsm/GlobalSearch';
 import { AnimatedCounter } from '@/components/dsm/AnimatedCounter';
@@ -86,6 +87,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<TabId>('orientacion');
   const [vizFilters, setVizFilters] = useState<FilterState>({ estadoUE: [], tipoNorma: [], estadoES: [] });
   const [searchQuery, setSearchQuery] = useState('');
+  const [tourActive, setTourActive] = useState(false);
   const sectionRefs = useRef<Record<TabId, HTMLElement | null>>({
     orientacion: null, general: null, mapas: null, cronologia: null, transposicion: null, recursos: null,
   });
@@ -201,6 +203,10 @@ const Index = () => {
             >
               <span>🇪🇸</span> Transposición e implementación
             </span>
+          </div>
+
+          <div className="mt-8">
+            <GuidedTourButton onClick={() => setTourActive(true)} />
           </div>
 
           {/* Key metrics — editorial, not dashboard */}
@@ -489,6 +495,8 @@ const Index = () => {
           </p>
         </div>
       </footer>
+
+      <GuidedTour active={tourActive} onClose={() => setTourActive(false)} />
     </div>
   );
 };
