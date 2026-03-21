@@ -87,6 +87,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<TabId>('orientacion');
   const [vizFilters, setVizFilters] = useState<FilterState>({ estadoUE: [], tipoNorma: [], estadoES: [] });
   const [searchQuery, setSearchQuery] = useState('');
+  const [tourActive, setTourActive] = useState(false);
   const sectionRefs = useRef<Record<TabId, HTMLElement | null>>({
     orientacion: null, general: null, mapas: null, cronologia: null, transposicion: null, recursos: null,
   });
