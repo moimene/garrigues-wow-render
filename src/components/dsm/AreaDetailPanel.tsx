@@ -112,6 +112,27 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
             {bloque.funcionNormativa}
           </div>
         )}
+
+        {/* Building Blocks badge */}
+        {bloque.buildingBlocks && bloque.buildingBlocks.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {bloque.buildingBlocks.map((bb, i) => (
+              <span
+                key={i}
+                className="text-[10px] font-medium px-2 py-0.5 inline-flex items-center gap-1"
+                style={{
+                  background: 'var(--g-sec-100)',
+                  color: 'var(--g-brand-3308)',
+                  borderRadius: 'var(--g-radius-sm)',
+                  border: '1px dashed var(--g-sec-300)',
+                }}
+                title="Digital Building Block de la Comisión Europea — instrumento técnico soberano asociado a este bloque"
+              >
+                <span>⚙</span> {bb}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Tab bar */}
