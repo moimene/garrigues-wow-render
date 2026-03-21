@@ -45,10 +45,10 @@ export const ObligationsHeatMap = () => {
   return (
     <div ref={ref} className="space-y-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 700ms cubic-bezier(0.16,1,0.3,1)' }}>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-[11px]" style={{ minWidth: '680px' }}>
+        <table className="w-full border-collapse text-[11px]" style={{ minWidth: '780px' }}>
           <thead>
             <tr>
-              <th className="text-left p-2 font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[10px]" style={{ width: '140px' }}>Bloque</th>
+              <th className="text-left p-2 font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[10px]" style={{ width: '200px' }}>Bloque</th>
               {allActors.map(a => (
                 <th key={a} className="p-2 text-center font-bold text-[var(--g-text-secondary)] uppercase tracking-wider text-[9px]" style={{ writingMode: 'vertical-rl', height: '100px', minWidth: '40px' }}>
                   {actorLabels[a].split(' ')[0]}
@@ -61,8 +61,8 @@ export const ObligationsHeatMap = () => {
               <tr key={bloque.id}>
                 <td className="p-2 font-semibold text-[var(--g-text-primary)]" style={{ borderBottom: '1px solid var(--g-border-subtle)' }}>
                   <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded shrink-0" style={{ background: bloque.color }} />
-                    <span className="truncate">B{bloque.id}</span>
+                    <span className="w-4 h-4 rounded shrink-0 flex items-center justify-center text-[8px] font-bold text-white" style={{ background: bloque.color }}>{bloque.id}</span>
+                    <span className="truncate text-[11px]" title={bloque.nombre}>B{bloque.id}: {bloque.nombre}</span>
                   </div>
                 </td>
                 {allActors.map(a => {

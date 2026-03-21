@@ -14,6 +14,7 @@ import { TranspositionSection } from '@/components/dsm/TranspositionSection';
 import { ResourcesSection } from '@/components/dsm/ResourcesSection';
 import { useScrollReveal } from '@/components/dsm/useScrollReveal';
 import { VisualizationFilters, FilterState } from '@/components/dsm/VisualizationFilters';
+import { BloqueLegend } from '@/components/dsm/BloqueLegend';
 
 const tabs = [
   { id: 'general', label: 'Vista General' },
@@ -186,6 +187,7 @@ const Index = () => {
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa Radial Sunburst</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Anillos concéntricos: DSM → Bloques → Normas. Color exterior por estado de transposición en España.</p>
             <SunburstMap filters={vizFilters} />
+            <BloqueLegend />
           </div>
 
           {/* HeatGrid */}
@@ -193,23 +195,26 @@ const Index = () => {
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa de Calor por Bloques</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Densidad normativa y porcentaje de implementación en España por bloque temático.</p>
             <HeatGrid filters={vizFilters} />
+            <BloqueLegend />
           </div>
 
-          {/* Obligations Matrix — NEW */}
+          {/* Obligations Matrix */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Matriz de Obligaciones por Actor</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Cruza los 12 bloques con los principales tipos de actores regulados. La intensidad refleja el volumen y complejidad de las obligaciones. Pasa el ratón para ver obligaciones concretas.</p>
             <ObligationsHeatMap />
+            <BloqueLegend />
           </div>
 
-          {/* Interactions Matrix — NEW */}
+          {/* Interactions Matrix */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Matriz de Interacciones Normativas</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Atlas de dependencias y complementariedades entre las 12 áreas del DSM. Identifica solapamientos y relaciones que afectan al cumplimiento coordinado.</p>
             <InteractionsMatrix />
+            <BloqueLegend />
           </div>
 
-          {/* Density Timeline — NEW */}
+          {/* Density Timeline */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Densidad Temporal de Hitos</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Mapa de calor por trimestre: identifica los periodos con mayor concentración de entradas en vigor, plazos de transposición y propuestas legislativas.</p>
@@ -221,6 +226,7 @@ const Index = () => {
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Diagrama de Constelación</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Red de nodos: bloques temáticos y sus normas asociadas con estado de transposición.</p>
             <ConstellationGraph filters={vizFilters} />
+            <BloqueLegend />
           </div>
         </section>
 

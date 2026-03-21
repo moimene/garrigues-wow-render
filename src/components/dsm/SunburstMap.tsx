@@ -18,7 +18,7 @@ const estadoColors: Record<string, string> = {
 export const SunburstMap = ({ filters }: Props) => {
   const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
   const { ref, isVisible } = useScrollReveal(0.2);
-  const size = 520;
+  const size = 640;
   const cx = size / 2;
   const cy = size / 2;
 
@@ -67,31 +67,31 @@ export const SunburstMap = ({ filters }: Props) => {
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-6" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'scale(1)' : 'scale(0.92)', transition: 'all 800ms cubic-bezier(0.16,1,0.3,1)' }}>
-      <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-[480px]" role="img" aria-label="Mapa Radial Sunburst del DSM">
+      <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-[600px]" role="img" aria-label="Mapa Radial Sunburst del DSM">
         {/* Center hub */}
-        <circle cx={cx} cy={cy} r={52} fill="var(--g-brand-3308)" />
-        <circle cx={cx} cy={cy} r={52} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.5} />
-        <text x={cx} y={cy - 8} textAnchor="middle" fill="white" fontSize="13" fontWeight="700" fontFamily="Montserrat">DSM</text>
-        <text x={cx} y={cy + 10} textAnchor="middle" fill="var(--g-sec-300)" fontSize="9" fontWeight="600" fontFamily="Montserrat">{filteredBloques.length} Bloques</text>
-        <text x={cx} y={cy + 24} textAnchor="middle" fill="var(--g-sec-300)" fontSize="9" fontWeight="500" fontFamily="Montserrat">{totalNormas} Normas</text>
+        <circle cx={cx} cy={cy} r={62} fill="var(--g-brand-3308)" />
+        <circle cx={cx} cy={cy} r={62} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.5} />
+        <text x={cx} y={cy - 10} textAnchor="middle" fill="white" fontSize="15" fontWeight="700" fontFamily="Montserrat">DSM</text>
+        <text x={cx} y={cy + 8} textAnchor="middle" fill="var(--g-sec-300)" fontSize="10" fontWeight="600" fontFamily="Montserrat">{filteredBloques.length} Bloques</text>
+        <text x={cx} y={cy + 24} textAnchor="middle" fill="var(--g-sec-300)" fontSize="10" fontWeight="500" fontFamily="Montserrat">{totalNormas} Normas</text>
 
         {segments.map(({ bloque, startAngle, sweep }) => {
           const isHovered = hoveredBlock === bloque.id;
           const midAngle = ((startAngle + sweep / 2) * Math.PI) / 180;
-          const labelR = 100;
+          const labelR = 115;
           return (
             <g key={bloque.id} onMouseEnter={() => setHoveredBlock(bloque.id)} onMouseLeave={() => setHoveredBlock(null)} style={{ cursor: 'pointer' }}>
               {/* Block ring - thicker, fully opaque */}
               <path
-                d={describeArc(cx, cy, 58, 115, startAngle, sweep - 0.8)}
+                d={describeArc(cx, cy, 68, 140, startAngle, sweep - 0.8)}
                 fill={bloque.color}
                 opacity={isHovered ? 1 : 0.92}
                 stroke="white"
                 strokeWidth={0.8}
                 style={{ transition: 'opacity 150ms ease, filter 150ms ease', filter: isHovered ? 'brightness(1.2) saturate(1.2)' : 'none' }}
               />
-              {sweep > 14 && (
-                <text x={cx + labelR * Math.cos(midAngle)} y={cy + labelR * Math.sin(midAngle)} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="9" fontWeight="700" fontFamily="Montserrat" style={{ pointerEvents: 'none', textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>
+              {sweep > 10 && (
+                <text x={cx + labelR * Math.cos(midAngle)} y={cy + labelR * Math.sin(midAngle)} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="10" fontWeight="700" fontFamily="Montserrat" style={{ pointerEvents: 'none', textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
                   B{bloque.id}
                 </text>
               )}
@@ -103,7 +103,7 @@ export const SunburstMap = ({ filters }: Props) => {
                 return (
                   <path
                     key={j}
-                    d={describeArc(cx, cy, 120, 165, normaStart, normaSweep - 0.4)}
+                    d={describeArc(cx, cy, 146, 200, normaStart, normaSweep - 0.4)}
                     fill={color}
                     opacity={isHovered ? 1 : 0.75}
                     stroke="white"

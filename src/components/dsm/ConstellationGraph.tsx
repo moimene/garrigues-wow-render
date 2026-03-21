@@ -30,8 +30,8 @@ interface Props {
 export const ConstellationGraph = ({ filters }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [activeBloque, setActiveBloque] = useState<number | null>(null);
-  const width = 700;
-  const height = 520;
+  const width = 800;
+  const height = 620;
   const cx = width / 2;
   const cy = height / 2;
 
@@ -54,21 +54,21 @@ export const ConstellationGraph = ({ filters }: Props) => {
 
     filteredBloques.forEach((b, i) => {
       const angle = (i / Math.max(count, 1)) * Math.PI * 2 - Math.PI / 2;
-      const orbitR = 155;
+      const orbitR = 190;
       const bNode: Node = {
         id: `b${b.id}`, label: `B${b.id}`, x: cx + orbitR * Math.cos(angle), y: cy + orbitR * Math.sin(angle),
-        r: 22, color: b.color, type: 'bloque', bloqueId: b.id,
+        r: 28, color: b.color, type: 'bloque', bloqueId: b.id,
       };
       bNodes.push(bNode);
 
       b.normas.slice(0, 6).forEach((n, j) => {
-        const nAngle = angle + ((j - b.normas.slice(0, 6).length / 2) * 0.2);
-        const nOrbit = orbitR + 60 + j * 14;
+        const nAngle = angle + ((j - b.normas.slice(0, 6).length / 2) * 0.18);
+        const nOrbit = orbitR + 70 + j * 16;
         const color = estadoColors[n.estadoES] || '#6b7280';
         const nNode: Node = {
           id: `n${b.id}-${j}`, label: n.nombre.split(' ').slice(0, 2).join(' '),
           x: cx + nOrbit * Math.cos(nAngle), y: cy + nOrbit * Math.sin(nAngle),
-          r: 7, color, type: 'norma', estadoES: n.estadoES, bloqueId: b.id,
+          r: 9, color, type: 'norma', estadoES: n.estadoES, bloqueId: b.id,
         };
         nNodes.push(nNode);
         lnks.push({ from: bNode, to: nNode });
@@ -88,7 +88,7 @@ export const ConstellationGraph = ({ filters }: Props) => {
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(24px)', transition: 'all 800ms cubic-bezier(0.16,1,0.3,1)' }}>
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full max-w-[700px]" role="img" aria-label="Diagrama de Constelación Normativa">
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full max-w-[800px]" role="img" aria-label="Diagrama de Constelación Normativa">
         {/* Links */}
         {links.map((l, i) => {
           const active = activeBloque === null || activeBloque === l.from.bloqueId;
@@ -103,9 +103,9 @@ export const ConstellationGraph = ({ filters }: Props) => {
         })}
 
         {/* Center hub */}
-        <circle cx={cx} cy={cy} r={34} fill="var(--g-brand-3308)" />
-        <circle cx={cx} cy={cy} r={34} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.6} />
-        <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="11" fontWeight="700" fontFamily="Montserrat">DSM</text>
+        <circle cx={cx} cy={cy} r={42} fill="var(--g-brand-3308)" />
+        <circle cx={cx} cy={cy} r={42} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.6} />
+        <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="13" fontWeight="700" fontFamily="Montserrat">DSM</text>
 
         {/* Orbit lines */}
         {bloqueNodes.map(bn => (
@@ -133,7 +133,7 @@ export const ConstellationGraph = ({ filters }: Props) => {
               <circle cx={n.x} cy={n.y} r={n.r} fill={n.color} stroke="white" strokeWidth={2.5}
                 style={{ filter: isActive ? `drop-shadow(0 0 6px ${n.color})` : 'none', transition: 'filter 200ms ease' }}
               />
-              <text x={n.x} y={n.y + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="9" fontWeight="700" fontFamily="Montserrat" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
+              <text x={n.x} y={n.y + 1} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="10" fontWeight="700" fontFamily="Montserrat" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
                 {n.label}
               </text>
             </g>
