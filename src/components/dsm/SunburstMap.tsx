@@ -69,11 +69,11 @@ export const SunburstMap = ({ filters }: Props) => {
     <div ref={ref} className="flex flex-col items-center gap-6" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'scale(1)' : 'scale(0.92)', transition: 'all 800ms cubic-bezier(0.16,1,0.3,1)' }}>
       <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-[600px]" role="img" aria-label="Mapa Radial Sunburst del DSM">
         {/* Center hub */}
-        <circle cx={cx} cy={cy} r={52} fill="var(--g-brand-3308)" />
-        <circle cx={cx} cy={cy} r={52} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.5} />
-        <text x={cx} y={cy - 8} textAnchor="middle" fill="white" fontSize="13" fontWeight="700" fontFamily="Montserrat">DSM</text>
-        <text x={cx} y={cy + 10} textAnchor="middle" fill="var(--g-sec-300)" fontSize="9" fontWeight="600" fontFamily="Montserrat">{filteredBloques.length} Bloques</text>
-        <text x={cx} y={cy + 24} textAnchor="middle" fill="var(--g-sec-300)" fontSize="9" fontWeight="500" fontFamily="Montserrat">{totalNormas} Normas</text>
+        <circle cx={cx} cy={cy} r={62} fill="var(--g-brand-3308)" />
+        <circle cx={cx} cy={cy} r={62} fill="none" stroke="var(--g-sec-300)" strokeWidth={2} opacity={0.5} />
+        <text x={cx} y={cy - 10} textAnchor="middle" fill="white" fontSize="15" fontWeight="700" fontFamily="Montserrat">DSM</text>
+        <text x={cx} y={cy + 8} textAnchor="middle" fill="var(--g-sec-300)" fontSize="10" fontWeight="600" fontFamily="Montserrat">{filteredBloques.length} Bloques</text>
+        <text x={cx} y={cy + 24} textAnchor="middle" fill="var(--g-sec-300)" fontSize="10" fontWeight="500" fontFamily="Montserrat">{totalNormas} Normas</text>
 
         {segments.map(({ bloque, startAngle, sweep }) => {
           const isHovered = hoveredBlock === bloque.id;
