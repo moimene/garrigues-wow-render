@@ -204,7 +204,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
 
         {tab === 'estadoUE' && (
           <div className="space-y-4">
-            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.estadoUEDetalle}</p>
+            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.estadoUEDetalle} /></p>
 
             {/* Arquitectura normativa */}
             {bloque.arquitecturaNormativaUE && (
