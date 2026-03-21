@@ -1,4 +1,5 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
+import { GuidedTour, GuidedTourButton } from '@/components/dsm/GuidedTour';
 import { bloques } from '@/data/dsmData';
 import { GlobalSearch } from '@/components/dsm/GlobalSearch';
 import { AnimatedCounter } from '@/components/dsm/AnimatedCounter';
