@@ -88,7 +88,7 @@ export const ConstellationGraph = ({ filters }: Props) => {
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(24px)', transition: 'all 800ms cubic-bezier(0.16,1,0.3,1)' }}>
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full max-w-[700px]" role="img" aria-label="Diagrama de Constelación Normativa">
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full max-w-[800px]" role="img" aria-label="Diagrama de Constelación Normativa">
         {/* Links */}
         {links.map((l, i) => {
           const active = activeBloque === null || activeBloque === l.from.bloqueId;
