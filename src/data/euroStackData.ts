@@ -20,28 +20,28 @@ export interface BuildingBlock {
   bloqueIds: number[]; // B1-B12 vinculados
   estado: BBEstado;
   url?: string;
-  casosReutilizacion?: number; // nº aproximado de reutilizaciones documentadas
-  funcionEnDSM: string; // qué función cumple respecto al marco normativo
+  casosReutilizacion?: number;
+  funcionEnDSM: string;
 }
 
 export type SovereigntyLevel =
-  | 'bb-operativo'      // Building Block disponible y operativo
-  | 'bb-pilotaje'       // Building Block en desarrollo o pilotaje
-  | 'parcial'           // Infraestructura parcial, dependencia mixta
-  | 'sin-equivalente';  // Sin equivalente técnico soberano consolidado
+  | 'bb-operativo'
+  | 'bb-pilotaje'
+  | 'parcial'
+  | 'sin-equivalente';
 
 export interface SovereigntyMapping {
   bloqueId: number;
   nivel: SovereigntyLevel;
-  buildingBlocks: string[]; // IDs de BBs asociados
-  nota: string; // Explicación breve del estado de soberanía
+  buildingBlocks: string[];
+  nota: string;
 }
 
 export interface EuroStackPrincipio {
   id: string;
   titulo: string;
   descripcion: string;
-  icono: string;
+  ordinal: string;
 }
 
 // ─── Building Blocks ────────────────────────────────────────────
@@ -113,14 +113,14 @@ export const sovereigntyMap: SovereigntyMapping[] = [
 // ─── Principios EuroStack ───────────────────────────────────────
 
 export const euroStackPrincipios: EuroStackPrincipio[] = [
-  { id: 'soberania', titulo: 'Soberanía tecnológica', descripcion: 'Reducir la dependencia estructural del 80 % de infraestructura y tecnologías digitales importadas, desarrollando alternativas europeas en capas críticas.', icono: '🏛' },
-  { id: 'interoperabilidad', titulo: 'Interoperabilidad por diseño', descripcion: 'Los componentes deben ser compatibles entre sí y con estándares abiertos, evitando bloqueos de proveedor y facilitando la reutilización transfronteriza.', icono: '🔗' },
-  { id: 'apertura', titulo: 'Código abierto y estándares abiertos', descripcion: 'Priorizar soluciones de código abierto y estándares públicos que permitan auditoría, adaptación y contribución por parte de cualquier actor europeo.', icono: '📖' },
-  { id: 'seguridad', titulo: 'Seguridad y privacidad por defecto', descripcion: 'Toda infraestructura soberana debe incorporar seguridad por diseño, coherente con NIS2, el Reglamento de Resiliencia Cibernética y el RGPD.', icono: '🛡' },
-  { id: 'escalabilidad', titulo: 'Escalabilidad paneuropea', descripcion: 'Las soluciones deben funcionar a escala de mercado único, no como proyectos piloto aislados. Los Building Blocks acumulan más de 300 reutilizaciones documentadas.', icono: '📐' },
-  { id: 'sostenibilidad', titulo: 'Sostenibilidad y eficiencia', descripcion: 'Evitar duplicidades entre Estados miembros mediante componentes reutilizables que reducen costes y aceleran el despliegue de servicios digitales.', icono: '♻' },
-  { id: 'gobernanza', titulo: 'Gobernanza compartida', descripcion: 'La infraestructura soberana exige mecanismos de gobernanza que equilibren coordinación europea y autonomía nacional en la implementación.', icono: '⚖' },
-  { id: 'confianza', titulo: 'Confianza institucional', descripcion: 'Los ciudadanos y las empresas deben confiar en que la infraestructura digital pública es segura, transparente y está bajo jurisdicción europea.', icono: '🤝' },
+  { id: 'soberania', titulo: 'Soberanía tecnológica', descripcion: 'Reducir la dependencia estructural del 80 % de infraestructura y tecnologías digitales importadas, desarrollando alternativas europeas en capas críticas.', ordinal: '01' },
+  { id: 'interoperabilidad', titulo: 'Interoperabilidad por diseño', descripcion: 'Los componentes deben ser compatibles entre sí y con estándares abiertos, evitando bloqueos de proveedor y facilitando la reutilización transfronteriza.', ordinal: '02' },
+  { id: 'apertura', titulo: 'Código abierto y estándares abiertos', descripcion: 'Priorizar soluciones de código abierto y estándares públicos que permitan auditoría, adaptación y contribución por parte de cualquier actor europeo.', ordinal: '03' },
+  { id: 'seguridad', titulo: 'Seguridad y privacidad por defecto', descripcion: 'Toda infraestructura soberana debe incorporar seguridad por diseño, coherente con NIS2, el Reglamento de Resiliencia Cibernética y el RGPD.', ordinal: '04' },
+  { id: 'escalabilidad', titulo: 'Escalabilidad paneuropea', descripcion: 'Las soluciones deben funcionar a escala de mercado único, no como proyectos piloto aislados. Los Building Blocks acumulan más de 300 reutilizaciones documentadas.', ordinal: '05' },
+  { id: 'sostenibilidad', titulo: 'Sostenibilidad y eficiencia', descripcion: 'Evitar duplicidades entre Estados miembros mediante componentes reutilizables que reducen costes y aceleran el despliegue de servicios digitales.', ordinal: '06' },
+  { id: 'gobernanza', titulo: 'Gobernanza compartida', descripcion: 'La infraestructura soberana exige mecanismos de gobernanza que equilibren coordinación europea y autonomía nacional en la implementación.', ordinal: '07' },
+  { id: 'confianza', titulo: 'Confianza institucional', descripcion: 'Los ciudadanos y las empresas deben confiar en que la infraestructura digital pública es segura, transparente y está bajo jurisdicción europea.', ordinal: '08' },
 ];
 
 // ─── Helpers ────────────────────────────────────────────────────

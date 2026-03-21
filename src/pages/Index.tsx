@@ -18,6 +18,7 @@ import { useScrollReveal } from '@/components/dsm/useScrollReveal';
 import { VisualizationFilters, FilterState } from '@/components/dsm/VisualizationFilters';
 import { NarrativeIntro } from '@/components/dsm/NarrativeIntro';
 import { VisualizationCard } from '@/components/dsm/VisualizationCard';
+import { GeoChip } from '@/components/dsm/GeoChip';
 
 const tabs = [
   { id: 'orientacion', label: 'El sistema' },
@@ -44,7 +45,7 @@ const SectionDivider = ({ label }: { label: string }) => {
     >
       <div className="flex-1 h-px" style={{ background: 'var(--g-border-subtle)' }} />
       <span
-        className="text-[9px] font-bold uppercase tracking-[0.25em] shrink-0"
+        className="text-[10px] font-bold uppercase tracking-[0.25em] shrink-0"
         style={{ color: 'var(--g-text-secondary)' }}
       >
         {label}
@@ -141,7 +142,7 @@ const Index = () => {
   return (
     <div className="min-h-screen" style={{ background: 'var(--g-surface-page)' }}>
       {/* ═══════════════════════════════════════════════════════════════
-          HERO — Autoridad institucional + orientación intelectual
+          HERO
       ═══════════════════════════════════════════════════════════════ */}
       <header
         className="relative overflow-hidden"
@@ -192,7 +193,7 @@ const Index = () => {
                 border: '1px solid rgba(255,255,255,0.12)',
               }}
             >
-              <span>🇪🇺</span> {bloques.length} áreas del DSM
+              <GeoChip variant="UE" /> {bloques.length} áreas del DSM
             </span>
             <span
               className="px-3 py-1.5 text-[11px] font-semibold inline-flex items-center gap-2"
@@ -204,7 +205,7 @@ const Index = () => {
                 border: '1px solid rgba(255,255,255,0.12)',
               }}
             >
-              <span>🇪🇸</span> Transposición e implementación
+              <GeoChip variant="ES" /> Transposición e implementación
             </span>
           </div>
 
@@ -212,7 +213,7 @@ const Index = () => {
             <GuidedTourButton onClick={() => setTourActive(true)} />
           </div>
 
-          {/* Key metrics — editorial, not dashboard */}
+          {/* Key metrics */}
           <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10">
             <AnimatedCounter target={totalNormas} label="Normas mapeadas" />
             <AnimatedCounter target={vigentes} label="Vigentes" />
@@ -235,7 +236,7 @@ const Index = () => {
       </header>
 
       {/* ═══════════════════════════════════════════════════════════════
-          STICKY NAV — Lean, institutional
+          STICKY NAV
       ═══════════════════════════════════════════════════════════════ */}
       <nav
         className="sticky top-0 z-40"
@@ -285,7 +286,7 @@ const Index = () => {
               }}
               title={vistaEspana ? 'Desactivar perspectiva España' : 'Activar perspectiva España: resalta transposición y filtra hitos'}
             >
-              <span>🇪🇸</span>
+              <GeoChip variant="ES" />
               Vista España
               {vistaEspana && (
                 <span
@@ -302,7 +303,6 @@ const Index = () => {
 
       {/* ═══════════════════════════════════════════════════════════════
           CAPA 1 — ORIENTACIÓN
-          Narrativa guiada: el usuario comprende el sistema en 90 segundos
       ═══════════════════════════════════════════════════════════════ */}
       <section ref={el => { sectionRefs.current.orientacion = el; }} id="orientacion">
         <NarrativeIntro />
@@ -312,10 +312,6 @@ const Index = () => {
           MAIN CONTENT AREA
       ═══════════════════════════════════════════════════════════════ */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-16 space-y-24">
-        {/* ─────────────────────────────────────────────────────────────
-            CAPA 2 — EXPLORACIÓN
-        ───────────────────────────────────────────────────────────── */}
-
         {/* Las 12 áreas */}
         <section ref={el => { sectionRefs.current.general = el; }} id="general">
           <LayerHeading
@@ -324,7 +320,7 @@ const Index = () => {
             subtitle="Cada bloque representa un ámbito normativo con sus propias normas, plazos y actores afectados. Despliega cualquier bloque para acceder a su ficha completa: síntesis ejecutiva, estado UE, transposición en España, obligaciones e interacciones."
           />
 
-          <div className="flex flex-wrap justify-center gap-3 mb-8 text-[11px]">
+          <div className="flex flex-wrap justify-center gap-3 mb-8 text-xs">
             {[
               { label: 'Vigente', color: 'var(--status-vigente)' },
               { label: 'En proceso legislativo', color: 'var(--status-proceso)' },
@@ -448,10 +444,6 @@ const Index = () => {
 
         <SectionDivider label="Análisis detallado" />
 
-        {/* ─────────────────────────────────────────────────────────────
-            CAPA 3 — ANÁLISIS
-        ───────────────────────────────────────────────────────────── */}
-
         {/* Cronología */}
         <section ref={el => { sectionRefs.current.cronologia = el; }} id="cronologia">
           <LayerHeading
@@ -525,7 +517,7 @@ const Index = () => {
             </span>
             <div className="w-8 h-[2px]" style={{ background: 'var(--g-brand-bright)' }} />
           </div>
-          <p className="text-[11px] leading-relaxed" style={{ color: 'var(--g-sec-300)' }}>
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--g-sec-300)' }}>
             Mapa Normativo del Mercado Único Digital · Actualizado 19 de marzo de 2026
             <br />
             © 2026 Garrigues. Herramienta de inteligencia jurídica para uso informativo.
