@@ -102,10 +102,10 @@ export const SunburstMap = ({ filters, vistaEspana }: Props) => {
               <path
                 d={describeArc(cx, cy, 68, 140, startAngle, sweep - 0.8)}
                 fill={bloque.color}
-                opacity={isHovered ? 1 : 0.92}
+                opacity={vistaEspana ? 0.5 : (isHovered ? 1 : 0.92)}
                 stroke="white"
                 strokeWidth={0.8}
-                style={{ transition: 'opacity 150ms ease, filter 150ms ease', filter: isHovered ? 'brightness(1.2) saturate(1.2)' : 'none' }}
+                style={{ transition: 'opacity 300ms ease, filter 150ms ease', filter: isHovered ? 'brightness(1.2) saturate(1.2)' : 'none' }}
               />
               {sweep > 10 && (
                 <text x={cx + labelR * Math.cos(midAngle)} y={cy + labelR * Math.sin(midAngle)} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="10" fontWeight="700" fontFamily="Montserrat" style={{ pointerEvents: 'none', textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
