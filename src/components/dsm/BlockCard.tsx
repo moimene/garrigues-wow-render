@@ -63,19 +63,19 @@ export const BlockCard = ({ bloque, index }: BlockCardProps) => {
               </span>
             )}
             {bloque.enProceso > 0 && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-medium" style={{ background: '#fef3c7', color: '#92400e', borderRadius: 'var(--g-radius-sm)' }}>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-medium" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)' }}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--status-proceso)' }} />
                 {bloque.enProceso} en proceso
               </span>
             )}
             {bloque.planificadas > 0 && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-medium" style={{ background: '#e2e8f0', color: '#475569', borderRadius: 'var(--g-radius-sm)' }}>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-medium" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)' }}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--status-planificada)' }} />
                 {bloque.planificadas} planificadas
               </span>
             )}
             {bloque.enRevision > 0 && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-medium" style={{ background: '#f1f5f9', color: '#64748b', borderRadius: 'var(--g-radius-sm)' }}>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-medium" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)' }}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--status-revision)' }} />
                 {bloque.enRevision} en revisión
               </span>
@@ -85,7 +85,7 @@ export const BlockCard = ({ bloque, index }: BlockCardProps) => {
           <div className="mt-3 pt-3 flex items-center justify-between text-[10px] font-medium text-[var(--g-text-secondary)]" style={{ borderTop: '1px solid var(--g-border-subtle)' }}>
             <span>{bloque.reglamentos} Reg. + {bloque.directivas} Dir.</span>
             <span className="text-[var(--g-link)] group-hover:text-[var(--g-link-hover)]" style={{ transition: 'var(--g-transition-fast)' }}>
-              {expanded ? 'Cerrar ↑' : 'Ver detalle →'}
+              {expanded ? 'Cerrar' : 'Ver detalle'}
             </span>
           </div>
         </div>

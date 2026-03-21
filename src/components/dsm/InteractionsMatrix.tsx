@@ -30,12 +30,12 @@ export const InteractionsMatrix = () => {
   return (
     <div ref={ref} className="space-y-4" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 700ms cubic-bezier(0.16,1,0.3,1)' }}>
       <div className="overflow-x-auto">
-        <table className="border-collapse text-[11px]" style={{ minWidth: '520px' }}>
+        <table className="border-collapse text-xs" style={{ minWidth: '520px' }}>
           <thead>
             <tr>
               <th className="p-2" />
               {bloques.map(b => (
-                <th key={b.id} className="p-2 text-center font-bold text-[11px]" style={{ color: b.color, minWidth: '36px' }}>
+                <th key={b.id} className="p-2 text-center font-bold text-xs" style={{ color: b.color, minWidth: '36px' }}>
                   B{b.id}
                 </th>
               ))}
@@ -44,7 +44,7 @@ export const InteractionsMatrix = () => {
           <tbody>
             {bloques.map(bRow => (
               <tr key={bRow.id}>
-                <td className="p-2 font-bold text-right pr-3 whitespace-nowrap text-[11px]" style={{ color: bRow.color }} title={bRow.nombre}>
+                <td className="p-2 font-bold text-right pr-3 whitespace-nowrap text-xs" style={{ color: bRow.color }} title={bRow.nombre}>
                   B{bRow.id}
                 </td>
                 {bloques.map(bCol => {
@@ -75,14 +75,22 @@ export const InteractionsMatrix = () => {
                         }}
                       >
                         {isDiag ? (
-                          <span className="text-[11px] font-bold text-white">■</span>
+                          <span className="text-xs font-bold text-white">■</span>
                         ) : cfg ? (
-                          <span className="text-[13px] font-bold" style={{ color: cfg.color }}>{cfg.symbol}</span>
+                          <span className="text-sm font-bold" style={{ color: cfg.color }}>{cfg.symbol}</span>
                         ) : null}
                       </div>
 
                       {isH && cell?.desc && (
-                        <div className="absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[240px] p-3 text-left" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', border: `2px solid ${cfg?.color || 'var(--g-border-subtle)'}` }}>
+                        <div
+                          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[240px] p-3 text-left"
+                          style={{
+                            background: '#ffffff',
+                            borderRadius: 'var(--g-radius-md)',
+                            boxShadow: '0 8px 30px rgba(0,0,0,0.22)',
+                            border: `2px solid ${cfg?.color || '#d1d5db'}`,
+                          }}
+                        >
                           <div className="flex items-center gap-2 mb-1">
                             <span className="font-bold text-xs text-[var(--g-text-primary)]">B{bRow.id} → B{bCol.id}</span>
                             {cfg && (
@@ -104,11 +112,11 @@ export const InteractionsMatrix = () => {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-5 text-[11px] text-[var(--g-text-secondary)]">
+      <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-[var(--g-text-secondary)]">
         {Object.entries(depTypeConfig).map(([key, cfg]) => (
           <span key={key} className="inline-flex items-center gap-2 font-semibold">
             <span className="w-5 h-5 rounded-sm flex items-center justify-center" style={{ background: `${cfg.color}25` }}>
-              <span className="text-[12px] font-bold" style={{ color: cfg.color }}>{cfg.symbol}</span>
+              <span className="text-xs font-bold" style={{ color: cfg.color }}>{cfg.symbol}</span>
             </span>
             {cfg.label}
           </span>

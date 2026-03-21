@@ -71,13 +71,13 @@ const NarrativeModule = () => {
               </span>
               <span className="text-sm font-bold text-[var(--g-text-primary)]">{l.title}</span>
             </div>
-            <p className="text-[12px] text-[var(--g-text-secondary)] leading-relaxed">{l.desc}</p>
+            <p className="text-xs text-[var(--g-text-secondary)] leading-relaxed">{l.desc}</p>
           </div>
         ))}
       </div>
 
       <div
-        className="p-4 text-[11px] leading-relaxed"
+        className="p-4 text-xs leading-relaxed"
         style={{
           background: 'rgba(0,68,56,0.04)',
           borderRadius: 'var(--g-radius-md)',
@@ -103,8 +103,8 @@ const BuildingBlocksGrid = () => {
 
   return (
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 600ms cubic-bezier(0.16,1,0.3,1) 100ms' }}>
-      <h3 className="text-base font-bold text-[var(--g-text-primary)] mb-1">Digital Building Blocks de la Comisión Europea</h3>
-      <p className="text-[12px] text-[var(--g-text-secondary)] mb-5 max-w-2xl leading-relaxed">
+      <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Digital Building Blocks de la Comisión Europea</h3>
+      <p className="text-xs text-[var(--g-text-secondary)] mb-5 max-w-2xl leading-relaxed">
         Componentes técnicos soberanos, reutilizables e interoperables que los Estados miembros emplean para ejecutar sus obligaciones normativas sin construir desde cero.
       </p>
 
@@ -129,19 +129,16 @@ const BuildingBlocksGrid = () => {
             >
               <div className="p-4">
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">⚙</span>
-                    <span className="text-sm font-bold text-[var(--g-text-primary)]">{bb.nombre}</span>
-                  </div>
+                  <span className="text-sm font-bold text-[var(--g-text-primary)]">{bb.nombre}</span>
                   <span
-                    className="text-[9px] font-bold px-2 py-0.5 shrink-0"
+                    className="text-[10px] font-bold px-2 py-0.5 shrink-0"
                     style={{ background: est.color, color: 'white', borderRadius: 'var(--g-radius-sm)' }}
                   >
                     {est.label}
                   </span>
                 </div>
 
-                <p className="text-[11px] text-[var(--g-text-secondary)] leading-relaxed mb-3">{bb.descripcionCorta}</p>
+                <p className="text-xs text-[var(--g-text-secondary)] leading-relaxed mb-3">{bb.descripcionCorta}</p>
 
                 {/* Linked blocks */}
                 <div className="flex flex-wrap gap-1.5">
@@ -160,10 +157,10 @@ const BuildingBlocksGrid = () => {
                 {/* Expanded detail */}
                 {isOpen && (
                   <div className="mt-4 pt-3 space-y-3" style={{ borderTop: '1px solid var(--g-border-subtle)' }}>
-                    <p className="text-[11px] text-[var(--g-text-primary)] leading-relaxed">{bb.descripcionLarga}</p>
+                    <p className="text-xs text-[var(--g-text-primary)] leading-relaxed">{bb.descripcionLarga}</p>
                     <div className="p-3" style={{ background: 'var(--g-surface-page)', borderRadius: 'var(--g-radius-md)' }}>
-                      <div className="text-[9px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1">Función en el DSM</div>
-                      <p className="text-[11px] text-[var(--g-text-primary)] leading-relaxed">{bb.funcionEnDSM}</p>
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1">Función en el DSM</div>
+                      <p className="text-xs text-[var(--g-text-primary)] leading-relaxed">{bb.funcionEnDSM}</p>
                     </div>
                     {bb.casosReutilizacion && (
                       <div className="text-[10px] text-[var(--g-text-secondary)]">
@@ -189,9 +186,9 @@ const SovereigntyHeatmap = () => {
 
   return (
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 600ms cubic-bezier(0.16,1,0.3,1) 200ms' }}>
-      <h3 className="text-base font-bold text-[var(--g-text-primary)] mb-1">Mapa de soberanía técnica por área</h3>
-      <p className="text-[12px] text-[var(--g-text-secondary)] mb-2 max-w-2xl leading-relaxed">
-        ¿Dónde existe infraestructura técnica soberana para ejecutar las obligaciones normativas? Este mapa no evalúa el cumplimiento jurídico, sino la madurez técnica de la soberanía digital.
+      <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa de soberanía técnica por área</h3>
+      <p className="text-xs text-[var(--g-text-secondary)] mb-2 max-w-2xl leading-relaxed">
+        Donde existe infraestructura técnica soberana para ejecutar las obligaciones normativas. Este mapa no evalúa el cumplimiento jurídico, sino la madurez técnica de la soberanía digital.
       </p>
 
       {/* Legend */}
@@ -228,7 +225,7 @@ const SovereigntyHeatmap = () => {
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <span
-                  className="w-6 h-6 flex items-center justify-center text-[9px] font-bold shrink-0"
+                  className="w-6 h-6 flex items-center justify-center text-[10px] font-bold shrink-0"
                   style={{ background: bloque.color, color: 'white', borderRadius: 'var(--g-radius-full)' }}
                 >
                   {bloque.id}
@@ -238,7 +235,7 @@ const SovereigntyHeatmap = () => {
                 </span>
               </div>
               <span
-                className="text-[9px] font-semibold px-1.5 py-0.5 inline-block"
+                className="text-[10px] font-semibold px-1.5 py-0.5 inline-block"
                 style={{ color: cfg.color, background: `${cfg.color}15`, borderRadius: 'var(--g-radius-sm)' }}
               >
                 {cfg.label}
@@ -261,8 +258,8 @@ const SovereigntyHeatmap = () => {
                       {s.buildingBlocks.map(bbId => {
                         const bb = buildingBlocks.find(b => b.id === bbId);
                         return bb ? (
-                          <span key={bbId} className="text-[9px] font-medium px-1.5 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-brand-3308)', borderRadius: 'var(--g-radius-sm)' }}>
-                            ⚙ {bb.nombre}
+                          <span key={bbId} className="text-[10px] font-medium px-1.5 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-brand-3308)', borderRadius: 'var(--g-radius-sm)' }}>
+                            BB · {bb.nombre}
                           </span>
                         ) : null;
                       })}
@@ -285,13 +282,13 @@ const EuroStackPrinciples = () => {
 
   return (
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(16px)', transition: 'all 600ms cubic-bezier(0.16,1,0.3,1) 300ms' }}>
-      <h3 className="text-base font-bold text-[var(--g-text-primary)] mb-1">Principios del EuroStack</h3>
-      <p className="text-[12px] text-[var(--g-text-secondary)] mb-5 max-w-2xl leading-relaxed">
+      <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Principios del EuroStack</h3>
+      <p className="text-xs text-[var(--g-text-secondary)] mb-5 max-w-2xl leading-relaxed">
         El informe EuroStack (Fundación Bertelsmann, 2025) propone ocho principios para una infraestructura digital europea soberana. Estos principios no son normativos, sino orientaciones estratégicas para el diseño de políticas públicas.
       </p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {euroStackPrincipios.map((p, i) => (
+        {euroStackPrincipios.map(p => (
           <div
             key={p.id}
             className="p-4"
@@ -301,8 +298,18 @@ const EuroStackPrinciples = () => {
               border: '1px solid var(--g-border-subtle)',
             }}
           >
-            <div className="text-xl mb-2">{p.icono}</div>
-            <div className="text-[11px] font-bold text-[var(--g-text-primary)] mb-1">{p.titulo}</div>
+            <div
+              className="w-8 h-8 flex items-center justify-center text-xs font-bold mb-3"
+              style={{
+                background: 'var(--g-sec-100)',
+                color: 'var(--g-brand-3308)',
+                borderRadius: 'var(--g-radius-sm)',
+                fontVariantNumeric: 'tabular-nums',
+              }}
+            >
+              {p.ordinal}
+            </div>
+            <div className="text-xs font-bold text-[var(--g-text-primary)] mb-1">{p.titulo}</div>
             <p className="text-[10px] text-[var(--g-text-secondary)] leading-relaxed">{p.descripcion}</p>
           </div>
         ))}

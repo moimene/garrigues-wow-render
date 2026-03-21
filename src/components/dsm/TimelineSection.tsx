@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
-import { cronologia, EstadoUE, EstadoES, bloques } from '@/data/dsmData';
+import { cronologia, EstadoUE, bloques } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
+import { GeoChip } from './GeoChip';
 
 const estadoColors: Record<string, string> = {
   vigente: 'var(--status-vigente)',
@@ -100,10 +101,13 @@ const CardContent = ({ event, align, showDetail, onToggle }: {
   <div className="pb-8 group">
     <div className="flex items-center gap-2 flex-wrap" style={{ justifyContent: align === 'right' ? 'flex-end' : 'flex-start' }}>
       <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: estadoColors[event.estado] }}>
-        {event.tipoHito === 'tecnico' ? '⚙ ' : ''}{event.fecha}
+        {event.tipoHito === 'tecnico' && (
+          <span className="inline-flex items-center gap-1 mr-1 text-[10px] font-bold px-1 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)' }}>TEC</span>
+        )}
+        {event.fecha}
       </span>
       {event.incertidumbre && (
-        <span className="text-[9px] font-medium px-1.5 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)', border: '1px dashed var(--g-border-subtle)' }} title="Fecha sujeta a proceso legislativo">
+        <span className="text-[10px] font-medium px-1.5 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)', border: '1px dashed var(--g-border-subtle)' }} title="Fecha sujeta a proceso legislativo">
           ~Estimado
         </span>
       )}
@@ -116,14 +120,14 @@ const CardContent = ({ event, align, showDetail, onToggle }: {
       <div className="mt-2 p-2.5 space-y-1.5" style={{ background: 'var(--g-surface-page)', borderRadius: 'var(--g-radius-md)', borderLeft: `2px solid ${estadoColors[event.estado]}`, transition: 'all 200ms ease' }}>
         {event.efectoJuridico && (
           <div>
-            <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)]">Efecto jurídico</span>
-            <p className="text-[11px] text-[var(--g-text-primary)] leading-relaxed">{event.efectoJuridico}</p>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)]">Efecto jurídico</span>
+            <p className="text-xs text-[var(--g-text-primary)] leading-relaxed">{event.efectoJuridico}</p>
           </div>
         )}
         {event.proximoPaso && (
           <div>
-            <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)]">Próximo paso</span>
-            <p className="text-[11px] text-[var(--g-text-primary)] leading-relaxed">{event.proximoPaso}</p>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)]">Próximo paso</span>
+            <p className="text-xs text-[var(--g-text-primary)] leading-relaxed">{event.proximoPaso}</p>
           </div>
         )}
       </div>
@@ -142,7 +146,7 @@ const CardContent = ({ event, align, showDetail, onToggle }: {
 
     {!showDetail && (event.efectoJuridico || event.proximoPaso) && (
       <button onClick={onToggle} className="mt-1.5 text-[10px] font-medium" style={{ color: 'var(--g-brand-accent)' }}>
-        Ver detalle →
+        Ver detalle
       </button>
     )}
   </div>
@@ -155,7 +159,6 @@ export const TimelineSection = ({ vistaEspana }: { vistaEspana?: boolean }) => {
     let events = filter === 'all' ? cronologia : cronologia.filter(e => e.estado === filter);
     if (vistaEspana) {
       events = events.filter(e => {
-        // Keep events linked to blocks that have non-propuesta normas in Spain
         return e.bloques.some(bId => {
           const bloque = bloques.find(b => b.id === bId);
           return bloque?.normas.some(n => n.estadoES !== 'propuesta');
@@ -183,13 +186,14 @@ export const TimelineSection = ({ vistaEspana }: { vistaEspana?: boolean }) => {
         </span>
         <span className="inline-flex items-center gap-1.5">
           <span className="w-3 h-3 rounded-full border-[2px]" style={{ borderColor: 'var(--g-text-secondary)', background: 'var(--g-surface-card)', borderStyle: 'dashed' }} />
-          ⚙ Hito técnico
+          <span className="font-bold px-1 py-0.5" style={{ background: 'var(--g-sec-100)', borderRadius: 'var(--g-radius-sm)' }}>TEC</span>
+          Hito técnico
         </span>
       </div>
 
       {vistaEspana && (
         <div
-          className="flex items-center justify-center gap-2 px-4 py-2 text-[11px] font-semibold"
+          className="flex items-center justify-center gap-2 px-4 py-2 text-xs font-semibold"
           style={{
             background: 'var(--g-surface-subtle)',
             borderRadius: 'var(--g-radius-md)',
@@ -197,7 +201,7 @@ export const TimelineSection = ({ vistaEspana }: { vistaEspana?: boolean }) => {
             border: '1px solid var(--g-sec-300)',
           }}
         >
-          <span>🇪🇸</span>
+          <GeoChip variant="ES" />
           Mostrando solo hitos con impacto en España ({filteredEvents.length} de {cronologia.length})
         </div>
       )}
