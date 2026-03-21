@@ -229,7 +229,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
 
         {tab === 'transposicion' && (
           <div className="space-y-4">
-            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.transposicionDetalle}</p>
+            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.transposicionDetalle} /></p>
             <div className="space-y-2">
               {bloque.normas.map((n, i) => {
                 const est = estadoESLabels[n.estadoES];
