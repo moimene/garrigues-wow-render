@@ -198,11 +198,12 @@ const Index = () => {
             <BloqueLegend />
           </div>
 
-          {/* Obligations Matrix — NEW */}
+          {/* Obligations Matrix */}
           <div className="p-6 sm:p-8" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-lg)', boxShadow: 'var(--g-shadow-card)' }}>
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Matriz de Obligaciones por Actor</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Cruza los 12 bloques con los principales tipos de actores regulados. La intensidad refleja el volumen y complejidad de las obligaciones. Pasa el ratón para ver obligaciones concretas.</p>
             <ObligationsHeatMap />
+            <BloqueLegend />
           </div>
 
           {/* Interactions Matrix — NEW */}
