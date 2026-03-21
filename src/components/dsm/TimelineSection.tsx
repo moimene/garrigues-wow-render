@@ -74,7 +74,14 @@ const TimelineNode = ({ event, index }: { event: typeof cronologia[0]; index: nu
           {isLeft && <CardContent event={event} align="right" showDetail={showDetail} onToggle={() => setShowDetail(!showDetail)} />}
         </div>
         <div className="flex flex-col items-center">
-          <div className="w-4 h-4 rounded-full border-[3px] z-10" style={{ borderColor: estadoColors[event.estado], background: 'var(--g-surface-card)' }} />
+          <div
+            className="w-4 h-4 rounded-full border-[3px] z-10"
+            style={{
+              borderColor: estadoColors[event.estado],
+              background: 'var(--g-surface-card)',
+              borderStyle: event.tipoHito === 'tecnico' ? 'dashed' : 'solid',
+            }}
+          />
         </div>
         <div className={!isLeft ? 'pl-6' : 'pl-6 opacity-0 pointer-events-none'}>
           {!isLeft && <CardContent event={event} align="left" showDetail={showDetail} onToggle={() => setShowDetail(!showDetail)} />}
