@@ -87,7 +87,7 @@ export const ObligationsHeatMap = () => {
                         {intensidadPattern(cell.intensidad)}
                       </span>
                       {isH && cell.obligaciones.length > 0 && (
-                        <div className="absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[220px] p-3 text-left" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', border: '1px solid var(--g-border-subtle)' }}>
+                        <div className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[220px] p-3 text-left" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: '0 8px 30px rgba(0,0,0,0.18)', border: '1px solid var(--g-border-subtle)' }}>
                           <div className="font-bold text-[var(--g-text-primary)] text-xs mb-1">{actorLabels[a]}</div>
                           <div className="text-[10px] text-[var(--g-text-secondary)] mb-1.5">{bloque.nombre}</div>
                           <ul className="space-y-0.5">

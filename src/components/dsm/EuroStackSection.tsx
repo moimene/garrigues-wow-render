@@ -247,11 +247,11 @@ const SovereigntyHeatmap = () => {
               {/* Hover tooltip */}
               {isHov && (
                 <div
-                  className="absolute left-0 right-0 top-full mt-1 p-3 z-20"
+                  className="absolute left-0 right-0 top-full mt-1 p-3 z-50"
                   style={{
                     background: 'var(--g-surface-card)',
                     borderRadius: 'var(--g-radius-md)',
-                    boxShadow: 'var(--g-shadow-lg)',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.18)',
                     border: '1px solid var(--g-border-subtle)',
                   }}
                 >
