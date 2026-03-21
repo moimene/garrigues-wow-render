@@ -159,6 +159,21 @@ export const TimelineSection = ({ vistaEspana }: { vistaEspana?: boolean }) => {
         ))}
       </div>
 
+      {vistaEspana && (
+        <div
+          className="flex items-center justify-center gap-2 px-4 py-2 text-[11px] font-semibold"
+          style={{
+            background: 'var(--g-surface-subtle)',
+            borderRadius: 'var(--g-radius-md)',
+            color: 'var(--g-brand-3308)',
+            border: '1px solid var(--g-sec-300)',
+          }}
+        >
+          <span>🇪🇸</span>
+          Mostrando solo hitos con impacto en España ({filteredEvents.length} de {cronologia.length})
+        </div>
+      )}
+
       {filteredEvents.length === 0 ? (
         <div className="text-center py-12 text-sm text-[var(--g-text-secondary)]">
           No hay hitos para el filtro seleccionado.
