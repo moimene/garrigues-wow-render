@@ -457,7 +457,7 @@ const Index = () => {
             title="Cronología legislativa 2025–2028"
             subtitle="Principales hitos del mandato legislativo 2024–2029. Cada entrada muestra su efecto jurídico y el próximo paso esperado. Las fechas marcadas como '~Estimado' están sujetas a la evolución del proceso legislativo."
           />
-          <TimelineSection />
+          <TimelineSection vistaEspana={vistaEspana} />
         </section>
 
         {/* Transposición España */}
