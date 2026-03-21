@@ -195,6 +195,7 @@ const Index = () => {
             <h3 className="text-lg font-bold text-[var(--g-text-primary)] mb-1">Mapa de Calor por Bloques</h3>
             <p className="text-xs text-[var(--g-text-secondary)] mb-6">Densidad normativa y porcentaje de implementación en España por bloque temático.</p>
             <HeatGrid filters={vizFilters} />
+            <BloqueLegend />
           </div>
 
           {/* Obligations Matrix — NEW */}
