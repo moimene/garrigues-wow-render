@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { type Bloque, actorLabels, bloques as allBloques } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
+import { GlossaryText } from './GlossaryText';
 
 const estadoESLabels: Record<string, { label: string; color: string }> = {
   directa: { label: 'Aplicación directa', color: 'var(--status-directa)' },
