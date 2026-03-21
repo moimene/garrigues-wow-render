@@ -269,6 +269,30 @@ const Index = () => {
                 </button>
               ))}
             </div>
+
+            {/* Vista España toggle */}
+            <button
+              onClick={() => setVistaEspana(!vistaEspana)}
+              className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] sm:text-[11px] font-bold whitespace-nowrap"
+              style={{
+                background: vistaEspana ? 'var(--g-brand-3308)' : 'transparent',
+                color: vistaEspana ? 'white' : 'var(--g-text-secondary)',
+                borderRadius: 'var(--g-radius-full)',
+                border: `1.5px solid ${vistaEspana ? 'var(--g-brand-3308)' : 'var(--g-border-subtle)'}`,
+                transition: 'all 200ms ease',
+              }}
+              title={vistaEspana ? 'Desactivar perspectiva España' : 'Activar perspectiva España: resalta transposición y filtra hitos'}
+            >
+              <span>🇪🇸</span>
+              Vista España
+              {vistaEspana && (
+                <span
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ background: 'var(--g-brand-bright)' }}
+                />
+              )}
+            </button>
+
             <GlobalSearch query={searchQuery} onChange={setSearchQuery} onSelect={handleSearchSelect} />
           </div>
         </div>
