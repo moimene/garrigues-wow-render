@@ -12,7 +12,7 @@ interface Props {
 
 export const VisualizationCard = ({ question, title, description, interpretation, children, showLegend = true }: Props) => (
   <div
-    className="overflow-hidden"
+    className="overflow-visible"
     style={{
       background: 'var(--g-surface-card)',
       borderRadius: 'var(--g-radius-lg)',
