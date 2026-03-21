@@ -163,7 +163,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
 
             <div className="p-4" style={{ background: 'var(--g-sec-50)', borderRadius: 'var(--g-radius-md)', borderLeft: `3px solid ${bloque.color}` }}>
               <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1">Impacto principal</div>
-              <p className="text-xs text-[var(--g-text-primary)] leading-relaxed">{bloque.impactoResumen}</p>
+              <p className="text-xs text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.impactoResumen} /></p>
             </div>
 
             {/* Alcance */}
