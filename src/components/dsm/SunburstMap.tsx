@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { bloques } from '@/data/dsmData';
+import { bloques, type Norma } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
 import { FilterState, normaPassesFilter, bloquePassesEstadoUE } from './VisualizationFilters';
 
@@ -15,8 +15,24 @@ const estadoColors: Record<string, string> = {
   propuesta: '#6b7280',
 };
 
+const estadoLabels: Record<string, string> = {
+  directa: 'Apl. directa',
+  transpuesta: 'Transpuesta',
+  parcial: 'Parcial',
+  pendiente: 'Pendiente',
+  propuesta: 'Propuesta',
+};
+
+interface SelectedNorma {
+  norma: Norma;
+  bloqueId: number;
+  bloqueNombre: string;
+  bloqueColor: string;
+}
+
 export const SunburstMap = ({ filters }: Props) => {
   const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
+  const [selectedNorma, setSelectedNorma] = useState<SelectedNorma | null>(null);
   const { ref, isVisible } = useScrollReveal(0.2);
   const size = 640;
   const cx = size / 2;
@@ -81,7 +97,7 @@ export const SunburstMap = ({ filters }: Props) => {
           const labelR = 115;
           return (
             <g key={bloque.id} onMouseEnter={() => setHoveredBlock(bloque.id)} onMouseLeave={() => setHoveredBlock(null)} style={{ cursor: 'pointer' }}>
-              {/* Block ring - thicker, fully opaque */}
+              {/* Block ring */}
               <path
                 d={describeArc(cx, cy, 68, 140, startAngle, sweep - 0.8)}
                 fill={bloque.color}
@@ -95,20 +111,27 @@ export const SunburstMap = ({ filters }: Props) => {
                   B{bloque.id}
                 </text>
               )}
-              {/* Norma ring - vivid status colors */}
+              {/* Norma ring — clickable */}
               {bloque.normas.map((norma, j) => {
                 const normaSweep = (1 / totalNormas) * 360;
                 const normaStart = startAngle + j * normaSweep;
                 const color = estadoColors[norma.estadoES] || '#6b7280';
+                const isSelected = selectedNorma?.norma.nombre === norma.nombre && selectedNorma?.bloqueId === bloque.id;
                 return (
                   <path
                     key={j}
                     d={describeArc(cx, cy, 146, 200, normaStart, normaSweep - 0.4)}
                     fill={color}
-                    opacity={isHovered ? 1 : 0.75}
-                    stroke="white"
-                    strokeWidth={0.3}
-                    style={{ transition: 'opacity 200ms ease' }}
+                    opacity={isSelected ? 1 : isHovered ? 1 : 0.75}
+                    stroke={isSelected ? 'white' : 'white'}
+                    strokeWidth={isSelected ? 2 : 0.3}
+                    style={{ cursor: 'pointer', transition: 'opacity 200ms ease, stroke-width 150ms ease' }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedNorma(
+                        isSelected ? null : { norma, bloqueId: bloque.id, bloqueNombre: bloque.nombre, bloqueColor: bloque.color }
+                      );
+                    }}
                   >
                     <title>{norma.nombre} — {norma.estadoES}</title>
                   </path>
@@ -119,7 +142,71 @@ export const SunburstMap = ({ filters }: Props) => {
         })}
       </svg>
 
-      {hoveredBlock && (() => {
+      {/* Selected norma detail panel */}
+      {selectedNorma && (
+        <div
+          className="w-full max-w-md text-left p-4 relative"
+          style={{
+            background: 'var(--g-surface-card)',
+            borderRadius: 'var(--g-radius-md)',
+            boxShadow: 'var(--g-shadow-dropdown)',
+            borderLeft: `4px solid ${estadoColors[selectedNorma.norma.estadoES] || '#6b7280'}`,
+            animation: 'fade-in 0.2s ease-out',
+          }}
+        >
+          <button
+            onClick={() => setSelectedNorma(null)}
+            className="absolute top-3 right-3 text-[var(--g-text-secondary)] hover:text-[var(--g-text-primary)] text-xs font-bold"
+            style={{ transition: 'color 150ms ease' }}
+          >
+            ✕
+          </button>
+          <div className="flex items-center gap-2 mb-2">
+            <span
+              className="text-[9px] font-bold px-2 py-0.5 rounded"
+              style={{
+                background: selectedNorma.bloqueColor,
+                color: 'white',
+              }}
+            >
+              B{selectedNorma.bloqueId}
+            </span>
+            <span className="text-[10px] font-medium text-[var(--g-text-secondary)]">
+              {selectedNorma.bloqueNombre}
+            </span>
+          </div>
+          <div className="text-sm font-bold text-[var(--g-text-primary)] leading-snug">
+            {selectedNorma.norma.nombre}
+          </div>
+          <div className="flex items-center gap-3 mt-2">
+            <span
+              className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded"
+              style={{
+                background: estadoColors[selectedNorma.norma.estadoES] || '#6b7280',
+                color: 'white',
+              }}
+            >
+              {estadoLabels[selectedNorma.norma.estadoES] || selectedNorma.norma.estadoES}
+            </span>
+            <span className="text-[10px] font-medium text-[var(--g-text-secondary)]">
+              {selectedNorma.norma.tipo}
+            </span>
+            {selectedNorma.norma.plazo !== '—' && (
+              <span className="text-[10px] text-[var(--g-text-secondary)]">
+                Plazo: {selectedNorma.norma.plazo}
+              </span>
+            )}
+          </div>
+          {selectedNorma.norma.transposicionES && (
+            <p className="mt-2 text-[11px] text-[var(--g-text-secondary)] leading-relaxed">
+              {selectedNorma.norma.transposicionES}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Hovered block info (only when no norma selected) */}
+      {hoveredBlock && !selectedNorma && (() => {
         const b = filteredBloques.find(b => b.id === hoveredBlock);
         return b ? (
           <div className="text-center px-5 py-3" style={{ background: 'var(--g-surface-card)', borderRadius: 'var(--g-radius-md)', boxShadow: 'var(--g-shadow-dropdown)', borderLeft: `4px solid ${b.color}` }}>
@@ -143,6 +230,10 @@ export const SunburstMap = ({ filters }: Props) => {
           </span>
         ))}
       </div>
+
+      <p className="text-[11px] text-[var(--g-text-secondary)] text-center">
+        Pulse sobre cualquier segmento del anillo exterior para ver el detalle de la norma.
+      </p>
     </div>
   );
 };
