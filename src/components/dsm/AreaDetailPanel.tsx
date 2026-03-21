@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { type Bloque, actorLabels, bloques as allBloques } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
+import { GlossaryText } from './GlossaryText';
 
 const estadoESLabels: Record<string, { label: string; color: string }> = {
   directa: { label: 'Aplicación directa', color: 'var(--status-directa)' },
@@ -137,7 +138,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
       <div className="p-5 sm:p-6">
         {tab === 'sintesis' && (
           <div className="space-y-4">
-            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.sintesisEjecutiva}</p>
+            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.sintesisEjecutiva} /></p>
 
             {/* Expandable deeper explanation */}
             {bloque.explicacionMedia && (
@@ -151,9 +152,9 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
                 </button>
                 {showFullExplanation && (
                   <div className="mt-3 space-y-3">
-                    <p className="text-[13px] text-[var(--g-text-primary)] leading-relaxed">{bloque.explicacionMedia}</p>
+                    <p className="text-[13px] text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.explicacionMedia} /></p>
                     {bloque.explicacionCompleta && (
-                      <p className="text-[12px] text-[var(--g-text-secondary)] leading-relaxed">{bloque.explicacionCompleta}</p>
+                      <p className="text-[12px] text-[var(--g-text-secondary)] leading-relaxed"><GlossaryText text={bloque.explicacionCompleta} /></p>
                     )}
                   </div>
                 )}
@@ -162,14 +163,14 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
 
             <div className="p-4" style={{ background: 'var(--g-sec-50)', borderRadius: 'var(--g-radius-md)', borderLeft: `3px solid ${bloque.color}` }}>
               <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1">Impacto principal</div>
-              <p className="text-xs text-[var(--g-text-primary)] leading-relaxed">{bloque.impactoResumen}</p>
+              <p className="text-xs text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.impactoResumen} /></p>
             </div>
 
             {/* Alcance */}
             {bloque.alcance && (
               <div>
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1.5">Alcance</div>
-                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed">{bloque.alcance}</p>
+                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.alcance} /></p>
               </div>
             )}
 
@@ -203,13 +204,13 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
 
         {tab === 'estadoUE' && (
           <div className="space-y-4">
-            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.estadoUEDetalle}</p>
+            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.estadoUEDetalle} /></p>
 
             {/* Arquitectura normativa */}
             {bloque.arquitecturaNormativaUE && (
               <div className="p-3" style={{ background: 'rgba(0,68,56,0.04)', borderRadius: 'var(--g-radius-md)' }}>
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1.5">Arquitectura normativa</div>
-                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed">{bloque.arquitecturaNormativaUE}</p>
+                <p className="text-[12px] text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.arquitecturaNormativaUE} /></p>
               </div>
             )}
 
@@ -228,7 +229,7 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
 
         {tab === 'transposicion' && (
           <div className="space-y-4">
-            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed">{bloque.transposicionDetalle}</p>
+            <p className="text-sm text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.transposicionDetalle} /></p>
             <div className="space-y-2">
               {bloque.normas.map((n, i) => {
                 const est = estadoESLabels[n.estadoES];
