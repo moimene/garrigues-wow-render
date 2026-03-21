@@ -440,7 +440,7 @@ const Index = () => {
             description="Cada nodo representa un bloque o una norma individual. Las conexiones muestran la adscripción temática. El color indica el estado de transposición en España."
             interpretation="Los bloques con mayor número de nodos periféricos son los más complejos. Las zonas de convergencia señalan áreas donde múltiples normas se aplican simultáneamente."
           >
-            <ConstellationGraph filters={vizFilters} />
+            <ConstellationGraph filters={vizFilters} vistaEspana={vistaEspana} />
           </VisualizationCard>
         </section>
 
