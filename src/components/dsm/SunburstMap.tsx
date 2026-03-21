@@ -78,7 +78,7 @@ export const SunburstMap = ({ filters }: Props) => {
         {segments.map(({ bloque, startAngle, sweep }) => {
           const isHovered = hoveredBlock === bloque.id;
           const midAngle = ((startAngle + sweep / 2) * Math.PI) / 180;
-          const labelR = 100;
+          const labelR = 115;
           return (
             <g key={bloque.id} onMouseEnter={() => setHoveredBlock(bloque.id)} onMouseLeave={() => setHoveredBlock(null)} style={{ cursor: 'pointer' }}>
               {/* Block ring - thicker, fully opaque */}
