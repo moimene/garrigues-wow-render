@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { bloques } from '@/data/dsmData';
+import { bloques, type Norma } from '@/data/dsmData';
 import { useScrollReveal } from './useScrollReveal';
 import { FilterState, normaPassesFilter, bloquePassesEstadoUE } from './VisualizationFilters';
 
@@ -9,6 +9,14 @@ const estadoColors: Record<string, string> = {
   parcial: '#d97706',
   pendiente: '#dc2626',
   propuesta: '#6b7280',
+};
+
+const estadoLabels: Record<string, string> = {
+  directa: 'Apl. directa',
+  transpuesta: 'Transpuesta',
+  parcial: 'Parcial',
+  pendiente: 'Pendiente',
+  propuesta: 'Propuesta',
 };
 
 interface Node {
@@ -21,6 +29,9 @@ interface Node {
   type: 'bloque' | 'norma';
   estadoES?: string;
   bloqueId: number;
+  norma?: Norma;
+  bloqueNombre?: string;
+  bloqueColor?: string;
 }
 
 interface Props {
@@ -30,6 +41,7 @@ interface Props {
 export const ConstellationGraph = ({ filters }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [activeBloque, setActiveBloque] = useState<number | null>(null);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const width = 800;
   const height = 620;
   const cx = width / 2;
@@ -69,6 +81,7 @@ export const ConstellationGraph = ({ filters }: Props) => {
           id: `n${b.id}-${j}`, label: n.nombre.split(' ').slice(0, 2).join(' '),
           x: cx + nOrbit * Math.cos(nAngle), y: cy + nOrbit * Math.sin(nAngle),
           r: 9, color, type: 'norma', estadoES: n.estadoES, bloqueId: b.id,
+          norma: n, bloqueNombre: b.nombre, bloqueColor: b.color,
         };
         nNodes.push(nNode);
         lnks.push({ from: bNode, to: nNode });
@@ -112,12 +125,27 @@ export const ConstellationGraph = ({ filters }: Props) => {
           <line key={`c-${bn.id}`} x1={cx} y1={cy} x2={bn.x} y2={bn.y} stroke={bn.color} strokeWidth={1} opacity={activeBloque === bn.bloqueId ? 0.5 : 0.15} strokeDasharray="4 3" style={{ transition: 'opacity 300ms ease' }} />
         ))}
 
-        {/* Norma nodes */}
+        {/* Norma nodes — clickable */}
         {normaNodes.map(n => {
           const active = activeBloque === null || activeBloque === n.bloqueId;
+          const isSelected = selectedNode?.id === n.id;
           return (
-            <g key={n.id} style={{ transition: 'opacity 200ms ease' }} opacity={active ? 1 : 0.2}>
-              <circle cx={n.x} cy={n.y} r={n.r} fill={n.color} stroke="white" strokeWidth={1.5} />
+            <g
+              key={n.id}
+              style={{ transition: 'opacity 200ms ease', cursor: 'pointer' }}
+              opacity={active ? 1 : 0.2}
+              onClick={() => setSelectedNode(isSelected ? null : n)}
+            >
+              <circle
+                cx={n.x} cy={n.y} r={isSelected ? n.r + 3 : n.r}
+                fill={n.color}
+                stroke="white"
+                strokeWidth={isSelected ? 2.5 : 1.5}
+                style={{
+                  filter: isSelected ? `drop-shadow(0 0 8px ${n.color})` : 'none',
+                  transition: 'r 150ms ease, stroke-width 150ms ease, filter 150ms ease',
+                }}
+              />
             </g>
           );
         })}
@@ -141,18 +169,78 @@ export const ConstellationGraph = ({ filters }: Props) => {
         })}
       </svg>
 
+      {/* Selected norma detail panel */}
+      {selectedNode?.norma && (
+        <div
+          className="w-full max-w-md text-left p-4 relative"
+          style={{
+            background: 'var(--g-surface-card)',
+            borderRadius: 'var(--g-radius-md)',
+            boxShadow: 'var(--g-shadow-dropdown)',
+            borderLeft: `4px solid ${estadoColors[selectedNode.norma.estadoES] || '#6b7280'}`,
+            animation: 'fade-in 0.2s ease-out',
+          }}
+        >
+          <button
+            onClick={() => setSelectedNode(null)}
+            className="absolute top-3 right-3 text-[var(--g-text-secondary)] hover:text-[var(--g-text-primary)] text-xs font-bold"
+            style={{ transition: 'color 150ms ease' }}
+          >
+            ✕
+          </button>
+          <div className="flex items-center gap-2 mb-2">
+            <span
+              className="text-[9px] font-bold px-2 py-0.5 rounded"
+              style={{ background: selectedNode.bloqueColor, color: 'white' }}
+            >
+              B{selectedNode.bloqueId}
+            </span>
+            <span className="text-[10px] font-medium text-[var(--g-text-secondary)]">
+              {selectedNode.bloqueNombre}
+            </span>
+          </div>
+          <div className="text-sm font-bold text-[var(--g-text-primary)] leading-snug">
+            {selectedNode.norma.nombre}
+          </div>
+          <div className="flex items-center gap-3 mt-2">
+            <span
+              className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded"
+              style={{
+                background: estadoColors[selectedNode.norma.estadoES] || '#6b7280',
+                color: 'white',
+              }}
+            >
+              {estadoLabels[selectedNode.norma.estadoES] || selectedNode.norma.estadoES}
+            </span>
+            <span className="text-[10px] font-medium text-[var(--g-text-secondary)]">
+              {selectedNode.norma.tipo}
+            </span>
+            {selectedNode.norma.plazo !== '—' && (
+              <span className="text-[10px] text-[var(--g-text-secondary)]">
+                Plazo: {selectedNode.norma.plazo}
+              </span>
+            )}
+          </div>
+          {selectedNode.norma.transposicionES && (
+            <p className="mt-2 text-[11px] text-[var(--g-text-secondary)] leading-relaxed">
+              {selectedNode.norma.transposicionES}
+            </p>
+          )}
+        </div>
+      )}
+
       {/* Legend */}
       <div className="flex flex-wrap justify-center gap-4 text-[11px]">
         {Object.entries(estadoColors).map(([key, color]) => (
           <span key={key} className="inline-flex items-center gap-1.5 font-semibold text-[var(--g-text-secondary)] capitalize">
             <span className="w-3 h-3 rounded-full" style={{ background: color }} />
-            {key}
+            {estadoLabels[key] || key}
           </span>
         ))}
       </div>
 
-      <p className="text-xs text-[var(--g-text-secondary)] text-center max-w-md">
-        Pasa el ratón sobre un bloque para resaltar sus normas. Los colores representan el estado de transposición en España.
+      <p className="text-[11px] text-[var(--g-text-secondary)] text-center max-w-md">
+        Pulse sobre un nodo de norma para ver su ficha. Pase el ratón sobre un bloque para resaltar sus normas.
       </p>
     </div>
   );
