@@ -99,7 +99,9 @@ const CardContent = ({ event, align, showDetail, onToggle }: {
 }) => (
   <div className="pb-8 group">
     <div className="flex items-center gap-2 flex-wrap" style={{ justifyContent: align === 'right' ? 'flex-end' : 'flex-start' }}>
-      <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: estadoColors[event.estado] }}>{event.fecha}</span>
+      <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: estadoColors[event.estado] }}>
+        {event.tipoHito === 'tecnico' ? '⚙ ' : ''}{event.fecha}
+      </span>
       {event.incertidumbre && (
         <span className="text-[9px] font-medium px-1.5 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-text-secondary)', borderRadius: 'var(--g-radius-sm)', border: '1px dashed var(--g-border-subtle)' }} title="Fecha sujeta a proceso legislativo">
           ~Estimado
