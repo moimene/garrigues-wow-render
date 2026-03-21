@@ -1,77 +1,41 @@
 
 
-## Auditoría de estilo completa — Mapa Normativo DSM Garrigues
+## Plan: Reescribir íntegramente el bloque B7 en dsmData.ts
 
-### Diagnóstico: Emojis encontrados (TODOS deben eliminarse)
+### Problema
+El bloque B7 (id: 7) contiene errores graves de contenido: incluye e-Evidence, PNR, Europol y la Directiva sobre violencia contra mujeres, que no pertenecen a confianza digital. Los textos no reflejan correctamente eIDAS 2, la Ley 6/2020, ni los plazos de la cartera EUDI.
 
-| Archivo | Línea | Emoji | Sustitución propuesta |
-|---------|-------|-------|-----------------------|
-| `Index.tsx` | 195 | 🇪🇺 | Chip texto `UE` con fondo `var(--g-brand-3308)` y texto blanco |
-| `Index.tsx` | 207 | 🇪🇸 | Chip texto `ES` con fondo `var(--g-brand-3308)` y texto blanco |
-| `Index.tsx` | 288 | 🇪🇸 | Chip texto `ES` (mismo estilo) |
-| `TimelineSection.tsx` | 103 | ⚙ | Texto `[TEC]` en negrita o dot cuadrado `■` con color diferenciado |
-| `TimelineSection.tsx` | 186 | ⚙ | Sustituir por `■` + texto "Hito técnico" |
-| `TimelineSection.tsx` | 200 | 🇪🇸 | Chip `ES` |
-| `AreaDetailPanel.tsx` | 131 | ⚙ | Sustituir por dot `·` o prefijo tipográfico `BB:` |
-| `AreaDetailPanel.tsx` | 244 | 📅 | Eliminar, el contexto de fecha es evidente |
-| `AreaDetailPanel.tsx` | 24 | ⚡ | Sustituir por `!` en bold o `×` |
-| `EuroStackSection.tsx` | 133 | ⚙ | Sustituir por dot `·` tipográfico |
-| `euroStackData.ts` | 116-123 | 🏛🔗📖🛡📐♻⚖🤝 | Eliminar campo `icono` de principios; usar numeración ordinal `01–08` con estilo tipográfico |
+### Cambio
+Reescribir completamente el objeto del bloque `id: 7` en `src/data/dsmData.ts` (líneas 392-443), sustituyendo todos los campos con el contenido del informe legal proporcionado:
 
-### Diagnóstico: Tooltips con fondo transparente (BUG ACTIVO)
+**Campos a reescribir:**
+- `subtitulo` → "Marco común de identificación electrónica, carteras EUDI y servicios de confianza cualificados"
+- `descripcion` → "eIDAS 2, Reglamento (UE) 2024/1183, cartera EUDI, firma electrónica cualificada, servicios de confianza, Ley 6/2020"
+- `vigentes: 3, enProceso: 0, planificadas: 0, enRevision: 0, reglamentos: 1, directivas: 0` (ajustado a las normas reales del bloque)
+- `sintesisEjecutiva` → texto del informe sobre eIDAS 2 y EUDI
+- `explicacionMedia` → texto nivel 2 del informe
+- `explicacionCompleta` → texto nivel 3 del informe
+- `impactoResumen` → obligaciones nucleares (cartera EUDI, aceptación por administraciones, Ley 6/2020 art. 326.4 LEC)
+- `estadoUEDetalle` → estado con fechas precisas (vigor 20.05.2024, actos ejecución 21.11.2024, plazos 24/36 meses)
+- `transposicionDetalle` → perspectiva España con Ley 6/2020, DNIe, Cl@ve, @firma, pilotos DC4EU
+- `alcance` → sin e-Evidence/PNR/Europol
+- `conceptosClave` → nuevos términos (EUDI, atributos verificados, prestador cualificado, niveles de garantía, art. 326.4 LEC, minimización)
+- `arquitecturaNormativaUE` → eIDAS 2 + actos de ejecución + coordinación RGPD/DSA/DMA
+- `clavesInterpretacion` → 5 claves del informe legal
+- `alertasRigor` → 2 alertas actualizadas
+- `recursosReferencia` → fuentes corregidas (sin e-Evidence)
+- `funcionNormativa` → "Habilitante e infraestructural — arquitectura de confianza para transacciones seguras"
+- `obligacionesActores` → reescritos según el informe (Estados/administraciones, proveedores de carteras, partes usuarias privadas, prestadores cualificados)
+- `dependencias` → reescritas (protección de datos, servicios digitales/VLOP, mercados digitales/DMA, sector público, pagos, ciberseguridad)
+- `hitosProximos` → plazos reales eIDAS 2 (cartera 24 meses, aceptación 36 meses, actos ejecución 2025)
+- `normas` → reemplazar las 5 normas erróneas por las correctas:
+  1. Reglamento eIDAS (910/2014) — vigente/directa
+  2. Reglamento (UE) 2024/1183 (eIDAS 2) — vigente/directa
+  3. Ley 6/2020 (complemento nacional) — transpuesta
 
-Los tooltips en `InteractionsMatrix.tsx` (línea 85) siguen usando `var(--g-surface-card)` en vez de `#ffffff`. Mismo problema potencial en `EuroStackSection.tsx` sovereignty heatmap y `HeatGrid.tsx` según el screenshot del usuario.
+### Archivo afectado
+- `src/data/dsmData.ts` — líneas 392-443 (solo el objeto de id: 7)
 
-**Acción**: Auditar TODOS los tooltips/popovers del proyecto y forzar `background: '#ffffff'`, `border: '1px solid #d1d5db'`, `boxShadow: '0 8px 30px rgba(0,0,0,0.22)'`, `zIndex: 50`.
-
-Archivos afectados:
-- `InteractionsMatrix.tsx` línea 85 — `var(--g-surface-card)` → `#ffffff`
-- `EuroStackSection.tsx` — ya corregido, verificar
-- `HeatGrid.tsx` — ya corregido, verificar
-- `ObligationsHeatMap.tsx` — ya corregido
-
-### Diagnóstico: Inconsistencias tipográficas
-
-| Problema | Ubicación | Corrección |
-|----------|-----------|------------|
-| Textos `text-[9px]` demasiado pequeños | badges en EuroStackSection, labels | Mínimo `text-[10px]` en toda la app |
-| `text-[11px]` vs `text-xs` mezclados | body text en múltiples componentes | Estandarizar: body pequeño = `text-xs` (12px), micro = `text-[10px]`, nunca menos de 10px |
-| H3 inconsistentes: `text-base` vs `text-xl` | Section headings | Unificar: H3 sección = `text-lg font-bold` |
-
-### Diagnóstico: Botones/chips/badges inconsistentes
-
-| Problema | Corrección |
-|----------|------------|
-| `borderRadius` varía: `var(--g-radius-sm)`, `var(--g-radius-full)`, `rounded` | Chips/badges: `var(--g-radius-sm)`. Botones pill: `var(--g-radius-full)`. Cards: `var(--g-radius-lg)` |
-| Hardcoded colors en badges (`#fef3c7`, `#92400e`, `#e2e8f0`) | Usar sistema de tokens CSS existente |
-| Sombras pesadas en hover de cards | Reducir `var(--g-shadow-card-hover)` |
-
-### Plan de cambios
-
-**Fase 1 — Eliminar todos los emojis** (8 archivos)
-1. `Index.tsx`: Reemplazar 🇪🇺/🇪🇸 por chips tipográficos `<span>UE</span>` / `<span>ES</span>` con estilo uniforme
-2. `TimelineSection.tsx`: Reemplazar ⚙ por indicador tipográfico `■ TEC` y 🇪🇸 por chip `ES`
-3. `AreaDetailPanel.tsx`: Reemplazar ⚙ por `BB ·`, eliminar 📅, reemplazar ⚡ por texto `(!)` 
-4. `EuroStackSection.tsx`: Reemplazar `{p.icono}` emoji por numeración ordinal `01`–`08` estilizada
-5. `euroStackData.ts`: Cambiar campo `icono` de emojis a strings numerales `'01'`–`'08'`
-
-**Fase 2 — Corregir tooltips transparentes**
-1. `InteractionsMatrix.tsx`: Forzar `background: '#ffffff'` en tooltip
-2. Auditar todos los demás y asegurar consistencia
-
-**Fase 3 — Unificar escala tipográfica y componentes**
-1. Establecer mínimo `10px` para cualquier texto
-2. Estandarizar badges: `text-[10px] font-semibold px-2 py-0.5`, radio `var(--g-radius-sm)`, sin hardcoded colors
-3. Unificar headings de sección: `text-lg font-bold`
-4. Eliminar hardcoded hex en badges de `BlockCard.tsx` → usar tokens CSS
-
-**Fase 4 — Crear componente chip `ES`/`UE` reutilizable**
-Un `<GeoChip variant="ES" | "UE" />` que renderice un chip tipográfico sobrio y consistente, reutilizable en todo el proyecto.
-
-### Resultado esperado
-- Cero emojis en todo el codebase
-- Tooltips siempre opacos y legibles
-- Escala tipográfica coherente (10px mínimo, jerarquía clara)
-- Chips/badges unificados visualmente
-- Tono visual institucional sin elementos decorativos
+### Sin otros cambios
+Los componentes de UI no se tocan; el `AreaDetailPanel` ya consume estos campos correctamente.
 
