@@ -402,7 +402,7 @@ const Index = () => {
             description="Cada celda representa un bloque temático. La barra inferior indica el porcentaje de normas ya implementadas en España."
             interpretation="Los bloques con más normas no son necesariamente los de mayor impacto. Cruza esta vista con la matriz de obligaciones para identificar los ámbitos de mayor exigencia práctica."
           >
-            <HeatGrid filters={vizFilters} />
+            <HeatGrid filters={vizFilters} vistaEspana={vistaEspana} />
           </VisualizationCard>
 
           <VisualizationCard
