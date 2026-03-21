@@ -152,9 +152,9 @@ export const AreaDetailPanel = ({ bloque, onClose }: Props) => {
                 </button>
                 {showFullExplanation && (
                   <div className="mt-3 space-y-3">
-                    <p className="text-[13px] text-[var(--g-text-primary)] leading-relaxed">{bloque.explicacionMedia}</p>
+                    <p className="text-[13px] text-[var(--g-text-primary)] leading-relaxed"><GlossaryText text={bloque.explicacionMedia} /></p>
                     {bloque.explicacionCompleta && (
-                      <p className="text-[12px] text-[var(--g-text-secondary)] leading-relaxed">{bloque.explicacionCompleta}</p>
+                      <p className="text-[12px] text-[var(--g-text-secondary)] leading-relaxed"><GlossaryText text={bloque.explicacionCompleta} /></p>
                     )}
                   </div>
                 )}
