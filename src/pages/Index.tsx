@@ -205,6 +205,10 @@ const Index = () => {
             </span>
           </div>
 
+          <div className="mt-8">
+            <GuidedTourButton onClick={() => setTourActive(true)} />
+          </div>
+
           {/* Key metrics — editorial, not dashboard */}
           <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10">
             <AnimatedCounter target={totalNormas} label="Normas mapeadas" />
