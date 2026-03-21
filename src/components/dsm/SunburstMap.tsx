@@ -121,12 +121,12 @@ export const SunburstMap = ({ filters, vistaEspana }: Props) => {
                 return (
                   <path
                     key={j}
-                    d={describeArc(cx, cy, 146, 200, normaStart, normaSweep - 0.4)}
+                    d={describeArc(cx, cy, 146, vistaEspana ? 210 : 200, normaStart, normaSweep - 0.4)}
                     fill={color}
-                    opacity={isSelected ? 1 : isHovered ? 1 : 0.75}
+                    opacity={vistaEspana ? 1 : (isSelected ? 1 : isHovered ? 1 : 0.75)}
                     stroke={isSelected ? 'white' : 'white'}
-                    strokeWidth={isSelected ? 2 : 0.3}
-                    style={{ cursor: 'pointer', transition: 'opacity 200ms ease, stroke-width 150ms ease' }}
+                    strokeWidth={isSelected ? 2 : (vistaEspana ? 0.8 : 0.3)}
+                    style={{ cursor: 'pointer', transition: 'all 300ms ease' }}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedNorma(
@@ -134,7 +134,7 @@ export const SunburstMap = ({ filters, vistaEspana }: Props) => {
                       );
                     }}
                   >
-                    <title>{norma.nombre} — {norma.estadoES}</title>
+                    <title>{norma.nombre} — {estadoLabels[norma.estadoES] || norma.estadoES}</title>
                   </path>
                 );
               })}

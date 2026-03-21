@@ -62,19 +62,26 @@ export const HeatGrid = ({ filters, vistaEspana }: Props) => {
               }}
             >
               <div className="text-4xl font-bold tabular-nums text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
-                {b.normas.length}
+                {vistaEspana ? `${pct}%` : b.normas.length}
               </div>
               <div className="text-[12px] font-bold mt-1 leading-tight text-white" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.25)' }}>
-                B{b.id}
+                {vistaEspana ? 'implementadas' : `B${b.id}`}
               </div>
               <div className="text-[10px] mt-1 leading-tight text-white/80 font-medium line-clamp-2" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
-                {b.nombre}
+                {vistaEspana ? `B${b.id} · ${b.nombre}` : b.nombre}
               </div>
               <div className="mt-3 w-full h-2.5 overflow-hidden" style={{ background: 'rgba(255,255,255,0.3)', borderRadius: 'var(--g-radius-full)' }}>
-                <div className="h-full" style={{ width: `${pct}%`, background: 'rgba(255,255,255,0.9)', borderRadius: 'var(--g-radius-full)', transition: 'width 600ms ease-out' }} />
+                <div className="h-full" style={{
+                  width: `${pct}%`,
+                  background: vistaEspana
+                    ? (pct === 100 ? '#059669' : pct >= 60 ? '#d97706' : '#dc2626')
+                    : 'rgba(255,255,255,0.9)',
+                  borderRadius: 'var(--g-radius-full)',
+                  transition: 'width 600ms ease-out',
+                }} />
               </div>
               <div className="text-[11px] mt-1 font-bold text-white" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
-                {pct}% impl.
+                {vistaEspana ? `${transpuestas}/${b.normas.length} normas` : `${pct}% impl.`}
               </div>
 
               {isH && (
