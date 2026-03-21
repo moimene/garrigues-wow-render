@@ -53,7 +53,14 @@ const TimelineNode = ({ event, index }: { event: typeof cronologia[0]; index: nu
       {/* Mobile */}
       <div className="md:hidden flex gap-3 w-full">
         <div className="flex flex-col items-center flex-shrink-0">
-          <div className="w-3.5 h-3.5 rounded-full border-[3px] z-10" style={{ borderColor: estadoColors[event.estado], background: 'var(--g-surface-card)' }} />
+          <div
+            className="w-3.5 h-3.5 rounded-full border-[3px] z-10"
+            style={{
+              borderColor: estadoColors[event.estado],
+              background: 'var(--g-surface-card)',
+              borderStyle: event.tipoHito === 'tecnico' ? 'dashed' : 'solid',
+            }}
+          />
           <div className="w-0.5 flex-1" style={{ background: 'var(--g-sec-300)', opacity: 0.4 }} />
         </div>
         <div className="pb-6 flex-1">
