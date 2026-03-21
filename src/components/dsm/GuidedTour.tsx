@@ -258,6 +258,6 @@ export const GuidedTourButton = ({ onClick }: { onClick: () => void }) => (
     }}
   >
     <Play size={13} className="group-hover:scale-110 transition-transform" />
-    Explícame el sistema en 2 minutos
+    ¿Cómo usar este sitio?
   </button>
 );
