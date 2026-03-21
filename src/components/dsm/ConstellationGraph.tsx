@@ -30,8 +30,8 @@ interface Props {
 export const ConstellationGraph = ({ filters }: Props) => {
   const { ref, isVisible } = useScrollReveal(0.15);
   const [activeBloque, setActiveBloque] = useState<number | null>(null);
-  const width = 700;
-  const height = 520;
+  const width = 800;
+  const height = 620;
   const cx = width / 2;
   const cy = height / 2;
 
