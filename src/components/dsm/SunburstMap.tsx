@@ -18,7 +18,7 @@ const estadoColors: Record<string, string> = {
 export const SunburstMap = ({ filters }: Props) => {
   const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
   const { ref, isVisible } = useScrollReveal(0.2);
-  const size = 520;
+  const size = 640;
   const cx = size / 2;
   const cy = size / 2;
 
