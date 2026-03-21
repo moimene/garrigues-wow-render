@@ -54,10 +54,10 @@ export const ConstellationGraph = ({ filters }: Props) => {
 
     filteredBloques.forEach((b, i) => {
       const angle = (i / Math.max(count, 1)) * Math.PI * 2 - Math.PI / 2;
-      const orbitR = 155;
+      const orbitR = 190;
       const bNode: Node = {
         id: `b${b.id}`, label: `B${b.id}`, x: cx + orbitR * Math.cos(angle), y: cy + orbitR * Math.sin(angle),
-        r: 22, color: b.color, type: 'bloque', bloqueId: b.id,
+        r: 28, color: b.color, type: 'bloque', bloqueId: b.id,
       };
       bNodes.push(bNode);
 
