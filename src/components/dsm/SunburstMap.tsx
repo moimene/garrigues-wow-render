@@ -5,6 +5,7 @@ import { FilterState, normaPassesFilter, bloquePassesEstadoUE } from './Visualiz
 
 interface Props {
   filters?: FilterState;
+  vistaEspana?: boolean;
 }
 
 const estadoColors: Record<string, string> = {
