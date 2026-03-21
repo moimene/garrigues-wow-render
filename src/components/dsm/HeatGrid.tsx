@@ -34,7 +34,7 @@ export const HeatGrid = ({ filters }: Props) => {
 
   return (
     <div ref={ref} className="space-y-4">
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {filteredBloques.map((b, i) => {
           const intensity = b.normas.length / maxNormas;
           const transpuestas = b.normas.filter(n => n.estadoES === 'directa' || n.estadoES === 'transpuesta').length;
