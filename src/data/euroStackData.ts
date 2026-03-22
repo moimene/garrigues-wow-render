@@ -85,7 +85,7 @@ export const buildingBlocks: BuildingBlock[] = [
     nombre: 'OOTS (Once-Only Technical System)',
     descripcionCorta: 'Primer espacio de datos transfronterizo del sector público de la UE.',
     descripcionLarga: 'Sistema técnico que permite a los ciudadanos y empresas presentar datos una sola vez ante las administraciones públicas europeas, reutilizando eID para autenticación y eDelivery para el intercambio seguro de evidencias. Constituye el primer espacio de datos transfronterizo del sector público de la Unión.',
-    bloqueIds: [12],
+    bloqueIds: [13],
     estado: 'pilotaje',
     url: 'https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Once+Only+Technical+System',
     casosReutilizacion: 25,
