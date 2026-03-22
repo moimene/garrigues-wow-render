@@ -466,10 +466,10 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Exención de responsabilidad condicionada', 'Principio de país de origen', 'Riesgos sistémicos', 'Trazabilidad de comerciantes', 'Publicidad basada en perfiles', 'Diligencia debida digital', 'Coordinador de servicios digitales'],
     arquitecturaNormativaUE: 'Reglamento de servicios digitales (DSA) como núcleo horizontal, complementado por normativa de retirada de contenidos terroristas y reglamento de publicidad política. Guías y códigos de buenas prácticas completan la práctica institucional.',
     clavesInterpretacion: [
-      'La exención de responsabilidad no cubre incumplimientos de obligaciones de diligencia debida.',
-      'La publicidad basada en perfiles tiene restricciones específicas y prohibiciones para menores.',
-      'No debe confundirse moderación con censura ni exención con impunidad.',
-      'La diligencia debida es verificable y sujeta a supervisión y auditoría.',
+      'La exención de responsabilidad por contenidos de terceros no opera si el intermediario tiene conocimiento efectivo de ilicitud y no actúa con diligencia.',
+      'La moderación de contenidos no es una obligación general del DSA: la obligación es tener mecanismos eficaces de notificación y retirada. No debe confundirse moderación con censura ni exención con impunidad.',
+      'La publicidad basada en perfiles tiene restricciones específicas y prohibiciones para menores; la publicidad basada en datos sensibles está prohibida.',
+      'El principio de país de origen —que el proveedor se rige por el derecho de su Estado miembro de establecimiento— tiene excepciones importantes para servicios a consumidores.',
     ],
     alertasRigor: [
       'La supervisión de VLOPs está centralizada en la Comisión, no en las autoridades nacionales.',
