@@ -503,6 +503,7 @@ export const bloques: Bloque[] = [
       { areaId: 10, tipo: 'complementariedad', descripcion: 'El DMA y el DSA son complementarios: uno regula la competencia y otro la responsabilidad de contenidos.' },
       { areaId: 5, tipo: 'complementariedad', descripcion: 'La moderación de contenidos interactúa con los derechos de autor y la libertad de expresión.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'La moderación y la publicidad implican tratamientos de datos personales sujetos al RGPD.' },
+      { areaId: 11, tipo: 'complementariedad', descripcion: 'EMFA y DSA comparten objetivos de transparencia y protección del pluralismo en medios digitales.' },
     ],
     hitosProximos: ['DSA: supervisión activa de VLOPs por Comisión', 'Digital Fairness Act: propuesta Q4 2026', 'Auditorías independientes de VLOPs: en curso'],
     normas: [
