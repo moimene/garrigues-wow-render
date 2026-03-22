@@ -1,4 +1,5 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
+import heroBg from '@/assets/hero-building.png';
 import { GuidedTour, GuidedTourButton } from '@/components/dsm/GuidedTour';
 import { bloques } from '@/data/dsmData';
 import { EuroStackSection } from '@/components/dsm/EuroStackSection';
