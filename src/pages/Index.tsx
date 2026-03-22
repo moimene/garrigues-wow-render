@@ -147,10 +147,21 @@ const Index = () => {
       ═══════════════════════════════════════════════════════════════ */}
       <header
         className="relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(160deg, var(--g-brand-3308) 0%, #00332a 50%, var(--g-sec-700) 100%)',
-        }}
+        style={{ background: 'var(--g-brand-3308)' }}
       >
+        <img
+          src={heroBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ opacity: 0.18 }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(160deg, rgba(0,68,56,0.92) 0%, rgba(0,51,42,0.95) 50%, rgba(0,115,98,0.88) 100%)',
+          }}
+        />
         <div className="absolute inset-0 g-pattern-dots" />
         <div className="absolute inset-0 g-pattern-lines" />
 
