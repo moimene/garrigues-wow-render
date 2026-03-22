@@ -275,6 +275,9 @@ export const bloques: Bloque[] = [
       { areaId: 6, tipo: 'complementariedad', descripcion: 'La protección de datos y la ciberseguridad comparten requisitos de seguridad de la información y notificación de brechas.' },
       { areaId: 12, tipo: 'dependencia', descripcion: 'Los datos financieros regulados por FIDA (Open Finance) se cruzan con el marco de gobernanza de datos.' },
       { areaId: 8, tipo: 'complementariedad', descripcion: 'La moderación de contenidos en plataformas requiere tratamientos de datos personales sujetos al RGPD.' },
+      { areaId: 9, tipo: 'complementariedad', descripcion: 'La personalización de precios y prácticas comerciales online implican tratamientos de datos personales sujetos al RGPD.' },
+      { areaId: 10, tipo: 'complementariedad', descripcion: 'Las obligaciones de portabilidad de datos del DMA se coordinan con el Data Act y el RGPD.' },
+      { areaId: 13, tipo: 'complementariedad', descripcion: 'Los datos abiertos de alto valor y el OOTS requieren coordinación con el marco de gobernanza de datos.' },
     ],
     hitosProximos: ['Data Act: aplicación plena desde sept. 2025', 'EHDS: aplicación escalonada 2025-2029', 'Digital Omnibus (datos): trílogos primavera 2026'],
     normas: [
