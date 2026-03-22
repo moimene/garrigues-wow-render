@@ -610,6 +610,7 @@ export const bloques: Bloque[] = [
       { areaId: 8, tipo: 'complementariedad', descripcion: 'DMA y DSA son el binomio regulatorio para plataformas: competencia + responsabilidad.' },
       { areaId: 9, tipo: 'complementariedad', descripcion: 'Las obligaciones de transparencia del DMA refuerzan la protección del consumidor.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'Las obligaciones de portabilidad de datos del DMA se coordinan con el Data Act.' },
+      { areaId: 12, tipo: 'complementariedad', descripcion: 'El Crowdfunding Regulation y la regulación fintech interactúan con el régimen de competencia en plataformas.' },
     ],
     hitosProximos: ['Platform Work Directive: transposición 02.12.2026', 'EU Inc.: acuerdo finales 2026', 'DMA: procedimientos abiertos contra gatekeepers'],
     normas: [
