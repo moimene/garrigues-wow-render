@@ -572,10 +572,10 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Gatekeeper', 'Servicios de plataforma central', 'Remedios ex ante', 'Contestabilidad', 'Auto-preferencia', 'Interoperabilidad de mensajería', 'Presunción de laboralidad'],
     arquitecturaNormativaUE: 'Reglamento de mercados digitales (DMA) vigente, complementado por directrices, formularios y actos de ejecución. Reglamento de Subvenciones Foráneas. Platform Work Directive pendiente de transposición. La Comisión centraliza la supervisión de gatekeepers.',
     clavesInterpretacion: [
-      'El régimen DMA no sustituye al derecho de la competencia; son complementarios.',
-      'La interoperabilidad tiene límites técnicos y de seguridad que deben evaluarse.',
-      'La designación como gatekeeper depende de umbrales cuantitativos y cualitativos.',
-      'La presunción de laboralidad de la Platform Work Directive es refutable, no absoluta.',
+      'El DMA no prohíbe ser grande o dominante: prohíbe conductas específicas a quienes alcancen los umbrales de gatekeeper.',
+      'Un operador puede ser dominante en sentido del derecho de la competencia sin ser gatekeeper del DMA, y viceversa en casos límite. Los dos regímenes son complementarios, no sustitutivos.',
+      'La interoperabilidad de mensajería tiene requisitos técnicos y de seguridad que condicionan su alcance práctico.',
+      'La designación como gatekeeper depende de umbrales cuantitativos y cualitativos y puede ampliarse mediante investigaciones de mercado.',
     ],
     alertasRigor: [
       'Los procedimientos de enforcement del DMA están en fases iniciales; la jurisprudencia es incipiente.',
