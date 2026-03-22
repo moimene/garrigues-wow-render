@@ -115,6 +115,8 @@ export const bloques: Bloque[] = [
       { areaId: 6, tipo: 'complementariedad', descripcion: 'La ciberseguridad es requisito intrínseco de los sistemas de IA; el CRA afecta a productos con IA embebida.' },
       { areaId: 2, tipo: 'dependencia', descripcion: 'El Chips Act garantiza la capacidad de hardware necesaria para computación de IA y cuántica.' },
       { areaId: 9, tipo: 'dependencia', descripcion: 'La responsabilidad por producto se extiende a sistemas de IA, requiriendo coordinación con el marco de IA.' },
+      { areaId: 5, tipo: 'complementariedad', descripcion: 'La minería de textos y datos para entrenamiento de IA interactúa con la excepción de derechos de autor del art. 4 de la Directiva 2019/790.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'La cartera EUDI y los servicios de confianza cualificados proporcionan la capa de identidad y autenticación para sistemas de IA de alto riesgo.' },
     ],
     hitosProximos: ['AI Act: aplicación plena agosto 2027', 'Cloud & AI Development Act: propuesta esperada Q1 2026', 'Digital Omnibus on AI: trílogos primavera 2026', 'Estándares armonizados CEN/CENELEC: en desarrollo'],
     normas: [
@@ -168,6 +170,7 @@ export const bloques: Bloque[] = [
     dependencias: [
       { areaId: 1, tipo: 'dependencia', descripcion: 'Los programas de I+D y la IA dependen de la disponibilidad de semiconductores avanzados.' },
       { areaId: 3, tipo: 'complementariedad', descripcion: 'La infraestructura de conectividad requiere componentes de la cadena de suministro regulada aquí.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'La identidad digital europea es habilitante para procesos industriales digitalizados y cadenas de suministro verificables.' },
     ],
     hitosProximos: ['Chips Act: evaluación Q1 2026', 'European Innovation Act: propuesta esperada 2026', 'Critical Raw Materials Act: objetivos 2030'],
     normas: [
@@ -273,6 +276,9 @@ export const bloques: Bloque[] = [
       { areaId: 6, tipo: 'complementariedad', descripcion: 'La protección de datos y la ciberseguridad comparten requisitos de seguridad de la información y notificación de brechas.' },
       { areaId: 12, tipo: 'dependencia', descripcion: 'Los datos financieros regulados por FIDA (Open Finance) se cruzan con el marco de gobernanza de datos.' },
       { areaId: 8, tipo: 'complementariedad', descripcion: 'La moderación de contenidos en plataformas requiere tratamientos de datos personales sujetos al RGPD.' },
+      { areaId: 9, tipo: 'complementariedad', descripcion: 'La personalización de precios y prácticas comerciales online implican tratamientos de datos personales sujetos al RGPD.' },
+      { areaId: 10, tipo: 'complementariedad', descripcion: 'Las obligaciones de portabilidad de datos del DMA se coordinan con el Data Act y el RGPD.' },
+      { areaId: 13, tipo: 'complementariedad', descripcion: 'Los datos abiertos de alto valor y el OOTS requieren coordinación con el marco de gobernanza de datos.' },
     ],
     hitosProximos: ['Data Act: aplicación plena desde sept. 2025', 'EHDS: aplicación escalonada 2025-2029', 'Digital Omnibus (datos): trílogos primavera 2026'],
     normas: [
@@ -381,6 +387,8 @@ export const bloques: Bloque[] = [
       { areaId: 12, tipo: 'dependencia', descripcion: 'DORA es la lex specialis de NIS2 para el sector financiero.' },
       { areaId: 3, tipo: 'complementariedad', descripcion: 'Los operadores de telecomunicaciones son entidades esenciales bajo NIS2.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'La ciberseguridad y la protección de datos comparten obligaciones de notificación de brechas.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'Los esquemas de certificación de ciberseguridad sustentan la certificación de carteras EUDI y componentes críticos.' },
+      { areaId: 13, tipo: 'complementariedad', descripcion: 'El ENS y NIS2 aseguran la seguridad de los sistemas de administración electrónica e interoperabilidad.' },
     ],
     hitosProximos: ['NIS2: transposición en España (plazo vencido, tramitación activa)', 'CRA: aplicación escalonada 2025-2027', 'Digital Omnibus (ciber): trílogos primavera 2026'],
     normas: [
@@ -396,7 +404,7 @@ export const bloques: Bloque[] = [
     id: 7, nombre: 'Identidad Digital y Servicios de Confianza',
     subtitulo: 'Marco común de identificación electrónica, carteras EUDI y servicios de confianza cualificados',
     descripcion: 'eIDAS 2, Reglamento (UE) 2024/1183, cartera EUDI, firma electrónica cualificada, servicios de confianza, Ley 6/2020',
-    color: '#1e3a5f', vigentes: 3, enProceso: 0, planificadas: 0, enRevision: 0, reglamentos: 2, directivas: 0,
+    color: '#1e3a5f', vigentes: 3, enProceso: 0, planificadas: 0, enRevision: 0, reglamentos: 3, directivas: 0,
     sintesisEjecutiva: 'Este bloque articula la arquitectura de confianza digital en la UE. El Reglamento (UE) 2024/1183 (eIDAS 2) reconfigura el marco de identificación electrónica y amplía el régimen de servicios de confianza para cimentar transacciones seguras entre ciudadanos, empresas y administraciones. Su pieza central es la Cartera Europea de Identidad Digital (EUDI), interoperable y bajo control del usuario, que habilita identificación, presentación de atributos y firma o sello electrónicos cualificados. En España, la Ley 6/2020 complementa eIDAS y otorga efectos probatorios reforzados a los servicios cualificados; la LEC 326.4 establece presunción y traslada la carga de la prueba a quien impugna.',
     explicacionMedia: 'El Reglamento (UE) 2024/1183 obliga a ofrecer una cartera EUDI interoperable y segura bajo control del usuario, y amplía los servicios de confianza. Las administraciones deberán aceptar la cartera para sus servicios en línea y ciertos proveedores privados y plataformas de muy gran tamaño deberán facilitar su uso para autenticación a demanda del usuario en plazos reglados. España complementa el marco con la Ley 6/2020 y la presunción probatoria del art. 326.4 LEC; los despliegues técnicos avanzan con pilotos y adaptación de infraestructuras nacionales.',
     explicacionCompleta: 'El sistema de confianza digital integra identificación electrónica notificada, carteras EUDI y servicios de confianza. eIDAS 2 está en vigor; los actos de ejecución de noviembre de 2024 activan plazos de 24 meses para disponibilizar al menos una cartera por Estado y de 36 meses para la aceptación obligatoria por partes privadas sujetas a autenticación reforzada y por plataformas de muy gran tamaño a petición del usuario. La cartera EUDI permite identificación, presentación selectiva de atributos y creación de firmas cualificadas gratuitas para uso no profesional, con código abierto en componentes esenciales, certificación y seguridad por diseño. Se añaden servicios cualificados de archivo electrónico, libros mayores electrónicos y declaraciones cualificadas de atributos; se exige cotejo electrónico de atributos públicos prioritarios. España, mediante la Ley 6/2020, fija vigencia y revocación de certificados, obligaciones de prestadores, supervisión, listas de confianza y un régimen sancionador, y consolida la inversión de la carga de la prueba para documentos sustentados en servicios cualificados (LEC 326.4). La coordinación con RGPD, DSA y DMA es estrecha.',
@@ -439,6 +447,7 @@ export const bloques: Bloque[] = [
       { areaId: 12, tipo: 'complementariedad', descripcion: 'EUDI y declaraciones de atributos se integran en ventanillas únicas y procedimientos transfronterizos del sector público digital.' },
       { areaId: 9, tipo: 'complementariedad', descripcion: 'La aceptación de EUDI como medio de autenticación encaja con exigencias de autenticación reforzada en servicios financieros y pagos.' },
       { areaId: 6, tipo: 'complementariedad', descripcion: 'Los esquemas de certificación de ciberseguridad sustentan la certificación de carteras y componentes críticos.' },
+      { areaId: 13, tipo: 'dependencia', descripcion: 'El OOTS reutiliza eID/EUDI Wallet para autenticación transfronteriza, haciendo de la identidad digital infraestructura del sector público.' },
     ],
     hitosProximos: [
       'Noviembre 2026: disponibilidad obligatoria de al menos una cartera EUDI por Estado miembro (24 meses desde actos de ejecución)',
@@ -495,6 +504,7 @@ export const bloques: Bloque[] = [
       { areaId: 10, tipo: 'complementariedad', descripcion: 'El DMA y el DSA son complementarios: uno regula la competencia y otro la responsabilidad de contenidos.' },
       { areaId: 5, tipo: 'complementariedad', descripcion: 'La moderación de contenidos interactúa con los derechos de autor y la libertad de expresión.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'La moderación y la publicidad implican tratamientos de datos personales sujetos al RGPD.' },
+      { areaId: 11, tipo: 'complementariedad', descripcion: 'EMFA y DSA comparten objetivos de transparencia y protección del pluralismo en medios digitales.' },
     ],
     hitosProximos: ['DSA: supervisión activa de VLOPs por Comisión', 'Digital Fairness Act: propuesta Q4 2026', 'Auditorías independientes de VLOPs: en curso'],
     normas: [
@@ -545,6 +555,8 @@ export const bloques: Bloque[] = [
       { areaId: 8, tipo: 'complementariedad', descripcion: 'El DSA refuerza las obligaciones de transparencia de los marketplaces online.' },
       { areaId: 1, tipo: 'dependencia', descripcion: 'La responsabilidad por producto se extiende a sistemas de IA, requiriendo coordinación con el AI Act.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'La personalización de precios y reseñas implican tratamientos de datos personales.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'La aceptación de EUDI como medio de autenticación encaja con exigencias de autenticación reforzada en pagos y servicios financieros.' },
+      { areaId: 10, tipo: 'complementariedad', descripcion: 'Las obligaciones de transparencia del DMA refuerzan la protección del consumidor digital.' },
     ],
     hitosProximos: ['Right to Repair: transposición 31.07.2026', 'Product Liability: transposición 09.12.2026', 'Digital Fairness Act (consumo): propuesta pendiente'],
     normas: [
@@ -599,6 +611,7 @@ export const bloques: Bloque[] = [
       { areaId: 8, tipo: 'complementariedad', descripcion: 'DMA y DSA son el binomio regulatorio para plataformas: competencia + responsabilidad.' },
       { areaId: 9, tipo: 'complementariedad', descripcion: 'Las obligaciones de transparencia del DMA refuerzan la protección del consumidor.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'Las obligaciones de portabilidad de datos del DMA se coordinan con el Data Act.' },
+      { areaId: 12, tipo: 'complementariedad', descripcion: 'El Crowdfunding Regulation y la regulación fintech interactúan con el régimen de competencia en plataformas.' },
     ],
     hitosProximos: ['Platform Work Directive: transposición 02.12.2026', 'EU Inc.: acuerdo finales 2026', 'DMA: procedimientos abiertos contra gatekeepers'],
     normas: [
