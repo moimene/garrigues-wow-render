@@ -349,10 +349,11 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Operador esencial e importante', 'Evaluación de conformidad', 'Vulnerabilidades explotables', 'Seguridad desde el diseño', 'Cadena de suministro', 'Notificación de incidentes', 'Resiliencia operativa digital (DORA)', 'Certificación de ciberseguridad'],
     arquitecturaNormativaUE: 'NIS2 (directiva con transposición en marcha), Directiva de Resiliencia de Entidades Críticas, CRA (reglamento con periodos transitorios), DORA (reglamento vigente para sector financiero), Cybersecurity Act (certificación) y Cyber Solidarity Act. ENISA coordina.',
     clavesInterpretacion: [
-      'Seguridad no es solo TI: incluye gobernanza, formación y continuidad de negocio.',
-      'La cadena de suministro y el soporte posventa son elementos críticos de cumplimiento.',
-      'Los informes de incidentes tienen umbrales y tiempos precisos que varían por marco.',
-      'DORA es lex specialis de NIS2 para el sector financiero: no se duplican, se complementan.',
+      'NIS2 amplía significativamente el alcance respecto a NIS1: incorpora sectores nuevos y elimina el margen de apreciación nacional sobre qué entidades son esenciales.',
+      'La gestión de riesgos de la cadena de suministro es una obligación sustantiva, no un objetivo de buenas prácticas.',
+      'El CRA se aplica a productos, no a servicios: los servicios digitales tienen su marco en NIS2 y en el DSA.',
+      'Los informes de incidentes tienen umbrales y tiempos precisos: 24h alerta temprana, 72h notificación inicial, 1 mes informe final.',
+      'DORA es lex specialis de NIS2 para el sector financiero: las entidades financieras no quedan exentas de NIS2, pero DORA especializa el régimen.',
     ],
     alertasRigor: [
       'NIS2 tiene el plazo de transposición vencido en España; las obligaciones están definidas pero la implementación normativa interna está pendiente.',
