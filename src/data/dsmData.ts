@@ -240,12 +240,12 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Minimización', 'Bases jurídicas de tratamiento', 'Responsabilidad proactiva', 'Seudonimización', 'Intermediación neutral', 'Conmutación sin obstáculos', 'Conjuntos de alto valor', 'Acceso B2B y B2C a datos de productos', 'Privacidad por diseño y por defecto'],
     arquitecturaNormativaUE: 'El RGPD es el eje horizontal plenamente vigente, complementado por la directiva de cooperación policial y el marco de ePrivacy en revisión. El Data Governance Act y el Data Act crean la infraestructura de gobernanza e intercambio de datos. Actos de ejecución, guías del Comité Europeo de Protección de Datos y códigos de conducta orientan la práctica.',
     clavesInterpretacion: [
-      'La base de licitud no es un mero trámite: su elección condiciona todo el régimen aplicable.',
-      'La anonimización efectiva es exigente y requiere irreversibilidad práctica.',
-      'La seudonimización no elimina el carácter personal de los datos.',
-      'Los datos mixtos personales y no personales requieren cautela especial.',
-      'El acceso a datos de productos no es ilimitado; deben salvaguardarse secretos y seguridad.',
-      'El consentimiento no es la única base posible ni siempre la más adecuada.',
+      'El consentimiento no es la única ni la principal base de licitud; elegirla cuando otra es más apropiada crea problemas de cumplimiento.',
+      'La seudonimización no elimina el carácter personal de los datos. La anonimización efectiva exige irreversibilidad práctica, no solo técnica.',
+      'La Directiva ePrivacy sigue vigente; no debe confundirse con el Reglamento ePrivacy propuesto, que no ha sido adoptado.',
+      'El Data Act no crea un derecho de propiedad sobre los datos: crea derechos de acceso y portabilidad para usuarios de productos conectados.',
+      'El DGA no obliga a compartir datos: crea estructuras de confianza para quien quiera compartirlos de forma organizada.',
+      'La conmutación entre proveedores de nube no es instantánea: el Data Act establece plazos y condiciones para reducir barreras de forma progresiva.',
     ],
     alertasRigor: [
       'La revisión de ePrivacy está bloqueada en el Consejo desde 2017; la directiva vigente sigue siendo aplicable.',
