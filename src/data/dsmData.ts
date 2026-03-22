@@ -170,6 +170,7 @@ export const bloques: Bloque[] = [
     dependencias: [
       { areaId: 1, tipo: 'dependencia', descripcion: 'Los programas de I+D y la IA dependen de la disponibilidad de semiconductores avanzados.' },
       { areaId: 3, tipo: 'complementariedad', descripcion: 'La infraestructura de conectividad requiere componentes de la cadena de suministro regulada aquí.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'La identidad digital europea es habilitante para procesos industriales digitalizados y cadenas de suministro verificables.' },
     ],
     hitosProximos: ['Chips Act: evaluación Q1 2026', 'European Innovation Act: propuesta esperada 2026', 'Critical Raw Materials Act: objetivos 2030'],
     normas: [
