@@ -85,11 +85,11 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Clasificación por riesgo', 'Proveedor y usuario de IA', 'Evaluación de conformidad', 'Modelos de propósito general', 'Prohibiciones específicas', 'Sandbox regulatorio', 'Alto riesgo', 'Supervisión humana'],
     arquitecturaNormativaUE: 'El Reglamento de IA es el eje central, con aplicación escalonada. Se complementa con propuestas en materia de responsabilidad civil y de productos. Guías técnicas, estándares armonizados (CEN/CENELEC) y actos de ejecución precisarán metodologías y plantillas. Los programas Horizonte Europa y Europa Digital canalizan la financiación.',
     clavesInterpretacion: [
-      'La clasificación por riesgo es jurídica y técnica, no meramente conceptual.',
-      'La documentación técnica es un elemento de cumplimiento sustantivo, no un mero trámite.',
-      'Los modelos de propósito general tienen obligaciones propias diferenciadas de los sistemas de alto riesgo.',
-      'Los sandboxes regulatorios no eximen de responsabilidad, pero facilitan el cumplimiento.',
-      'La distinción entre proveedor y usuario de IA determina el régimen de obligaciones aplicable.',
+      'La clasificación como sistema de alto riesgo es una determinación jurídica y técnica que depende del sector de uso y del impacto potencial, no solo de la sofisticación del sistema.',
+      'Un mismo modelo puede ser de alto riesgo en un contexto y no serlo en otro.',
+      'Las prohibiciones son absolutas y no admiten justificación por interés legítimo: la identificación biométrica en tiempo real en espacios públicos con fines policiales tiene un régimen excepcional muy restringido.',
+      'Los modelos de propósito general tienen obligaciones propias diferenciadas; los de riesgo sistémico requieren adversarial testing.',
+      'La distinción entre proveedor y desplegador de IA determina el régimen de obligaciones aplicable.',
     ],
     alertasRigor: [
       'La aplicación escalonada del AI Act implica que no todas las obligaciones son exigibles simultáneamente.',
