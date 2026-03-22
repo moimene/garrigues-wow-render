@@ -107,7 +107,8 @@ export const sovereigntyMap: SovereigntyMapping[] = [
   { bloqueId: 9, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'Los pagos y la resiliencia financiera dependen de infraestructuras sectoriales (TARGET, SEPA). El euro digital podría constituir un Building Block futuro según EuroStack.' },
   { bloqueId: 10, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La protección de consumidores digitales se articula mediante normas y cooperación entre autoridades, sin infraestructura técnica soberana específica.' },
   { bloqueId: 11, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La propiedad intelectual digital se gestiona mediante marcos normativos y entidades de gestión, sin Building Block técnico asociado.' },
-  { bloqueId: 12, nivel: 'bb-pilotaje', buildingBlocks: ['oots', 'edelivery'], nota: 'El OOTS y eDelivery conforman la infraestructura técnica del sector público digital. España figura como frontrunner en implementación del Marco Europeo de Interoperabilidad.' },
+  { bloqueId: 12, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'Los servicios financieros digitales dependen de infraestructuras sectoriales (TARGET, SEPA). El euro digital podría constituir un Building Block futuro según EuroStack.' },
+  { bloqueId: 13, nivel: 'bb-pilotaje', buildingBlocks: ['oots', 'edelivery'], nota: 'El OOTS y eDelivery conforman la infraestructura técnica del sector público digital. España figura como frontrunner en implementación del Marco Europeo de Interoperabilidad.' },
 ];
 
 // ─── Principios EuroStack ───────────────────────────────────────
