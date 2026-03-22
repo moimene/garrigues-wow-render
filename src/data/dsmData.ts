@@ -115,6 +115,8 @@ export const bloques: Bloque[] = [
       { areaId: 6, tipo: 'complementariedad', descripcion: 'La ciberseguridad es requisito intrínseco de los sistemas de IA; el CRA afecta a productos con IA embebida.' },
       { areaId: 2, tipo: 'dependencia', descripcion: 'El Chips Act garantiza la capacidad de hardware necesaria para computación de IA y cuántica.' },
       { areaId: 9, tipo: 'dependencia', descripcion: 'La responsabilidad por producto se extiende a sistemas de IA, requiriendo coordinación con el marco de IA.' },
+      { areaId: 5, tipo: 'complementariedad', descripcion: 'La minería de textos y datos para entrenamiento de IA interactúa con la excepción de derechos de autor del art. 4 de la Directiva 2019/790.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'La cartera EUDI y los servicios de confianza cualificados proporcionan la capa de identidad y autenticación para sistemas de IA de alto riesgo.' },
     ],
     hitosProximos: ['AI Act: aplicación plena agosto 2027', 'Cloud & AI Development Act: propuesta esperada Q1 2026', 'Digital Omnibus on AI: trílogos primavera 2026', 'Estándares armonizados CEN/CENELEC: en desarrollo'],
     normas: [
