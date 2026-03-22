@@ -518,10 +518,10 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Conformidad digital', 'Actualizaciones de seguridad', 'Remedios', 'Reseñas verificadas', 'Personalización de precios', 'Responsabilidad objetiva', 'Derecho a reparación', 'Geo-blocking'],
     arquitecturaNormativaUE: 'Directivas de contenidos digitales, ventas de bienes y Omnibus como base transpuesta. Product Liability Directive y Right to Repair Directive pendientes. Reglamento de Geo-blocking y General Product Safety Regulation en aplicación directa. Cooperación reforzada entre autoridades de consumo.',
     clavesInterpretacion: [
-      'Los contenidos y servicios digitales exigen actualizaciones de seguridad como parte de la conformidad, no como cortesía.',
-      'La publicidad personalizada tiene límites legales específicos, especialmente con menores.',
-      'La responsabilidad por producto se extiende a software e IA: el concepto de "producto" evoluciona.',
-      'El derecho a reparación no elimina la garantía legal, sino que la complementa.',
+      'Los servicios digitales prestados a cambio de datos personales —no de precio monetario— están cubiertos por la Directiva 2019/770/UE: la gratuidad aparente no excluye la protección del consumidor.',
+      'La conformidad de los bienes con elementos digitales exige actualizaciones de seguridad durante el periodo de uso esperado, incluso después del fin del plazo de garantía formal.',
+      'La responsabilidad por producto se extiende expresamente a software e IA: el concepto de "producto" evoluciona con la Product Liability Directive.',
+      'El derecho a reparación no elimina la garantía legal, sino que la complementa; la prioridad de reparación sobre sustitución es una novedad relevante.',
     ],
     alertasRigor: [
       'La Product Liability Directive y la Right to Repair tienen plazos de transposición en 2026 que España debe cumplir.',
