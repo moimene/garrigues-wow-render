@@ -446,6 +446,7 @@ export const bloques: Bloque[] = [
       { areaId: 12, tipo: 'complementariedad', descripcion: 'EUDI y declaraciones de atributos se integran en ventanillas únicas y procedimientos transfronterizos del sector público digital.' },
       { areaId: 9, tipo: 'complementariedad', descripcion: 'La aceptación de EUDI como medio de autenticación encaja con exigencias de autenticación reforzada en servicios financieros y pagos.' },
       { areaId: 6, tipo: 'complementariedad', descripcion: 'Los esquemas de certificación de ciberseguridad sustentan la certificación de carteras y componentes críticos.' },
+      { areaId: 13, tipo: 'dependencia', descripcion: 'El OOTS reutiliza eID/EUDI Wallet para autenticación transfronteriza, haciendo de la identidad digital infraestructura del sector público.' },
     ],
     hitosProximos: [
       'Noviembre 2026: disponibilidad obligatoria de al menos una cartera EUDI por Estado miembro (24 meses desde actos de ejecución)',
