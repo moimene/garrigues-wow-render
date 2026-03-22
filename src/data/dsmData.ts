@@ -386,6 +386,8 @@ export const bloques: Bloque[] = [
       { areaId: 12, tipo: 'dependencia', descripcion: 'DORA es la lex specialis de NIS2 para el sector financiero.' },
       { areaId: 3, tipo: 'complementariedad', descripcion: 'Los operadores de telecomunicaciones son entidades esenciales bajo NIS2.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'La ciberseguridad y la protección de datos comparten obligaciones de notificación de brechas.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'Los esquemas de certificación de ciberseguridad sustentan la certificación de carteras EUDI y componentes críticos.' },
+      { areaId: 13, tipo: 'complementariedad', descripcion: 'El ENS y NIS2 aseguran la seguridad de los sistemas de administración electrónica e interoperabilidad.' },
     ],
     hitosProximos: ['NIS2: transposición en España (plazo vencido, tramitación activa)', 'CRA: aplicación escalonada 2025-2027', 'Digital Omnibus (ciber): trílogos primavera 2026'],
     normas: [
