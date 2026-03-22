@@ -254,14 +254,23 @@ const SovereigntyHeatmap = () => {
                 >
                   <p className="text-[10px] text-[var(--g-text-primary)] leading-relaxed">{s.nota}</p>
                   {s.buildingBlocks.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-1">
+                    <div className="mt-2 space-y-1">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--g-text-secondary)] mb-1">Building Blocks</div>
                       {s.buildingBlocks.map(bbId => {
                         const bb = buildingBlocks.find(b => b.id === bbId);
-                        return bb ? (
-                          <span key={bbId} className="text-[10px] font-medium px-1.5 py-0.5" style={{ background: 'var(--g-sec-100)', color: 'var(--g-brand-3308)', borderRadius: 'var(--g-radius-sm)' }}>
-                            BB · {bb.nombre}
-                          </span>
-                        ) : null;
+                        if (!bb) return null;
+                        const est = bbEstadoConfig[bb.estado];
+                        return (
+                          <div key={bbId} className="flex items-center justify-between gap-2">
+                            <span className="text-[10px] font-medium text-[var(--g-text-primary)]">{bb.nombre}</span>
+                            <span
+                              className="text-[10px] font-semibold px-1.5 py-0.5 shrink-0"
+                              style={{ background: est.color, color: 'white', borderRadius: 'var(--g-radius-sm)' }}
+                            >
+                              {est.label}
+                            </span>
+                          </div>
+                        );
                       })}
                     </div>
                   )}
