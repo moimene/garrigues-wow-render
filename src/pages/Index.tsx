@@ -236,6 +236,55 @@ const Index = () => {
       </header>
 
       {/* ═══════════════════════════════════════════════════════════════
+          MARQUEE BANNER — Visita guiada
+      ═══════════════════════════════════════════════════════════════ */}
+      <div
+        onClick={() => setTourActive(true)}
+        className="w-full overflow-hidden cursor-pointer select-none"
+        style={{
+          background: 'var(--g-brand-3308)',
+          height: '36px',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="Iniciar visita guiada"
+        onKeyDown={e => { if (e.key === 'Enter') setTourActive(true); }}
+      >
+        <div className="animate-marquee whitespace-nowrap flex items-center" style={{ minWidth: '200%' }}>
+          {Array.from({ length: 16 }).map((_, i) => (
+            <span key={i} className="inline-flex items-center">
+              <span
+                className="text-[11px] font-semibold uppercase"
+                style={{ color: 'rgba(255,255,255,0.9)', letterSpacing: '0.18em' }}
+              >
+                ¿Cómo usar este sitio?
+              </span>
+              <span
+                className="mx-6 text-[10px]"
+                style={{ color: 'rgba(255,255,255,0.35)' }}
+              >
+                ·
+              </span>
+              <span
+                className="text-[11px] font-medium uppercase"
+                style={{ color: 'rgba(255,255,255,0.55)', letterSpacing: '0.15em' }}
+              >
+                Visita guiada interactiva
+              </span>
+              <span
+                className="mx-6 text-[10px]"
+                style={{ color: 'rgba(255,255,255,0.35)' }}
+              >
+                ·
+              </span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
           STICKY NAV
       ═══════════════════════════════════════════════════════════════ */}
       <nav
