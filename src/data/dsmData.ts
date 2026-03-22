@@ -191,9 +191,9 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Autoridad nacional reguladora', 'Análisis de mercado', 'Obligaciones simétricas y asimétricas', 'Neutralidad de red', 'Servicio universal', 'Itinerancia', 'Espectro radioeléctrico'],
     arquitecturaNormativaUE: 'Código de comunicaciones electrónicas vigente y transpuesto, reglamento de itinerancia, reglamento BEREC y directrices del organismo de reguladores. Marco estable con revisiones periódicas.',
     clavesInterpretacion: [
-      'La neutralidad de red protege contenidos legales sin impedir la gestión razonable del tráfico.',
-      'Las obligaciones de acceso varían por posición de mercado del operador.',
-      'Las comunicaciones interpersonales independientes de numeración (OTT) tienen obligaciones específicas de seguridad.',
+      'Los servicios de comunicaciones interpersonales independientes de numeración —aplicaciones OTT de mensajería y videollamada— quedaron sujetos desde 2018 a obligaciones específicas de seguridad y derechos de usuarios, aunque con un régimen más ligero que los operadores tradicionales.',
+      'La neutralidad de red protege contenidos legales y no permite discriminación basada en origen, destino o tipo de tráfico, salvo excepciones tasadas.',
+      'Las obligaciones de acceso varían según la posición de mercado del operador, determinada por análisis periódicos de la CNMC.',
     ],
     alertasRigor: [
       'El Digital Networks Act puede alterar significativamente el marco actual; su evolución requiere seguimiento.',
