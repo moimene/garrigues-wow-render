@@ -74,7 +74,7 @@ export const buildingBlocks: BuildingBlock[] = [
     nombre: 'eDelivery',
     descripcionCorta: 'Intercambio seguro e interoperable de documentos y evidencias.',
     descripcionLarga: 'Solución de entrega segura, interoperable y neutral en cuanto a proveedores para intercambios entre administraciones, empresas y ciudadanos. Ya desplegada en la red PEPPOL para facturación electrónica y en el OOTS para el intercambio transfronterizo de evidencias.',
-    bloqueIds: [8, 12],
+    bloqueIds: [8, 13],
     estado: 'operativo',
     url: 'https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eDelivery',
     casosReutilizacion: 120,
