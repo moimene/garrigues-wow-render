@@ -717,6 +717,58 @@ export const bloques: Bloque[] = [
       { nombre: 'FIDA (Open Finance)', tipo: 'Propuesta', estadoES: 'propuesta', transposicionES: 'En tramitación. Acceso a datos financieros con consentimiento.', plazo: '—' },
     ]
   },
+  {
+    id: 13, nombre: 'Sector Público Digital e Interoperabilidad',
+    subtitulo: 'Ventanilla única, principio de una sola vez, interoperabilidad europea y datos abiertos de alto valor',
+    descripcion: 'SDGR, OOTS, Interoperable Europe Act, datos abiertos, ENI/ENS, administración digital',
+    color: '#475569', vigentes: 4, enProceso: 0, planificadas: 0, enRevision: 0, reglamentos: 3, directivas: 1,
+    sintesisEjecutiva: 'El sector público digital en el DSM se apoya en tres pilares complementarios. El Reglamento de Puerta de Acceso Única Digital (SDGR, Reglamento 2018/1724/UE) garantiza el acceso en línea a información, procedimientos y servicios de asistencia en todos los Estados miembros. El Reglamento de Interoperabilidad Europea (IEA, Reglamento 2024/903/UE) establece la gobernanza, los principios y los componentes interoperables reutilizables para que los sistemas públicos cooperen transfronterizamente. El principio "una sola vez" —los ciudadanos y empresas no deben presentar la misma información más de una vez a las administraciones— se implementa técnicamente a través del OOTS.',
+    explicacionMedia: 'El SDGR obliga a los Estados miembros a ofrecer procedimientos en línea y acceso a información sobre derechos y obligaciones a través de un portal europeo (Your Europe). El OOTS —Once-Only Technical System— es el primer espacio de datos transfronterizo del sector público de la Unión: permite a las administraciones intercambiar evidencias y documentos sin que el ciudadano o empresa los presente repetidamente. El Reglamento de Interoperabilidad Europea establece la gobernanza compartida y los elementos comunes (semánticos, técnicos, organizativos) sobre los que estos sistemas se despliegan. La Directiva de Datos Abiertos facilita la reutilización de información del sector público con énfasis en conjuntos de alto valor.',
+    explicacionCompleta: 'El alcance incluye obligaciones de información y procedimientos en línea (SDGR), cooperación transfronteriza mediante intercambio automatizado de evidencias (OOTS), especificaciones comunes para interoperabilidad y gobernanza compartida (IEA), y reutilización de documentos del sector público con categorías de alto valor (Directiva de Datos Abiertos). El OOTS reutiliza los Building Blocks eID (para autenticación) y eDelivery (para intercambio seguro), constituyendo la arquitectura de referencia para espacios de datos públicos europeos. La interoperabilidad no es solo tecnología: es gobernanza semántica, legal y organizativa, como distingue expresamente el Marco Europeo de Interoperabilidad (EIF). El principio "una sola vez" no elimina el consentimiento del usuario para el intercambio de datos: los sistemas deben implementar mecanismos de control y transparencia conformes al RGPD.',
+    impactoResumen: 'Las administraciones públicas deben ofrecer procedimientos en línea, conectar sus portales al OOTS para intercambio de evidencias y cumplir principios de interoperabilidad. Los ciudadanos y empresas se benefician de no presentar la misma información más de una vez. Los conjuntos de datos de alto valor deben publicarse en formato abierto y legible por máquinas.',
+    estadoUEDetalle: 'El SDGR es vigente; el portal Your Europe está operativo y el OOTS ha comenzado su despliegue con procedimientos prioritarios. El Reglamento de Interoperabilidad Europea fue adoptado en 2024 y está en implementación, con la Junta de Interoperabilidad Europa operativa. La Directiva de Datos Abiertos está transpuesta. Los actos de ejecución que designan categorías de conjuntos de alto valor están adoptados.',
+    transposicionDetalle: 'España cuenta con uno de los marcos de interoperabilidad más desarrollados de la Unión, con el Esquema Nacional de Interoperabilidad (ENI, RD 4/2010 actualizado) y el Esquema Nacional de Seguridad (ENS, RD 311/2022) como marcos técnicos de referencia. La Secretaría General de Administración Digital (SGAD) coordina la implementación del OOTS y la adaptación de portales y procedimientos. La coordinación con las comunidades autónomas es determinante para la coherencia y calidad de la implementación, con retos significativos en homogeneidad entre administraciones. El portal datos.gob.es actúa como catálogo nacional de datos abiertos. España figura junto con Estonia y los Países Bajos como frontrunner en implementación del Marco Europeo de Interoperabilidad.',
+    alcance: 'Procedimientos en línea, ventanilla digital única, intercambio transfronterizo de evidencias (OOTS), interoperabilidad de sistemas públicos (semántica, técnica, organizativa, de gobernanza), reutilización de datos del sector público y conjuntos de datos de alto valor.',
+    conceptosClave: ['Ventanilla única digital', 'Principio de una sola vez', 'OOTS (Once-Only Technical System)', 'Marco Europeo de Interoperabilidad (EIF)', 'Conjuntos de datos de alto valor', 'Interoperabilidad semántica', 'ENI/ENS', 'SGAD'],
+    arquitecturaNormativaUE: 'El SDGR establece el portal Your Europe y el OOTS. El Reglamento de Interoperabilidad Europea (IEA) define la gobernanza, los principios y la Junta de Interoperabilidad. La Directiva de Datos Abiertos facilita la reutilización con actos de ejecución para conjuntos de alto valor. Los Building Blocks eID y eDelivery son la infraestructura técnica del OOTS.',
+    clavesInterpretacion: [
+      'Interoperabilidad no es solo tecnología: es gobernanza semántica, legal y organizativa. El ENI distingue expresamente entre interoperabilidad técnica, semántica, organizativa y de gobernanza.',
+      'El principio "una sola vez" no elimina el consentimiento del usuario para el intercambio de datos: los sistemas deben implementar mecanismos de control y transparencia conformes al RGPD.',
+      'Los compromisos de calidad de servicio importan tanto como la existencia de portales: la accesibilidad, usabilidad e idioma son requisitos del SDGR.',
+      'El OOTS es un espacio de datos público transfronterizo, no un sistema de acceso irrestricto a información personal.',
+    ],
+    alertasRigor: [
+      'El despliegue del OOTS depende de la madurez técnica y organizativa de cada Estado miembro; la implementación es desigual.',
+      'La coordinación entre administración general y comunidades autónomas en España es determinante y presenta retos de homogeneidad.',
+    ],
+    recursosReferencia: [
+      'Reglamento de Puerta de Acceso Única Digital (SDGR, 2018/1724/UE) — EUR-Lex',
+      'Reglamento de Interoperabilidad Europea (IEA, 2024/903/UE) — EUR-Lex',
+      'Directiva de Datos Abiertos — EUR-Lex',
+      'Portal Your Europe — Comisión Europea',
+      'SGAD — Secretaría General de Administración Digital',
+      'ENI / ENS — Portal de administración electrónica (PAe)',
+    ],
+    funcionNormativa: 'Infraestructural y de gobernanza — reduce cargas administrativas, habilita servicios paneuropeos y potencia la reutilización de datos públicos.',
+    buildingBlocks: ['OOTS', 'eDelivery', 'eID / EUDI Wallet'],
+    obligacionesActores: [
+      { actor: 'administraciones', intensidad: 'alta', obligaciones: ['Ofrecer procedimientos en línea conforme al SDGR', 'Conectar portales nacionales al OOTS', 'Cumplir principios de interoperabilidad del IEA', 'Publicar conjuntos de datos de alto valor en formato abierto', 'Coordinar implementación con comunidades autónomas'] },
+      { actor: 'proveedores', intensidad: 'media', obligaciones: ['Desarrollar soluciones interoperables conforme al EIF', 'Adaptar sistemas a especificaciones OOTS y Building Blocks', 'Garantizar accesibilidad y usabilidad de los portales'] },
+      { actor: 'pymes', intensidad: 'baja', obligaciones: ['Beneficiarse del principio de una sola vez para trámites transfronterizos', 'Reutilizar datos abiertos de alto valor para innovación'] },
+    ],
+    dependencias: [
+      { areaId: 7, tipo: 'dependencia', descripcion: 'El OOTS reutiliza eID/EUDI Wallet para autenticación transfronteriza y eDelivery para intercambio seguro.' },
+      { areaId: 4, tipo: 'complementariedad', descripcion: 'Los datos abiertos de alto valor se coordinan con el marco de gobernanza de datos (DGA) y el Data Act.' },
+      { areaId: 6, tipo: 'complementariedad', descripcion: 'El ENS y NIS2 aseguran la seguridad de los sistemas de administración electrónica.' },
+    ],
+    hitosProximos: ['OOTS: despliegue con procedimientos prioritarios', 'IEA: implementación de gobernanza y componentes interoperables', 'Conjuntos de alto valor: publicación en formato abierto'],
+    normas: [
+      { nombre: 'Reglamento Ventanilla Digital Única (SDGR)', tipo: 'Reglamento', estadoES: 'directa', transposicionES: 'Aplicación directa. Portal Your Europe operativo. OOTS en despliegue con SGAD coordinando.', plazo: 'En vigor' },
+      { nombre: 'Interoperable Europe Act (IEA)', tipo: 'Reglamento', estadoES: 'directa', transposicionES: 'Aplicación directa desde 2024. Junta de Interoperabilidad operativa. ENI como marco nacional alineado.', plazo: 'En vigor' },
+      { nombre: 'Directiva de Datos Abiertos', tipo: 'Directiva', estadoES: 'transpuesta', transposicionES: 'Transpuesta. Portal datos.gob.es como catálogo nacional. Conjuntos de alto valor en publicación.', plazo: 'Cumplido' },
+      { nombre: 'Reglamento conjuntos de alto valor', tipo: 'Reglamento', estadoES: 'directa', transposicionES: 'Aplicación directa. Categorías de alto valor adoptadas por actos de ejecución.', plazo: 'En vigor' },
+    ]
+  },
 ];
 
 export interface TimelineEvent {
