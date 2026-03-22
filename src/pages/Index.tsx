@@ -154,12 +154,12 @@ const Index = () => {
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ opacity: 0.18 }}
+          style={{ opacity: 0.45 }}
         />
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(160deg, rgba(0,68,56,0.92) 0%, rgba(0,51,42,0.95) 50%, rgba(0,115,98,0.88) 100%)',
+            background: 'linear-gradient(160deg, rgba(0,68,56,0.72) 0%, rgba(0,51,42,0.78) 50%, rgba(0,115,98,0.68) 100%)',
           }}
         />
         <div className="absolute inset-0 g-pattern-dots" />
