@@ -554,6 +554,8 @@ export const bloques: Bloque[] = [
       { areaId: 8, tipo: 'complementariedad', descripcion: 'El DSA refuerza las obligaciones de transparencia de los marketplaces online.' },
       { areaId: 1, tipo: 'dependencia', descripcion: 'La responsabilidad por producto se extiende a sistemas de IA, requiriendo coordinación con el AI Act.' },
       { areaId: 4, tipo: 'complementariedad', descripcion: 'La personalización de precios y reseñas implican tratamientos de datos personales.' },
+      { areaId: 7, tipo: 'complementariedad', descripcion: 'La aceptación de EUDI como medio de autenticación encaja con exigencias de autenticación reforzada en pagos y servicios financieros.' },
+      { areaId: 10, tipo: 'complementariedad', descripcion: 'Las obligaciones de transparencia del DMA refuerzan la protección del consumidor digital.' },
     ],
     hitosProximos: ['Right to Repair: transposición 31.07.2026', 'Product Liability: transposición 09.12.2026', 'Digital Fairness Act (consumo): propuesta pendiente'],
     normas: [
