@@ -301,9 +301,10 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Comunicación pública', 'Carga de contenidos', 'Acuerdos de licencia', 'Portabilidad de contenidos', 'Excepciones de minería de textos y datos', 'Derecho afín de editores'],
     arquitecturaNormativaUE: 'Directiva de derechos de autor en el mercado único digital (2019), directiva de retransmisiones en línea y distribución por cable, y reglamento de portabilidad transfronteriza de contenidos.',
     clavesInterpretacion: [
-      'La responsabilidad de plataformas está condicionada a esfuerzos de licencia y medidas específicas, no a imputación automática.',
-      'La minería de textos y datos tiene excepciones específicas que distinguen entre investigación y uso comercial.',
+      'El régimen del art. 17 no convierte a las plataformas en responsables automáticos: les exige esfuerzos de licencia y medidas proporcionales con garantías para usos legítimos.',
+      'La minería de textos y datos con opt-out (art. 4) permite uso para cualquier finalidad salvo reserva expresa del titular; los titulares que no implementen opt-out activamente no pueden impedir el uso para entrenamiento de IA.',
       'El derecho afín de editores es un derecho negociable, no una tasa automática.',
+      'La excepción de minería del art. 3 (investigación científica sin fines comerciales) no requiere opt-out y es de aplicación obligatoria.',
     ],
     alertasRigor: [
       'La interpretación jurisprudencial de las excepciones de minería evoluciona rápidamente, especialmente en el contexto de IA generativa.',
