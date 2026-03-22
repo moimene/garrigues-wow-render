@@ -96,17 +96,17 @@ export const buildingBlocks: BuildingBlock[] = [
 // ─── Mapeo de soberanía por bloque ──────────────────────────────
 
 export const sovereigntyMap: SovereigntyMapping[] = [
-  { bloqueId: 1, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La protección de datos se apoya en marcos normativos, no en infraestructura técnica específica del programa de Building Blocks. La supervisión depende de autoridades nacionales.' },
-  { bloqueId: 2, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'Los servicios digitales se regulan por obligaciones de diligencia, sin Building Block técnico asociado. La supervisión depende de autoridades nacionales de servicios digitales.' },
-  { bloqueId: 3, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La competencia en plataformas se gestiona mediante supervisión ex ante de la Comisión. No existe un Building Block técnico equivalente.' },
+  { bloqueId: 1, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La IA y la I+D digital no tienen Building Block técnico asociado. La propuesta EuroStack plantea IA soberana como componente futuro del ecosistema europeo.' },
+  { bloqueId: 2, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La política industrial se apoya en programas de financiación e IPCEI, sin Building Block técnico del programa de la Comisión.' },
+  { bloqueId: 3, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La conectividad se regula por obligaciones operativas a operadores. No existe un Building Block técnico equivalente.' },
   { bloqueId: 4, nivel: 'parcial', buildingBlocks: ['oots'], nota: 'El OOTS anticipa la arquitectura de espacios de datos. La Ley de Datos y la Ley de Gobernanza buscan generalizar este modelo, pero los espacios sectoriales están en desarrollo.' },
-  { bloqueId: 5, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'El Reglamento de IA no tiene Building Block asociado, aunque la propuesta EuroStack plantea IA soberana como componente futuro del ecosistema europeo.' },
-  { bloqueId: 6, nivel: 'parcial', buildingBlocks: [], nota: 'La ciberseguridad es principio de diseño transversal de todos los Building Blocks, coherente con NIS2 y el Reglamento de Resiliencia Cibernética, pero no tiene un BB propio.' },
+  { bloqueId: 5, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La propiedad intelectual digital se gestiona mediante marcos normativos y entidades de gestión, sin Building Block técnico asociado.' },
+  { bloqueId: 6, nivel: 'parcial', buildingBlocks: [], nota: 'La ciberseguridad es principio de diseño transversal de todos los Building Blocks, coherente con NIS2 y el CRA, pero no tiene un BB propio.' },
   { bloqueId: 7, nivel: 'bb-pilotaje', buildingBlocks: ['eid', 'esignature'], nota: 'El bloque con mayor correspondencia directa. eID/EUDI Wallet y eSignature son los vehículos técnicos de referencia del Reglamento eIDAS revisado.' },
-  { bloqueId: 8, nivel: 'bb-operativo', buildingBlocks: ['edelivery'], nota: 'eDelivery está plenamente operativo y desplegado en redes como PEPPOL. Proporciona comunicación segura e interoperable para el marco de comunicaciones electrónicas.' },
-  { bloqueId: 9, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'Los pagos y la resiliencia financiera dependen de infraestructuras sectoriales (TARGET, SEPA). El euro digital podría constituir un Building Block futuro según EuroStack.' },
-  { bloqueId: 10, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La protección de consumidores digitales se articula mediante normas y cooperación entre autoridades, sin infraestructura técnica soberana específica.' },
-  { bloqueId: 11, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La propiedad intelectual digital se gestiona mediante marcos normativos y entidades de gestión, sin Building Block técnico asociado.' },
+  { bloqueId: 8, nivel: 'bb-operativo', buildingBlocks: ['edelivery'], nota: 'eDelivery está plenamente operativo y desplegado en redes como PEPPOL. Proporciona comunicación segura e interoperable.' },
+  { bloqueId: 9, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La protección de consumidores digitales se articula mediante normas y cooperación entre autoridades, sin infraestructura técnica soberana específica.' },
+  { bloqueId: 10, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'La competencia en plataformas se gestiona mediante supervisión ex ante de la Comisión. No existe un Building Block técnico equivalente.' },
+  { bloqueId: 11, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'El sector audiovisual y los medios se regulan mediante obligaciones normativas, sin Building Block técnico asociado.' },
   { bloqueId: 12, nivel: 'sin-equivalente', buildingBlocks: [], nota: 'Los servicios financieros digitales dependen de infraestructuras sectoriales (TARGET, SEPA). El euro digital podría constituir un Building Block futuro según EuroStack.' },
   { bloqueId: 13, nivel: 'bb-pilotaje', buildingBlocks: ['oots', 'edelivery'], nota: 'El OOTS y eDelivery conforman la infraestructura técnica del sector público digital. España figura como frontrunner en implementación del Marco Europeo de Interoperabilidad.' },
 ];
