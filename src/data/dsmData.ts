@@ -670,10 +670,11 @@ export const bloques: Bloque[] = [
     conceptosClave: ['Autenticación reforzada del cliente', 'Iniciación de pagos', 'Open banking', 'Externalización crítica', 'Pruebas de resiliencia', 'Criptoactivo', 'Stablecoin', 'Diligencia debida reforzada', 'Titularidad real'],
     arquitecturaNormativaUE: 'PSD2 vigente con revisión en curso (PSD3/PSR). MiCA para criptoactivos. DORA para resiliencia operativa. 6ª Directiva AML y Reglamento AML para prevención del blanqueo. Propuestas del euro digital y FIDA (open finance) en tramitación.',
     clavesInterpretacion: [
-      'Open banking no equivale a acceso sin restricciones: requiere consentimiento y finalidad.',
-      'La resiliencia operativa (DORA) exige pruebas y gestión de terceros, no solo controles internos.',
-      'MiCA distingue entre categorías de criptoactivos con obligaciones diferenciadas.',
-      'La gestión de proveedores TIC críticos merece tratamiento diferenciado bajo DORA.',
+      'DORA no sustituye NIS2 en el sector financiero: lo especializa. Las entidades financieras sujetas a DORA no quedan exentas de NIS2, pero DORA es lex specialis.',
+      'MiCA no regula todos los criptoactivos: los valores tokenizados siguen bajo MiFID II y los NFT únicos pueden quedar fuera del ámbito, dependiendo de sus características.',
+      'Open banking no equivale a acceso sin restricciones: requiere consentimiento del usuario, finalidad específica y cumplimiento de autenticación reforzada.',
+      'La gestión de proveedores TIC críticos es una obligación diferenciada bajo DORA que va más allá de la externalización ordinaria.',
+      'PSD3/PSR están en tramitación; PSD2 sigue siendo la norma vigente hasta su derogación efectiva.',
     ],
     alertasRigor: [
       'PSD3/PSR están en tramitación; PSD2 sigue siendo la norma vigente hasta su derogación.',
