@@ -1,25 +1,27 @@
 
 
-## Plan: Añadir banner roller/marquee para destacar el botón "¿Cómo usar este sitio?"
-
-### Objetivo
-Crear una franja animada tipo "ticker" o "marquee" justo debajo del hero (o en la parte inferior del hero) que se desplace horizontalmente de forma continua, repitiendo el mensaje "¿Cómo usar este sitio?" para captar la atención del usuario hacia la funcionalidad de visita guiada.
+## Plan: Imagen de fondo del hero con overlay verde institucional
 
 ### Cambios
 
-#### 1. Modificar `src/pages/Index.tsx`
-- Insertar un banner roller justo debajo del hero (después de la línea ~225, antes de la navegación sticky).
-- El banner será una franja de ancho completo con fondo sutil (p.ej. `var(--g-brand-3308)` con opacidad baja o el verde institucional).
-- Contenido: texto "¿Cómo usar este sitio? — Visita guiada interactiva" repetido varias veces, con animación CSS `marquee` de desplazamiento horizontal continuo.
-- Todo el banner será clicable y disparará `setTourActive(true)`.
+1. **Copiar imagen** al proyecto: `user-uploads://image-6.png` → `src/assets/hero-building.png`
 
-#### 2. Añadir keyframe en `src/index.css`
-- Definir `@keyframes marquee-scroll` que desplace `translateX(0)` → `translateX(-50%)` en bucle infinito.
-- Clase utilitaria `.animate-marquee` con `animation: marquee-scroll 20s linear infinite`.
+2. **Modificar `src/pages/Index.tsx`** (líneas ~147-154):
+   - Importar la imagen: `import heroBg from '@/assets/hero-building.png'`
+   - Añadir un `<img>` absoluto dentro del hero como fondo (`object-cover`, `object-center`)
+   - Superponer un overlay verde oscuro semitransparente con `mix-blend-mode: multiply` + gradiente para mantener legibilidad del texto
+   - Mantener los patrones decorativos existentes encima
 
-### Diseño visual
-- Franja estrecha (~36px alto), fondo verde institucional oscuro, texto blanco `text-[11px] font-semibold uppercase tracking-widest`.
-- Separadores tipográficos `·` entre repeticiones.
-- `cursor: pointer` en toda la franja.
-- Sobrio e institucional: sin emojis, sin iconos decorativos.
+   Estructura resultante del hero:
+   ```text
+   <section (relative, overflow-hidden)>
+     <img src={heroBg} (absolute, inset-0, object-cover, opacity ~0.3)>
+     <div (absolute, inset-0, gradient verde #004438 → #00332a, opacity ~0.85)>
+     <div (absolute, inset-0, g-pattern-dots)>
+     <div (absolute, inset-0, g-pattern-lines)>
+     <div (relative, contenido texto)>
+   </section>
+   ```
+
+   La imagen se verá sutilmente detrás del verde institucional, aportando textura y profundidad sin comprometer legibilidad ni identidad cromática.
 
